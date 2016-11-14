@@ -1,7 +1,7 @@
 package minechem.apparatus.prefab.energy.rf;
 
 import cofh.api.energy.IEnergyReceiver;
-import cpw.mods.fml.common.Optional;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.common.util.ForgeDirection;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyReceiver", modid = "CoFHAPI|energy")

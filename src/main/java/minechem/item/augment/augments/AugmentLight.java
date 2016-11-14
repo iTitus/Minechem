@@ -1,6 +1,6 @@
 package minechem.item.augment.augments;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import minechem.item.augment.IAugmentedItem;
 import minechem.registry.BlockRegistry;
 import net.minecraft.entity.player.EntityPlayer;

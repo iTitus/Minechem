@@ -1,6 +1,6 @@
 package minechem.helper;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;

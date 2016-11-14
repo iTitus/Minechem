@@ -1,7 +1,7 @@
 package minechem.helper;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

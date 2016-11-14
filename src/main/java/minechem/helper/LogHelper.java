@@ -1,6 +1,6 @@
 package minechem.helper;
 
-import cpw.mods.fml.common.FMLLog;
+import net.minecraftforge.fml.common.FMLLog;
 import minechem.Config;
 import minechem.Compendium;
 import org.apache.logging.log4j.Level;

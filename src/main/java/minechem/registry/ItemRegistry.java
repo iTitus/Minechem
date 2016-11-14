@@ -1,6 +1,6 @@
 package minechem.registry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import minechem.item.augment.AugmentedItem;
 import minechem.item.chemical.ChemicalItem;
 import minechem.item.journal.JournalItem;

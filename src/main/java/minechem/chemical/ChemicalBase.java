@@ -29,7 +29,7 @@ public abstract class ChemicalBase
     }
 
     /**
-     * Used for logging the {@link minechem.chemical.ChemicalBase} to the {@link cpw.mods.fml.common.FMLLog}
+     * Used for logging the {@link minechem.chemical.ChemicalBase} to the {@link net.minecraftforge.fml.common.FMLLog}
      */
     public abstract void log();
 

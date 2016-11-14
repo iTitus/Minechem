@@ -1,9 +1,9 @@
 package minechem.proxy.client;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import minechem.Compendium;
 import minechem.apparatus.prefab.renderer.BasicItemRenderer;
 import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntity;

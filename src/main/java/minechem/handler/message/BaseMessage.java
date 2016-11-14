@@ -1,7 +1,7 @@
 package minechem.handler.message;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import minechem.Minechem;
 import minechem.proxy.CommonProxy;
@@ -9,8 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 /**
- * Base class for Messages this place should be used for common {@link cpw.mods.fml.common.network.simpleimpl.IMessage} methods You do need to implement
- * {@link cpw.mods.fml.common.network.simpleimpl.IMessageHandler}
+ * Base class for Messages this place should be used for common {@link net.minecraftforge.fml.common.network.simpleimpl.IMessage} methods You do need to implement
+ * {@link net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler}
  */
 public abstract class BaseMessage implements IMessage
 {

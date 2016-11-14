@@ -1,8 +1,9 @@
 package minechem.compatibility.lua.events.triggered;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.EventBus;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.EventBus;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 import minechem.compatibility.lua.events.LuaEvent;
 
 public abstract class TriggerEvent<T extends Event> extends LuaEvent

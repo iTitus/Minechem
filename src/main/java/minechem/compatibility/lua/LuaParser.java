@@ -1,6 +1,6 @@
 package minechem.compatibility.lua;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import minechem.Compendium;

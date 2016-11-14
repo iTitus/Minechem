@@ -38,6 +38,7 @@ run/
 *.sublime*
 
 ## eclipse
+*.launch
 .classpath
 .metadata/
 .project
