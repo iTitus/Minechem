@@ -1,145 +1,119 @@
 package minechem.apparatus.prefab.tileEntity.storageTypes;
 
-import minechem.helper.MathHelper;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class BasicEnergy
-{
-    public static boolean freeEnergy;
-    protected int capacity;
-    protected int maxInput;
-    protected int maxOutput;
-    protected int stored;
+import minechem.helper.MathHelper;
 
-    public BasicEnergy()
-    {
-        this(1000000);
-    }
+public class BasicEnergy {
+	public static boolean freeEnergy;
+	protected int capacity;
+	protected int maxInput;
+	protected int maxOutput;
+	protected int stored;
 
-    public BasicEnergy(int capacity)
-    {
-        this(capacity, capacity, capacity);
-    }
+	public BasicEnergy() {
+		this(1000000);
+	}
 
-    public BasicEnergy(int capacity, int maxInput)
-    {
-        this(capacity, maxInput, maxInput);
-    }
+	public BasicEnergy(int capacity) {
+		this(capacity, capacity, capacity);
+	}
 
-    public BasicEnergy(int capacity, int maxInput, int maxOutput)
-    {
-        this.capacity = capacity;
-        this.maxInput = maxInput;
-        this.maxOutput = maxOutput;
-    }
+	public BasicEnergy(int capacity, int maxInput) {
+		this(capacity, maxInput, maxInput);
+	}
 
-    public boolean consumeEnergy(int energy)
-    {
-        if (freeEnergy)
-        {
-            return true;
-        }
-        if (hasEnergy(energy))
-        {
-            this.stored -= energy;
-            return true;
-        }
-        return false;
-    }
+	public BasicEnergy(int capacity, int maxInput, int maxOutput) {
+		this.capacity = capacity;
+		this.maxInput = maxInput;
+		this.maxOutput = maxOutput;
+	}
 
-    public int extractEnergy(int energy, boolean doExtract)
-    {
-        int amount = Math.min(this.stored, Math.min(energy, maxOutput));
-        if (doExtract)
-        {
-            this.stored -= amount;
-        }
-        return amount;
-    }
+	public boolean consumeEnergy(int energy) {
+		if (freeEnergy) {
+			return true;
+		}
+		if (hasEnergy(energy)) {
+			this.stored -= energy;
+			return true;
+		}
+		return false;
+	}
 
-    public boolean generateEnergy(int energy)
-    {
-        if (freeEnergy)
-        {
-            return true;
-        }
-        if (this.stored == this.capacity)
-        {
-            return false;
-        }
-        this.stored = Math.min(this.capacity, this.stored + energy);
-        return true;
-    }
+	public int extractEnergy(int energy, boolean doExtract) {
+		int amount = Math.min(this.stored, Math.min(energy, maxOutput));
+		if (doExtract) {
+			this.stored -= amount;
+		}
+		return amount;
+	}
 
-    public int getCapacity()
-    {
-        return this.capacity;
-    }
+	public boolean generateEnergy(int energy) {
+		if (freeEnergy) {
+			return true;
+		}
+		if (this.stored == this.capacity) {
+			return false;
+		}
+		this.stored = Math.min(this.capacity, this.stored + energy);
+		return true;
+	}
 
-    public int getMaxInput()
-    {
-        return this.maxInput;
-    }
+	public int getCapacity() {
+		return this.capacity;
+	}
 
-    public int getMaxOutput()
-    {
-        return this.maxOutput;
-    }
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+		if (this.stored > this.capacity) {
+			this.stored = this.capacity;
+		}
+	}
 
-    public int getStored()
-    {
-        return this.stored;
-    }
+	public int getMaxInput() {
+		return this.maxInput;
+	}
 
-    public boolean hasEnergy(int energy)
-    {
-        return freeEnergy ? true : energy < stored;
-    }
+	public void setMaxInput(int maxInput) {
+		this.maxInput = maxInput;
+	}
 
-    public int inputEnergy(int energy, boolean doInsert)
-    {
-        int amount = Math.min(energy, Math.min(this.maxInput, this.capacity - this.stored));
-        if (doInsert)
-        {
-            this.stored += amount;
-        }
-        return amount;
-    }
+	public int getMaxOutput() {
+		return this.maxOutput;
+	}
 
-    public BasicEnergy readFromNBT(NBTTagCompound tagCompound)
-    {
-        this.stored = tagCompound.getInteger("Stored");
-        this.stored = Math.max(this.stored, this.capacity);
-        return this;
-    }
+	public void setMaxOutput(int maxOutput) {
+		this.maxOutput = maxOutput;
+	}
 
-    public void setCapacity(int capacity)
-    {
-        this.capacity = capacity;
-        if (this.stored > this.capacity)
-        {
-            this.stored = this.capacity;
-        }
-    }
+	public int getStored() {
+		return this.stored;
+	}
 
-    public void setMaxInput(int maxInput)
-    {
-        this.maxInput = maxInput;
-    }
+	public void setStored(int stored) {
+		this.stored = MathHelper.clamp(stored, 0, capacity);
+	}
 
-    public void setMaxOutput(int maxOutput)
-    {
-        this.maxOutput = maxOutput;
-    }
+	public boolean hasEnergy(int energy) {
+		return freeEnergy ? true : energy < stored;
+	}
 
-    public void setStored(int stored)
-    {
-        this.stored = MathHelper.clamp(stored, 0, capacity);
-    }
+	public int inputEnergy(int energy, boolean doInsert) {
+		int amount = Math.min(energy, Math.min(this.maxInput, this.capacity - this.stored));
+		if (doInsert) {
+			this.stored += amount;
+		}
+		return amount;
+	}
 
-    public NBTTagCompound writeToNBT(NBTTagCompound tagCompound)
-    {
-        tagCompound.setInteger("Stored", this.stored);
-        return tagCompound;
-    }
+	public BasicEnergy readFromNBT(NBTTagCompound tagCompound) {
+		this.stored = tagCompound.getInteger("Stored");
+		this.stored = Math.max(this.stored, this.capacity);
+		return this;
+	}
+
+	public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
+		tagCompound.setInteger("Stored", this.stored);
+		return tagCompound;
+	}
 }

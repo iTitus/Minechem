@@ -1,30 +1,26 @@
 package minechem.registry;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import minechem.item.augment.AugmentedItem;
+
 import minechem.item.chemical.ChemicalItem;
 import minechem.item.journal.JournalItem;
-import minechem.recipes.AugmentRecipe;
-import minechem.recipes.WrapperRecipe;
 
-public class ItemRegistry
-{
-    public static JournalItem journal;
-    public static AugmentedItem augmentedItem;
-    public static ChemicalItem chemicalItem;
+public class ItemRegistry {
 
-    public static void init()
-    {
-        journal = new JournalItem();
-        GameRegistry.registerItem(journal, journal.getUnlocalizedName());
+	public static JournalItem journal;
+	// public static AugmentedItem augmentedItem;
+	public static ChemicalItem chemicalItem;
 
-        augmentedItem = new AugmentedItem();
-        GameRegistry.registerItem(augmentedItem, augmentedItem.getUnlocalizedName());
-        GameRegistry.addRecipe(new AugmentRecipe());
-        GameRegistry.addRecipe(new WrapperRecipe());
+	public static void init() {
+		GameRegistry.register(journal = new JournalItem());
 
-        chemicalItem = new ChemicalItem();
-        GameRegistry.registerItem(chemicalItem, chemicalItem.getUnlocalizedName());
-    }
+		// augmentedItem = new AugmentedItem();
+		// GameRegistry.registerItem(augmentedItem,
+		// augmentedItem.getUnlocalizedName());
+		// GameRegistry.addRecipe(new AugmentRecipe());
+		// GameRegistry.addRecipe(new WrapperRecipe());
+
+		GameRegistry.register(chemicalItem = new ChemicalItem());
+	}
 
 }

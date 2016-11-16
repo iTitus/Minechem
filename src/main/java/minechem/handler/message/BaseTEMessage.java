@@ -1,72 +1,68 @@
 package minechem.handler.message;
 
+import io.netty.buffer.ByteBuf;
+
+import net.minecraft.tileentity.TileEntity;
+
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.tileentity.TileEntity;
 
 /**
  * Basic message for {@link net.minecraft.tileentity.TileEntity} T represents the {@link net.minecraft.tileentity.TileEntity}
  */
-public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage implements IMessage
-{
-    private int posX, posY, posZ;
+public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage implements IMessage {
+	private int posX, posY, posZ;
 
-    /**
-     * Constructor needed for reflection
-     */
-    public BaseTEMessage()
-    {
-    }
+	/**
+	 * Constructor needed for reflection
+	 */
+	public BaseTEMessage() {
+	}
 
-    /**
-     * Basic Constructor using the TileEntity Use super(myTE); in subClasses
-     *
-     * @param entity
-     */
-    public BaseTEMessage(T entity)
-    {
-        this.posX = entity.xCoord;
-        this.posY = entity.yCoord;
-        this.posZ = entity.zCoord;
-    }
+	/**
+	 * Basic Constructor using the TileEntity Use super(myTE); in subClasses
+	 *
+	 * @param entity
+	 */
+	public BaseTEMessage(T entity) {
+		this.posX = entity.xCoord;
+		this.posY = entity.yCoord;
+		this.posZ = entity.zCoord;
+	}
 
-    /**
-     * Read values from ByteBuf Use super(buf); in subClasses
-     *
-     * @param buf
-     */
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        this.posX = buf.readInt();
-        this.posY = buf.readInt();
-        this.posZ = buf.readInt();
-    }
+	/**
+	 * Read values from ByteBuf Use super(buf); in subClasses
+	 *
+	 * @param buf
+	 */
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		this.posX = buf.readInt();
+		this.posY = buf.readInt();
+		this.posZ = buf.readInt();
+	}
 
-    /**
-     * Write values to ByteBuf Use super(buf); in subClasses
-     *
-     * @param buf
-     */
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeInt(this.posX);
-        buf.writeInt(this.posY);
-        buf.writeInt(this.posZ);
-    }
+	/**
+	 * Write values to ByteBuf Use super(buf); in subClasses
+	 *
+	 * @param buf
+	 */
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeInt(this.posX);
+		buf.writeInt(this.posY);
+		buf.writeInt(this.posZ);
+	}
 
-    /**
-     * Gets the TileEntity
-     *
-     * @param message
-     * @param ctx
-     * @return can be null
-     */
-    public T getTileEntity(BaseTEMessage message, MessageContext ctx)
-    {
-        TileEntity tileEntity = getWorld(ctx).getTileEntity(message.posX, message.posY, message.posZ);
-        return tileEntity == null ? null : (T) tileEntity;
-    }
+	/**
+	 * Gets the TileEntity
+	 *
+	 * @param message
+	 * @param ctx
+	 * @return can be null
+	 */
+	public T getTileEntity(BaseTEMessage message, MessageContext ctx) {
+		TileEntity tileEntity = getWorld(ctx).getTileEntity(message.posX, message.posY, message.posZ);
+		return tileEntity == null ? null : (T) tileEntity;
+	}
 }

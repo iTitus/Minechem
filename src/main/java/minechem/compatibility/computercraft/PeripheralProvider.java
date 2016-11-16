@@ -1,3 +1,4 @@
+/*
 package minechem.compatibility.computercraft;
 
 import dan200.computercraft.api.ComputerCraftAPI;
@@ -30,3 +31,4 @@ public class PeripheralProvider implements IPeripheralProvider
         return null;
     }
 }
+*/

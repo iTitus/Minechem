@@ -4,11 +4,12 @@ import net.minecraft.tileentity.TileEntity;
 
 import net.minecraftforge.fml.common.Optional;
 
-import dan200.computercraft.api.peripheral.IComputerAccess;
-import li.cil.oc.api.machine.Context;
 import minechem.Compendium;
 import minechem.apparatus.prefab.peripheral.TilePeripheralBase;
 import minechem.compatibility.ModList;
+
+//import dan200.computercraft.api.peripheral.IComputerAccess;
+//import li.cil.oc.api.machine.Context;
 
 public abstract class LuaEvent {
 
@@ -34,14 +35,14 @@ public abstract class LuaEvent {
 	@Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
 	public void computerCraftAnnounce(TilePeripheralBase te, Object... message) {
 		for (Object computer : te.getComputers()) {
-			((IComputerAccess) computer).queueEvent(name, message);
+			//((IComputerAccess) computer).queueEvent(name, message);
 		}
 	}
 
 	@Optional.Method(modid = Compendium.Naming.Mods.openComputers)
 	public void openComputersAnnounce(TilePeripheralBase te, Object... message) {
 		for (Object context : te.getContext()) {
-			((Context) context).signal(name, message);
+			//((Context) context).signal(name, message);
 		}
 	}
 }

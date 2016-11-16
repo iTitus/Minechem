@@ -10,11 +10,10 @@ import minechem.compatibility.openblocks.OpenBlocksCompat;
  * Example Enum Implementation of ModCompat to automatically register compatibility modules
  */
 public enum ModList {
-	//computercraft(Compendium.Naming.Mods.computerCraft, "ComputerCraft", new ComputerCraftCompat()),
-	//opencomputers(Compendium.Naming.Mods.openComputers, "OpenComputers"),
-	//openblocks(Compendium.Naming.Mods.openBlocks, "OpenBlocks", new OpenBlocksCompat());
 
-	;
+	computercraft(Compendium.Naming.Mods.computerCraft, "ComputerCraft", new ComputerCraftCompat()),
+	opencomputers(Compendium.Naming.Mods.openComputers, "OpenComputers"),
+	openblocks(Compendium.Naming.Mods.openBlocks, "OpenBlocks", new OpenBlocksCompat());
 
 	private final String modId;
 	private final String modName;

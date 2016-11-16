@@ -12,8 +12,8 @@ tile.opticalMicroscope.name=Optical Microscope
 tile.electricCrucible.name=Electric Crucible
 tile.centrifuge.name=Centrifuge
 
-item.journal.name=Chemist's Journal
-item.augmented.name=Item Augment
+item.minechem:journal.name=Chemist's Journal
+item.minechem:item.augmented.name=Item Augment
 
 config.debugMode=Turns on extra logging printouts
 config.debugMode.tooltip=Debug Mode

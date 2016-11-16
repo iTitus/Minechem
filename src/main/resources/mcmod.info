@@ -1,0 +1,16 @@
+[
+{
+  "modid": "minechem",
+  "name": "Minechem",
+  "description": "Minechem is a mod about chemistry, allowing you to research blocks and items, and then break them down into their base compounds and elements.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://www.minechemmod.com/",
+  "updateUrl": "",
+  "authorList": ["jakimfett", "hilburn", "way2muchnoise", "iTitus"],
+  "credits": "View a full list of contributors on our site!",
+  "logoFile": "assets/minechem/logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

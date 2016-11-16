@@ -1,17 +1,14 @@
 package minechem.registry;
 
-public class RecipeRegistry
-{
+public class RecipeRegistry {
 
-    private static final RecipeRegistry recipes = new RecipeRegistry();
+	private static final RecipeRegistry recipes = new RecipeRegistry();
 
-    public static RecipeRegistry getInstance()
-    {
-        return recipes;
-    }
+	public static RecipeRegistry getInstance() {
+		return recipes;
+	}
 
-    public void init()
-    {
-    }
+	public void init() {
+	}
 
 }

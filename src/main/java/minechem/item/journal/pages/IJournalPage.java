@@ -1,30 +1,31 @@
 package minechem.item.journal.pages;
 
 import java.util.List;
-import net.afterlifelochie.fontbox.document.Element;
+
 import net.minecraft.entity.player.EntityPlayer;
 
-public interface IJournalPage
-{
-    String getPageKey();
+import repackage.net.afterlifelochie.fontbox.document.Element;
 
-    IJournalPage getPage(String key);
+public interface IJournalPage {
+	String getPageKey();
 
-    String getPageName();
+	IJournalPage getPage(String key);
 
-    boolean hasSubPages();
+	String getPageName();
 
-    void addSubPage(IJournalPage page);
+	boolean hasSubPages();
 
-    void setChapter(String chapter);
+	void addSubPage(IJournalPage page);
 
-    int getSubPages();
+	void setChapter(String chapter);
 
-    List<Element> getElements(EntityPlayer player);
+	int getSubPages();
 
-    List<Element> getElements(String[] keys);
+	List<Element> getElements(EntityPlayer player);
 
-    boolean isUnlocked(EntityPlayer player);
+	List<Element> getElements(String[] keys);
 
-    boolean isUnlocked(String[] keys);
+	boolean isUnlocked(EntityPlayer player);
+
+	boolean isUnlocked(String[] keys);
 }

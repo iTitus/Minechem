@@ -1,32 +1,28 @@
 package minechem.apparatus.prefab.block;
 
-import minechem.proxy.client.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public abstract class SpecialRenderBlock extends Block
-{
+import minechem.proxy.ClientProxy;
 
-    protected SpecialRenderBlock(Material material)
-    {
-        super(material);
-    }
+public abstract class SpecialRenderBlock extends Block {
 
-    @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+	protected SpecialRenderBlock(Material material) {
+		super(material);
+	}
 
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-    @Override
-    public int getRenderType()
-    {
-        return ClientProxy.ISBRH_ID;
-    }
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return ClientProxy.ISBRH_ID;
+	}
 }
