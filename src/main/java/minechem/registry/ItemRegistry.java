@@ -1,5 +1,7 @@
 package minechem.registry;
 
+import net.minecraft.item.Item;
+
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import minechem.item.chemical.ChemicalItem;
@@ -12,15 +14,16 @@ public class ItemRegistry {
 	public static ChemicalItem chemicalItem;
 
 	public static void init() {
-		GameRegistry.register(journal = new JournalItem());
+
+		chemicalItem = register(new ChemicalItem());
+
+		journal = register(new JournalItem());
 
 		// augmentedItem = new AugmentedItem();
-		// GameRegistry.registerItem(augmentedItem,
-		// augmentedItem.getUnlocalizedName());
-		// GameRegistry.addRecipe(new AugmentRecipe());
-		// GameRegistry.addRecipe(new WrapperRecipe());
-
-		GameRegistry.register(chemicalItem = new ChemicalItem());
+		// GameRegistry.registerItem(augmentedItem, augmentedItem.getUnlocalizedName());
 	}
 
+	private static <T extends Item> T register(T item) {
+		return GameRegistry.register(item);
+	}
 }

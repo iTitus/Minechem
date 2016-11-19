@@ -6,12 +6,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.RecipeSorter;
 
 import minechem.Compendium;
 import minechem.item.prefab.WrapperItem;
 
 public class WrapperRecipe implements IRecipe {
+
 	public WrapperRecipe() {
 		RecipeSorter.register(Compendium.Naming.id + ":wrapper", getClass(), RecipeSorter.Category.SHAPELESS, "after:forge:shapelessore");
 	}
@@ -88,5 +90,10 @@ public class WrapperRecipe implements IRecipe {
 	@Override
 	public ItemStack getRecipeOutput() {
 		return null;
+	}
+
+	@Override
+	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
+		return ForgeHooks.defaultRecipeGetRemainingItems(inv);
 	}
 }

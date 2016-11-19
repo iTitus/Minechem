@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minechem:items/chemical/solid",
+		"layer1": "minechem:items/chemical/molecule_overlay"
+    }
+}

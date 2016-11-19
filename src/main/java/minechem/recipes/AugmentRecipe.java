@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.RecipeSorter;
 
 import minechem.Compendium;
@@ -13,6 +14,7 @@ import minechem.item.augment.IAugmentedItem;
 import minechem.registry.AugmentRegistry;
 
 public class AugmentRecipe implements IRecipe {
+
 	public AugmentRecipe() {
 		RecipeSorter.register(Compendium.Naming.id + ":augment", getClass(), RecipeSorter.Category.SHAPELESS, "after:" + Compendium.Naming.id + ":wrapper");
 	}
@@ -89,5 +91,10 @@ public class AugmentRecipe implements IRecipe {
 	@Override
 	public ItemStack getRecipeOutput() {
 		return null;
+	}
+
+	@Override
+	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
+		return ForgeHooks.defaultRecipeGetRemainingItems(inv);
 	}
 }

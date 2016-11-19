@@ -1,7 +1,5 @@
-itemGroup.Minechem=Minechem
-language.name=English
-language.region=US
-language.code=en_US
+itemGroup.minechem.name=Minechem
+itemGroup.minechem_chemicals.name=Chemicals
 
 gui.element.tank.empty=Empty
 gui.journal.writtenBy=Written By

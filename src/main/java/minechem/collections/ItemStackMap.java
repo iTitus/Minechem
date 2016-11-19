@@ -3,7 +3,6 @@ package minechem.collections;
 import net.minecraft.item.ItemStack;
 
 import gnu.trove.map.hash.TCustomHashMap;
-import gnu.trove.strategy.HashingStrategy;
 import minechem.collections.strategy.FlatItemStackHashingStrategy;
 import minechem.collections.strategy.ItemStackHashingStrategy;
 
@@ -14,8 +13,9 @@ import minechem.collections.strategy.ItemStackHashingStrategy;
  * @param <V>
  */
 public class ItemStackMap<V> extends TCustomHashMap<ItemStack, V> {
-	private static final HashingStrategy HASHING_STRATEGY = new ItemStackHashingStrategy();
-	private static final HashingStrategy FLAT_HASHING_STRATEGY = new FlatItemStackHashingStrategy();
+
+	private static final ItemStackHashingStrategy HASHING_STRATEGY = new ItemStackHashingStrategy();
+	private static final FlatItemStackHashingStrategy FLAT_HASHING_STRATEGY = new FlatItemStackHashingStrategy();
 
 	public ItemStackMap() {
 		this(false);
@@ -23,5 +23,12 @@ public class ItemStackMap<V> extends TCustomHashMap<ItemStack, V> {
 
 	public ItemStackMap(boolean flat) {
 		super(flat ? FLAT_HASHING_STRATEGY : HASHING_STRATEGY);
+	}
+
+	public ItemStackMap<V> copy() {
+		ItemStackMap<V> copy = new ItemStackMap<>();
+		copy.strategy = this.strategy;
+		copy.putAll(this);
+		return copy;
 	}
 }

@@ -1,6 +1,5 @@
 package minechem.registry;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,74 +10,61 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import minechem.Compendium;
 
 public class CreativeTabRegistry {
-	public static CreativeTab TAB_PRIMARY = new CreativeTab(Compendium.Naming.name);
-	public static CreativeTab TAB_CHEMICALS = new CreativeTab(Compendium.Naming.name + " Chemicals");
+
+	public static final CreativeTab TAB_PRIMARY = new CreativeTab(Compendium.Naming.id + ".name");
+	public static final CreativeTab TAB_CHEMICALS = new CreativeTab(Compendium.Naming.id + "_chemicals.name").setSearchable();
 
 	/**
-	 * Must be inited after the Blocks and Items If you want to used modded Items or Blocks
+	 * Must be inited after the Blocks and Items If you want to used modded
+	 * Items or Blocks
 	 */
 	public static void init() {
-		TAB_PRIMARY.setIcon(BlockRegistry.opticalMicroscope);
-		TAB_CHEMICALS.setIcon(BlockRegistry.electrolysisBlock);
+		TAB_PRIMARY.setStack(new ItemStack(BlockRegistry.opticalMicroscope));
+		TAB_CHEMICALS.setStack(new ItemStack(BlockRegistry.electrolysisBlock));
 	}
 
-	/**
-	 * Better implementation of the CreativeTab which allows {@link net.minecraft.item.ItemStack} to be passed Thus making it possible to add metaData to the Item
-	 */
 	private static class CreativeTab extends CreativeTabs {
-		private ItemStack iconItemStack;
 
-		public CreativeTab(String label, Item iconItem) {
-			this(label, new ItemStack(iconItem));
-		}
-
-		public CreativeTab(String label, Item iconItem, int meta) {
-			this(label, new ItemStack(iconItem, 1, meta));
-		}
-
-		public CreativeTab(String label, Block iconBlock) {
-			this(label, new ItemStack(iconBlock));
-		}
-
-		public CreativeTab(String label, Block iconBlock, int meta) {
-			this(label, new ItemStack(iconBlock, 1, meta));
-		}
-
-		public CreativeTab(String label, ItemStack iconItemStack) {
-			super(label);
-			this.iconItemStack = iconItemStack;
-		}
+		private ItemStack stack;
+		private boolean searchable = false;
 
 		public CreativeTab(String label) {
 			super(label);
 		}
 
-		public void setIcon(Item iconItem) {
-			this.iconItemStack = new ItemStack(iconItem);
-		}
-
-		public void setIcon(Item iconItem, int meta) {
-			this.iconItemStack = new ItemStack(iconItem, 1, meta);
-		}
-
-		public void setIcon(Block iconBlock) {
-			this.iconItemStack = new ItemStack(iconBlock);
-		}
-
-		public void setIcon(Block iconBlock, int meta) {
-			this.iconItemStack = new ItemStack(iconBlock, 1, meta);
-		}
-
-		@SideOnly(Side.CLIENT)
 		@Override
+		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
-			return iconItemStack.getItem();
+			return null;
 		}
 
-		@SideOnly(Side.CLIENT)
 		@Override
+		@SideOnly(Side.CLIENT)
 		public ItemStack getIconItemStack() {
-			return this.iconItemStack;
+			return getStack();
+		}
+
+		public ItemStack getStack() {
+			return stack != null && stack.getItem() != null ? stack : null;
+		}
+
+		public void setStack(ItemStack stack) {
+			this.stack = stack;
+		}
+
+		public CreativeTab setSearchable() {
+			return setSearchable("item_search.png");
+		}
+
+		public CreativeTab setSearchable(String background) {
+			this.searchable = true;
+			setBackgroundImageName(background);
+			return this;
+		}
+
+		@Override
+		public boolean hasSearchBar() {
+			return searchable;
 		}
 	}
 }

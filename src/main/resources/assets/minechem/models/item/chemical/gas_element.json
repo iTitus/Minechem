@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minechem:items/chemical/gas_overlay",
+        "layer1": "minechem:items/chemical/tube"
+    }
+}

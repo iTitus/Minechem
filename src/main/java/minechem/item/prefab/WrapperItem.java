@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public abstract class WrapperItem extends BasicItem {
+
 	public WrapperItem(String name) {
 		super(name);
 		setMaxDamage(Short.MAX_VALUE);

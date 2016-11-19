@@ -20,9 +20,9 @@ public class EventHandler {
 		ResearchHandler.saveResearch();
 	}
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(TextureStitchEvent.Pre paramPre) {
-		IconHandler.registerIcons(paramPre);
+		//IconHandler.registerIcons(paramPre);
 	}
 }

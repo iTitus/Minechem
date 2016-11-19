@@ -3,13 +3,13 @@ package minechem.collections;
 import net.minecraft.item.ItemStack;
 
 import gnu.trove.set.hash.TCustomHashSet;
-import gnu.trove.strategy.HashingStrategy;
 import minechem.collections.strategy.FlatItemStackHashingStrategy;
 import minechem.collections.strategy.ItemStackHashingStrategy;
 
 public class ItemStackSet extends TCustomHashSet<ItemStack> {
-	private static final HashingStrategy HASHING_STRATEGY = new ItemStackHashingStrategy();
-	private static final HashingStrategy FLAT_HASHING_STRATEGY = new FlatItemStackHashingStrategy();
+
+	private static final ItemStackHashingStrategy HASHING_STRATEGY = new ItemStackHashingStrategy();
+	private static final FlatItemStackHashingStrategy FLAT_HASHING_STRATEGY = new FlatItemStackHashingStrategy();
 
 	public ItemStackSet() {
 		this(false);

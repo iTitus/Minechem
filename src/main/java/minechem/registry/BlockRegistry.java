@@ -1,5 +1,8 @@
 package minechem.registry;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import minechem.Compendium;
@@ -23,26 +26,26 @@ public class BlockRegistry {
 	public static BlockRedstone blockRedstone;
 
 	public static void init() {
-		opticalMicroscope = new OpticalMicroscopeBlock();
-		GameRegistry.registerBlock(opticalMicroscope, opticalMicroscope.getUnlocalizedName());
+		opticalMicroscope = register(new OpticalMicroscopeBlock());
 		GameRegistry.registerTileEntity(OpticalMicroscopeTileEntity.class, Compendium.Naming.opticalMicroscope + "TileEntity");
 
-		electricCrucibleBlock = new ElectricCrucibleBlock();
-		GameRegistry.registerBlock(electricCrucibleBlock, electricCrucibleBlock.getUnlocalizedName());
+		electricCrucibleBlock = register(new ElectricCrucibleBlock());
 		GameRegistry.registerTileEntity(ElectricCrucibleTileEntity.class, Compendium.Naming.electricCrucible + "TileEntity");
 
-		centrifugeBlock = new CentrifugeBlock();
-		GameRegistry.registerBlock(centrifugeBlock, centrifugeBlock.getUnlocalizedName());
+		centrifugeBlock = register(new CentrifugeBlock());
 		GameRegistry.registerTileEntity(CentrifugeTileEntity.class, Compendium.Naming.centrifuge + "TileEntity");
 
-		electrolysisBlock = new ElectrolysisBlock();
-		GameRegistry.registerBlock(electrolysisBlock, electrolysisBlock.getUnlocalizedName());
+		electrolysisBlock = register(new ElectrolysisBlock());
 		GameRegistry.registerTileEntity(ElectrolysisTileEntity.class, Compendium.Naming.electrolysis + "TileEntity");
 
-		blockLight = new BlockLight();
-		GameRegistry.registerBlock(blockLight, blockLight.getLocalizedName());
+		blockLight = register(new BlockLight());
 
-		blockRedstone = new BlockRedstone();
-		GameRegistry.registerBlock(blockRedstone, blockRedstone.getLocalizedName());
+		blockRedstone = register(new BlockRedstone());
+	}
+
+	private static <T extends Block> T register(T block) {
+		GameRegistry.register(block);
+		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+		return block;
 	}
 }
