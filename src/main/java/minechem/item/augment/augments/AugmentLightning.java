@@ -1,28 +1,30 @@
 package minechem.item.augment.augments;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class AugmentLightning extends AugmentBase {
+
 	public AugmentLightning() {
 		super("lightning");
 	}
 
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase, int level) {
-		if (rand.nextInt(75) <= level) {
-			spawnLightning(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), stack, level);
+	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entityLiving, int level) {
+		if (RAND.nextInt(75) <= level) {
+			spawnLightning(world, pos.getX() + RAND.nextDouble(), pos.getY() + RAND.nextDouble(), pos.getZ() + RAND.nextDouble(), stack, level);
 		}
 		return false;
 	}
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user, int level) {
-		if (rand.nextInt(15) <= level) {
+		if (RAND.nextInt(15) <= level) {
 			spawnLightning(user.worldObj, target.posX, target.posY, target.posZ, stack, level);
 		}
 		return false;
@@ -30,7 +32,7 @@ public class AugmentLightning extends AugmentBase {
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool, int level) {
-		if (rand.nextInt(24000) <= level && entity instanceof EntityLivingBase) {
+		if (RAND.nextInt(24000) <= level && entity instanceof EntityLivingBase) {
 			spawnLightning(world, entity.posX, entity.posY, entity.posZ, stack, level);
 		}
 	}
@@ -40,7 +42,7 @@ public class AugmentLightning extends AugmentBase {
 			level = getUsableLevel(stack, level);
 			if (level >= 0) {
 				consumeAugment(stack, level);
-				world.addWeatherEffect(new EntityLightningBolt(world, x, y, z));
+				world.addWeatherEffect(new EntityLightningBolt(world, x, y, z, false));
 			}
 		}
 	}

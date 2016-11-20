@@ -7,6 +7,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class AugmentUnstable extends AugmentBase {
+
 	private final float multiplier;
 
 	public AugmentUnstable(float multiplier) {
@@ -15,9 +16,9 @@ public class AugmentUnstable extends AugmentBase {
 	}
 
 	@Override
-	public boolean onEntityItemUpdate(ItemStack stack, EntityItem entityItem, int level) {
-		if (!entityItem.worldObj.isRemote && rand.nextFloat() < multiplier * 0.001) {
-			consumeAugment(stack, level);
+	public boolean onEntityItemUpdate(EntityItem entityItem, int level) {
+		if (!entityItem.worldObj.isRemote && RAND.nextFloat() < multiplier * 0.001) {
+			consumeAugment(entityItem.getEntityItem(), level);
 			if (level < 0) {
 				return false;
 			}
@@ -27,8 +28,8 @@ public class AugmentUnstable extends AugmentBase {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool, int level) {
-		if (!entity.worldObj.isRemote && rand.nextFloat() < multiplier * 0.001) {
+	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isSelected, int level) {
+		if (!entity.worldObj.isRemote && RAND.nextFloat() < multiplier * 0.001) {
 			consumeAugment(stack, level);
 			if (level < 0) {
 				return;

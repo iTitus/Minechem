@@ -2,16 +2,23 @@ package minechem.item.augment.augments;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface IAugment {
+
 	String getKey();
 
 	/**
@@ -44,7 +51,7 @@ public interface IAugment {
 	/**
 	 * @return true to make the block drop
 	 */
-	boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase, int level);
+	boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entityLiving, int level);
 
 	/**
 	 * @return false to cancel drop
@@ -57,17 +64,17 @@ public interface IAugment {
 	 * @param entityItem The entity Item
 	 * @return Return true to skip any further update code.
 	 */
-	boolean onEntityItemUpdate(ItemStack stack, EntityItem entityItem, int level);
+	boolean onEntityItemUpdate(EntityItem entityItem, int level);
 
 	/**
-	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return True if something happen and false if it don't.
+	 * Callback for item usage. If the item does something special on right clicking, he will have one of those.
 	 */
-	boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int level);
+	EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int level);
 
 	/**
-	 * @return true to prevent further processing
+	 *
 	 */
-	boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int level);
+	EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand, int level);
 
 	/**
 	 * Called when a entity tries to play the 'swing' animation.
@@ -81,7 +88,7 @@ public interface IAugment {
 	/**
 	 * Returns true if the item can be used on the given entity, e.g. shears on sheep.
 	 */
-	boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase, int level);
+	boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target, EnumHand hand, int level);
 
 	/**
 	 * Called when the player Left Clicks (attacks) an entity. Processed before damage is done, if return value is true further processing is canceled and the entity is not attacked.
@@ -94,16 +101,16 @@ public interface IAugment {
 	boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity, int level);
 
 	/**
-	 * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+	 * Called whenever this item is equipped and the right mouse button is pressed.
 	 */
-	ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player, int level);
+	ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand, int level);
 
-	ItemStack onEaten(ItemStack stack, World world, EntityPlayer player, int level);
+	ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving, int level);
 
 	/**
 	 * Called each tick as long the item is on a player inventory.
 	 */
-	void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool, int level);
+	void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected, int level);
 
 	/**
 	 * Called each tick while using an item.
@@ -112,34 +119,34 @@ public interface IAugment {
 	 * @param player The Player using the item
 	 * @param count  The amount of time in tick the item has been used for continuously
 	 */
-	void onUsingTick(ItemStack stack, EntityPlayer player, int count, int level);
+	void onUsingTick(ItemStack stack, EntityLivingBase entityLiving, int count, int level);
 
 	/**
 	 * @param prevDigSpeed unmodified dig speed
 	 * @return
 	 */
-	float getModifiedDigSpeed(ItemStack stack, float prevDigSpeed, Block block, int metadata, int level);
+	float getStrVsBlock(ItemStack stack, IBlockState state, float prevStrVsBlock, int level);
 
 	/**
 	 * @param toolClass
-	 * @return modifier to tool level
+	 * @return new tool level
 	 */
-	int getHarvestLevelModifier(ItemStack stack, String toolClass, int level);
+	int getHarvestLevel(ItemStack stack, String toolClass, EntityPlayer player, IBlockState state, int prevHarvestLevel, int level);
 
 	/**
 	 * @return Attribute Modifiers to the base tools attributes.
 	 */
-	Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack, int level);
+	Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack, int level);
 
 	/**
 	 * @return float value between 0 and 1 indicating probability of damage not being applied to the tool
 	 */
-	float setDamageChance(ItemStack stack, int level);
+	float getDamageChance(ItemStack stack, int level);
 
 	/**
-	 * @return int modifier to EntityItem lifespan (base 6000)
+	 * @return new EntityItem lifespan (base 6000)
 	 */
-	int getEntityLifespanModifier(ItemStack stack, int level);
+	int getEntityLifespan(ItemStack stack, World world, int prevEntityLifespan, int level);
 
-	boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user, int level);
+	boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker, int level);
 }

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
  *
  */
 public class LocalizationHelper {
+
 	public static String getLocalString(String key) {
 		return getLocalString(key, false);
 	}

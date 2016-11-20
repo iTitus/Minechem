@@ -1,8 +1,10 @@
 package minechem.item.augment.augments;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class AugmentReinforced extends AugmentBase {
+
 	public AugmentReinforced() {
 		super("reinforced");
 	}
@@ -13,13 +15,14 @@ public class AugmentReinforced extends AugmentBase {
 	}
 
 	@Override
-	public float setDamageChance(ItemStack stack, int level) {
+	public float getDamageChance(ItemStack stack, int level) {
 		consumeAugment(stack, level);
 		return (level + 1) * 0.08F;
 	}
 
 	@Override
-	public int getEntityLifespanModifier(ItemStack stack, int level) {
-		return level * 1000;
+	public int getEntityLifespan(ItemStack stack, World world, int prevEntityLifespan, int level) {
+		return prevEntityLifespan + level * 1000;
 	}
+
 }

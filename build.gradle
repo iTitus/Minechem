@@ -37,7 +37,7 @@ minecraft {
 	// useDepAts = true
 	// makeObfSourceJar = false
 	
-	replaceIn "Minechem.java"
+	replaceIn "Compendium.java"
 	replace "@MODVERSION@", project.version
 	
 	replaceIn "package-info.java"

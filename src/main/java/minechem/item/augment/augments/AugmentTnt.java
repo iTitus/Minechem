@@ -1,10 +1,11 @@
 package minechem.item.augment.augments;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class AugmentTnt extends AugmentBase {
@@ -14,8 +15,8 @@ public class AugmentTnt extends AugmentBase {
 	}
 
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase, int level) {
-		createExplosion(world, null, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), level + 3, stack, level);
+	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entityLiving, int level) {
+		createExplosion(world, null, pos.getX() + RAND.nextDouble(), pos.getY() + RAND.nextDouble(), pos.getZ() + RAND.nextDouble(), level + 3, stack, level);
 		return false;
 	}
 

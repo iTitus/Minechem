@@ -7,103 +7,102 @@ import java.util.UUID;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemSpade;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import minechem.Compendium;
-import minechem.client.render.RenderHelper;
+import minechem.helper.LocalizationHelper;
 import minechem.item.IOverlay;
 import minechem.item.augment.augments.IAugment;
 import minechem.item.prefab.WrapperItem;
 import minechem.registry.AugmentRegistry;
 
 public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverlay {
+
 	public static final String augmentList = "augments";
 	public static final String level = "level";
-	public static final UUID itemUUID = field_111210_e;
-	private static int DEFAULTICON = 0;
-	private static int AXEICON = 1;
-	private static int HOEICON = 2;
-	private static int PICKICON = 3;
-	private static int SHOVELICON = 4;
-	private static int SWORDICON = 5;
+	public static final UUID ATTACK_DAMAGE_MOIFIER_UUID = ATTACK_DAMAGE_MODIFIER;
+//	private static int DEFAULTICON = 0;
+//	private static int AXEICON = 1;
+//	private static int HOEICON = 2;
+//	private static int PICKICON = 3;
+//	private static int SHOVELICON = 4;
+//	private static int SWORDICON = 5;
 
-	@SideOnly(Side.CLIENT)
-	protected IIcon[] augmentIcon;
+//	@SideOnly(Side.CLIENT)
+//	protected IIcon[] augmentIcon;
 
 	public AugmentedItem() {
-		super("augmented");
+		super(Compendium.Naming.augmented);
 		// augmented types are sword, shovel, pickaxe, hoe, axe
-		augmentIcon = new IIcon[6];
+//		augmentIcon = new IIcon[6];
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
-		// there's got to be a better way to register these...maybe a map?
+//	@Override
+//	@SideOnly(Side.CLIENT)
+//	public void registerIcons(IIconRegister iconRegister) {
+//		// there's got to be a better way to register these...maybe a map?
+//
+//		augmentIcon[DEFAULTICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedDefaultIcon");
+//		augmentIcon[AXEICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedAxeIcon");
+//		augmentIcon[HOEICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedHoeIcon");
+//		augmentIcon[PICKICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedPickaxeIcon");
+//		augmentIcon[SHOVELICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedShovelIcon");
+//		augmentIcon[SWORDICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedSwordIcon");
+//	}
 
-		augmentIcon[DEFAULTICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedDefaultIcon");
-		augmentIcon[AXEICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedAxeIcon");
-		augmentIcon[HOEICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedHoeIcon");
-		augmentIcon[PICKICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedPickaxeIcon");
-		augmentIcon[SHOVELICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedShovelIcon");
-		augmentIcon[SWORDICON] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedSwordIcon");
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIconFromDamage(int p_77617_1_) {
-		return augmentIcon[DEFAULTICON];
-	}
+//	@SideOnly(Side.CLIENT)
+//	@Override
+//	public IIcon getIconFromDamage(int p_77617_1_) {
+//		return augmentIcon[DEFAULTICON];
+//	}
 
 	@Override
 	public void renderOverlay(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top, float z) {
-		RenderHelper.enableBlend();
-		RenderHelper.setOpacity(1.0F);
-		textureManager.bindTexture(TextureMap.locationItemsTexture);
-		ItemStack wrappedItemStack = getWrappedItemStack(itemStack);
-		if (wrappedItemStack != null) {
-			Item wrappedItem = wrappedItemStack.getItem();
-			if (wrappedItem instanceof ItemAxe) {
-				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[AXEICON]);
-			} else if (wrappedItem instanceof ItemHoe) {
-				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[HOEICON]);
-			} else if (wrappedItem instanceof ItemPickaxe) {
-				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[PICKICON]);
-			} else if (wrappedItem instanceof ItemSpade) {
-				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[SHOVELICON]);
-			} else if (wrappedItem instanceof ItemSword) {
-				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[SWORDICON]);
-			} else {
-				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[DEFAULTICON]);
-			}
-		}
-
-		RenderHelper.resetOpacity();
-		RenderHelper.disableBlend();
+//		RenderHelper.enableBlend();
+//		RenderHelper.setOpacity(1.0F);
+//		textureManager.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+//		ItemStack wrappedItemStack = getWrappedItemStack(itemStack);
+//		if (wrappedItemStack != null) {
+//			Item wrappedItem = wrappedItemStack.getItem();
+//			if (wrappedItem instanceof ItemAxe) {
+//				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[AXEICON]);
+//			} else if (wrappedItem instanceof ItemHoe) {
+//				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[HOEICON]);
+//			} else if (wrappedItem instanceof ItemPickaxe) {
+//				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[PICKICON]);
+//			} else if (wrappedItem instanceof ItemSpade) {
+//				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[SHOVELICON]);
+//			} else if (wrappedItem instanceof ItemSword) {
+//				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[SWORDICON]);
+//			} else {
+//				RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[DEFAULTICON]);
+//			}
+//		}
+//
+//		RenderHelper.resetOpacity();
+//		RenderHelper.disableBlend();
 	}
 
 	@Override
@@ -128,9 +127,10 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	}
 
 	//#############################Augmented Item Stuff##########################################################
+
 	@Override
 	public boolean hasAugment(ItemStack item, IAugment augment) {
-		return item.hasTagCompound() && item.getTagCompound().hasKey(augment.getKey(), Compendium.NBTTags.tagCompound);
+		return item.hasTagCompound() && item.getTagCompound().hasKey(augment.getKey(), Constants.NBT.TAG_COMPOUND);
 	}
 
 	@Override
@@ -141,8 +141,8 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	@Override
 	public Map<IAugment, Integer> getAugments(ItemStack stack) {
 		Map<IAugment, Integer> result = new HashMap<IAugment, Integer>();
-		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(augmentList, Compendium.NBTTags.tagList)) {
-			NBTTagList augments = stack.getTagCompound().getTagList(augmentList, Compendium.NBTTags.tagString);
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey(augmentList, Constants.NBT.TAG_LIST)) {
+			NBTTagList augments = stack.getTagCompound().getTagList(augmentList, Constants.NBT.TAG_STRING);
 			for (int i = 0; i < augments.tagCount(); i++) {
 				String key = augments.getStringTagAt(i);
 				result.put(AugmentRegistry.getAugment(key), (int) stack.getTagCompound().getCompoundTag(key).getByte(level));
@@ -162,7 +162,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 			return false;
 		}
 		tagCompound.removeTag(augmentKey);
-		NBTTagList augments = tagCompound.getTagList(augmentList, Compendium.NBTTags.tagString);
+		NBTTagList augments = tagCompound.getTagList(augmentList, Constants.NBT.TAG_STRING);
 		for (int i = 0; i < augments.tagCount(); i++) {
 			if (augments.getStringTagAt(i).equals(augmentKey)) {
 				augments.removeTag(i);
@@ -172,12 +172,6 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 		return false;
 	}
 
-	/**
-	 * Set {@link minechem.item.augment.augments.IAugment} on Item
-	 *
-	 * @param item        ItemStack to add augment to
-	 * @param augmentItem Augment to add
-	 */
 	@Override
 	public boolean setAugment(ItemStack item, ItemStack augmentItem) {
 		IAugment augment = AugmentRegistry.getAugment(augmentItem);
@@ -189,13 +183,13 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 		}
 		NBTTagCompound tagCompound = item.getTagCompound();
 		String augmentKey = augment.getKey();
-		if (!tagCompound.hasKey(augmentKey, Compendium.NBTTags.tagCompound)) {
-			NBTTagList augments = tagCompound.getTagList(augmentList, Compendium.NBTTags.tagString);
+		if (!tagCompound.hasKey(augmentKey, Constants.NBT.TAG_COMPOUND)) {
+			NBTTagList augments = tagCompound.getTagList(augmentList, Constants.NBT.TAG_STRING);
 			augments.appendTag(new NBTTagString(augmentKey));
 			tagCompound.setTag(augmentList, augments);
 			NBTTagCompound augmentTag = new NBTTagCompound();
 			augmentTag.setTag(Compendium.NBTTags.item, augmentItem.writeToNBT(new NBTTagCompound()));
-			augmentTag.setByte(this.level, (byte) 0);
+			augmentTag.setByte(level, (byte) 0);
 			tagCompound.setTag(augmentKey, augmentTag);
 			return true;
 		}
@@ -205,8 +199,8 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	@Override
 	public boolean setAugmentLevel(ItemStack item, IAugment augment, int level) {
 		String augmentKey = augment.getKey();
-		if (item.getTagCompound().hasKey(augmentKey, Compendium.NBTTags.tagCompound)) {
-			item.getTagCompound().getCompoundTag(augmentKey).setByte(this.level, (byte) level);
+		if (item.getTagCompound().hasKey(augmentKey, Constants.NBT.TAG_COMPOUND)) {
+			item.getTagCompound().getCompoundTag(augmentKey).setByte(AugmentedItem.level, (byte) level);
 			return true;
 		}
 		return false;
@@ -214,29 +208,30 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 
 	@Override
 	public int getAugmentLevel(ItemStack item, IAugment augment) {
-		return hasAugment(item, augment) ? item.getTagCompound().getCompoundTag(augment.getKey()).getByte(this.level) : -1;
+		return hasAugment(item, augment) ? item.getTagCompound().getCompoundTag(augment.getKey()).getByte(level) : -1;
 	}
 
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-		super.addInformation(stack, player, list, bool);
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+		super.addInformation(stack, player, tooltip, advanced);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) // @TODO: Change this to display more useful data
 		{
-			list.add(entry.getKey().getLocalizedName() + ": " + entry.getKey().getDisplayText(entry.getValue()));
+			tooltip.add(entry.getKey().getLocalizedName() + ": " + entry.getKey().getDisplayText(entry.getValue()));
 		}
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return (getWrappedItemStack(stack) != null ? StatCollector.translateToLocal("augment.augmentedItem") + " " : "") + super.getItemStackDisplayName(stack);
+		return (getWrappedItemStack(stack) != null ? LocalizationHelper.getLocalString("augment.augmentedItem") + " " : "") + super.getItemStackDisplayName(stack);
 	}
 
 	//################################Augment Effect Stuff####################################
+
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase) {
-		boolean result = super.onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase);
+	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+		boolean result = super.onBlockDestroyed(stack, world, state, pos, entityLiving);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result |= entry.getKey().onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase, entry.getValue());
+			result |= entry.getKey().onBlockDestroyed(stack, world, state, pos, entityLiving, entry.getValue());
 		}
 		return result;
 	}
@@ -257,31 +252,37 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	public boolean onEntityItemUpdate(EntityItem entityItem) {
 		boolean result = super.onEntityItemUpdate(entityItem);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(entityItem.getEntityItem()).entrySet()) {
-			result |= entry.getKey().onEntityItemUpdate(entityItem.getEntityItem(), entityItem, entry.getValue());
+			result |= entry.getKey().onEntityItemUpdate(entityItem, entry.getValue());
 		}
 		return result;
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		boolean result = super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-		if (result) {
-			return true;
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		EnumActionResult result = super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
+		if (result == EnumActionResult.SUCCESS) {
+			return result;
 		}
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result |= entry.getKey().onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ, entry.getValue());
+			EnumActionResult newResult = entry.getKey().onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ, entry.getValue());
+			if (result == EnumActionResult.PASS || newResult == EnumActionResult.SUCCESS) {
+				result = newResult;
+			}
 		}
 		return result;
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		boolean result = super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-		if (result) {
-			return true;
+	public EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
+		EnumActionResult result = super.onItemUseFirst(stack, player, world, pos, side, hitX, hitY, hitZ, hand);
+		if (result == EnumActionResult.SUCCESS) {
+			return result;
 		}
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result |= entry.getKey().onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ, entry.getValue());
+			EnumActionResult newResult = entry.getKey().onItemUseFirst(stack, player, world, pos, side, hitX, hitY, hitZ, hand, entry.getValue());
+			if (result == EnumActionResult.PASS || newResult == EnumActionResult.SUCCESS) {
+				result = newResult;
+			}
 		}
 		return result;
 	}
@@ -299,10 +300,10 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	}
 
 	@Override
-	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase) {
-		boolean result = super.itemInteractionForEntity(stack, player, entityLivingBase);
+	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase target, EnumHand hand) {
+		boolean result = super.itemInteractionForEntity(stack, player, target, hand);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result |= entry.getKey().itemInteractionForEntity(stack, player, entityLivingBase, entry.getValue());
+			result |= entry.getKey().itemInteractionForEntity(stack, player, target, hand, entry.getValue());
 		}
 		return result;
 	}
@@ -320,19 +321,19 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		ItemStack result = super.onItemRightClick(stack, world, player);
+	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+		ActionResult<ItemStack> result = super.onItemRightClick(stack, world, player, hand);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result = entry.getKey().onItemRightClick(stack, world, player, entry.getValue());
+			result = entry.getKey().onItemRightClick(stack, world, player, hand, entry.getValue());
 		}
 		return result;
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
-		ItemStack result = super.onEaten(stack, world, player);
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
+		ItemStack result = super.onItemUseFinish(stack, world, entityLiving);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result = entry.getKey().onEaten(stack, world, player, entry.getValue());
+			result = entry.getKey().onItemUseFinish(stack, world, entityLiving, entry.getValue());
 		}
 		return result;
 	}
@@ -346,27 +347,27 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		super.onUsingTick(stack, player, count);
+	public void onUsingTick(ItemStack stack, EntityLivingBase entityLiving, int count) {
+		super.onUsingTick(stack, entityLiving, count);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			entry.getKey().onUsingTick(stack, player, count, entry.getValue());
+			entry.getKey().onUsingTick(stack, entityLiving, count, entry.getValue());
 		}
 	}
 
 	@Override
-	public float getDigSpeed(ItemStack itemstack, Block block, int metadata) {
-		float result = super.getDigSpeed(itemstack, block, metadata);
-		for (Map.Entry<IAugment, Integer> entry : getAugments(itemstack).entrySet()) {
-			result = entry.getKey().getModifiedDigSpeed(itemstack, result, block, metadata, entry.getValue());
+	public float getStrVsBlock(ItemStack stack, IBlockState state) {
+		float result = super.getStrVsBlock(stack, state);
+		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
+			result = entry.getKey().getStrVsBlock(stack, state, result, entry.getValue());
 		}
 		return result;
 	}
 
 	@Override
-	public int getHarvestLevel(ItemStack stack, String toolClass) {
-		int result = super.getHarvestLevel(stack, toolClass);
+	public int getHarvestLevel(ItemStack stack, String toolClass, EntityPlayer player, IBlockState state) {
+		int result = super.getHarvestLevel(stack, toolClass, player, state);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result += entry.getKey().getHarvestLevelModifier(stack, toolClass, entry.getValue());
+			result = entry.getKey().getHarvestLevel(stack, toolClass, player, state, result, entry.getValue());
 		}
 		return result;
 	}
@@ -381,10 +382,10 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	}
 
 	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		Multimap result = super.getAttributeModifiers(stack);
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+		Multimap<String, AttributeModifier> result = getAttributeModifiers(slot, stack);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			result.putAll(entry.getKey().getAttributeModifiers(stack, entry.getValue()));
+			result.putAll(entry.getKey().getAttributeModifiers(slot, stack, entry.getValue()));
 		}
 		return result;
 	}
@@ -392,7 +393,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	@Override
 	public void setDamage(ItemStack stack, int damage) {
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			if (itemRand.nextFloat() < entry.getKey().setDamageChance(stack, entry.getValue())) {
+			if (itemRand.nextFloat() < entry.getKey().getDamageChance(stack, entry.getValue())) {
 				return;
 			}
 		}
@@ -403,7 +404,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
 	public int getEntityLifespan(ItemStack stack, World world) {
 		int lifespan = super.getEntityLifespan(stack, world);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
-			lifespan += entry.getKey().getEntityLifespanModifier(stack, entry.getValue());
+			lifespan = entry.getKey().getEntityLifespan(stack, world, lifespan, entry.getValue());
 		}
 		return lifespan;
 	}

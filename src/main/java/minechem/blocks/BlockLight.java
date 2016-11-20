@@ -3,34 +3,71 @@ package minechem.blocks;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.Explosion;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.Compendium;
-import minechem.apparatus.prefab.block.SpecialRenderBlock;
 
-public class BlockLight extends SpecialRenderBlock {
+public class BlockLight extends BlockBase {
+
+	public static final PropertyInteger LIGHT = PropertyInteger.create("light", 0, 15);
+	private static final AxisAlignedBB AABB = new AxisAlignedBB(0.25, 0.25, 0.25, 0.75, 0.75, 0.75);
+
 	public BlockLight() {
-		super(Material.circuits);
-		setBlockName(Compendium.Naming.light);
-		this.setBlockBounds(0.35F, 0.35F, 0.35F, 0.65F, 0.65F, 0.65F);
-		this.setBlockTextureName(Compendium.Naming.id + ":blankIcon");
+		super(Compendium.Naming.light, Material.CIRCUITS);
+		setDefaultState(blockState.getBaseState().withProperty(LIGHT, 0));
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int face, float hitX, float hitY, float hitZ) {
-		return super.onBlockActivated(world, x, y, z, player, face, hitX, hitY, hitZ);
-		// @TODO: player hits with an augmented Item to boost light
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, LIGHT);
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		return Math.min(world.getBlockMetadata(x, y, z) + 10, 15);
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(LIGHT, meta);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(LIGHT);
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+		//TODO: player hits with an augmented Item to boost light
+		return super.onBlockActivated(worldIn, pos, state, player, hand, heldItem, side, hitX, hitY, hitZ);
+	}
+
+	@Override
+	public int getLightValue(IBlockState state) {
+		return state.getValue(LIGHT);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		for (int i = 0; i < state.getValue(LIGHT); i++) {
+			double x = pos.getX() + 0.5 + (rand.nextDouble() - 0.5) * 0.2;
+			double y = pos.getY() + 0.7 + (rand.nextDouble() - 0.5) * 0.2;
+			double z = pos.getZ() + 0.5 + (rand.nextDouble() - 0.5) * 0.2;
+
+			world.spawnParticle(EnumParticleTypes.FLAME, x, y, z, 0, 0, 0);
+		}
 	}
 
 	@Override
@@ -39,41 +76,36 @@ public class BlockLight extends SpecialRenderBlock {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.INVISIBLE;
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return AABB;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World world, BlockPos pos) {
+		return NULL_AABB;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
+	public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
-		return AxisAlignedBB.getBoundingBox(-0.2D, -0.2D, -0.2D, 0.2D, 0.2D, 0.2D);
-	}
-
-	@Override
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
-		return null;
-	}
-
-	@Override
-	public boolean isAir(IBlockAccess world, int x, int y, int z) {
-		return false;
-	}
-
-	@Override
-	public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
+	public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public boolean canHarvestBlock(EntityPlayer player, int meta) {
+	public boolean isFullCube(IBlockState state) {
 		return false;
-	}
-
-	@Override
-	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
 	}
 }

@@ -21,6 +21,8 @@ import minechem.handler.EventHandler;
 import minechem.handler.GuiHandler;
 import minechem.handler.MoleculeHandler;
 import minechem.helper.LogHelper;
+import minechem.registry.AugmentRegistry;
+import minechem.registry.BlockRegistry;
 import minechem.registry.CreativeTabRegistry;
 import minechem.registry.ItemRegistry;
 import minechem.registry.JournalRegistry;
@@ -49,11 +51,11 @@ public class CommonProxy {
 		LogHelper.debug("Registering Items...");
 		ItemRegistry.init();
 
-		// LogHelper.debug("Registering Blocks...");
-		// BlockRegistry.init();
+		LogHelper.debug("Registering Blocks...");
+		BlockRegistry.init();
 
-		//LogHelper.debug("Registering Augments...");
-		//AugmentRegistry.init();
+		LogHelper.debug("Registering Augments...");
+		AugmentRegistry.init();
 
 		LogHelper.debug("Registering CreativeTabs...");
 		CreativeTabRegistry.init();

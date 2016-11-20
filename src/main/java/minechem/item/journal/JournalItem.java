@@ -31,7 +31,7 @@ import minechem.registry.ResearchRegistry;
 public class JournalItem extends BasicItem {
 
 	public JournalItem() {
-		super("journal");
+		super(Compendium.Naming.journal);
 		setMaxStackSize(1);
 	}
 

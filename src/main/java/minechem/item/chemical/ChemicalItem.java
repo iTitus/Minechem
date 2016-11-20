@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import minechem.Compendium;
 import minechem.chemical.ChemicalBase;
 import minechem.helper.Jenkins;
 import minechem.item.prefab.BasicItem;
@@ -21,7 +22,7 @@ import minechem.registry.ItemRegistry;
 public class ChemicalItem extends BasicItem {
 
 	public ChemicalItem() {
-		super("chemical");
+		super(Compendium.Naming.chemical);
 		setCreativeTab(CreativeTabRegistry.TAB_CHEMICALS);
 	}
 

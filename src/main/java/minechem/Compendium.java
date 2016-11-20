@@ -59,6 +59,8 @@ public class Compendium {
 		public static final String electricCrucible = "electricCrucible";
 		public static final String centrifuge = "centrifuge";
 		public static final String journal = "journal";
+		public static final String chemical = "chemical";
+		public static final String augmented = "augmented";
 		public static final String light = "light";
 		public static final String redstone = "redstone";
 

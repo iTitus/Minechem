@@ -1,0 +1,12 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "particle": "blocks/redstone_block"
+        },
+        "model": "block"
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

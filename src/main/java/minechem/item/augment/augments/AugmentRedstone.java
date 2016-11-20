@@ -2,17 +2,18 @@ package minechem.item.augment.augments;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
+import minechem.blocks.BlockRedstone;
 import minechem.registry.BlockRegistry;
 
 public class AugmentRedstone extends AugmentBase {
-	private static final int[] levels = new int[]
-			{
-					5, 10, 15
-			};
+
+	private static final int[] levels = new int[]{5, 10, 15};
 
 	public AugmentRedstone() {
 		super("redstone");
@@ -29,16 +30,13 @@ public class AugmentRedstone extends AugmentBase {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int level) {
-		ForgeDirection dir = ForgeDirection.getOrientation(side);
-		x += dir.offsetX;
-		y += dir.offsetY;
-		z += dir.offsetZ;
-		if (!world.isRemote && player != null && player.canPlayerEdit(x, y, z, side, null)) {
-			if (world.isAirBlock(x, y, z)) {
-				world.setBlock(x, y, z, BlockRegistry.blockRedstone, levels[level], 7);
-			}
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int level) {
+		pos = pos.offset(facing);
+		if (!world.isRemote && player.canPlayerEdit(pos, facing, stack) && world.isAirBlock(pos)) {
+			world.setBlockState(pos, BlockRegistry.blockRedstone.getDefaultState().withProperty(BlockRedstone.POWER, levels[level]), 7);
+			return EnumActionResult.SUCCESS;
 		}
-		return false;
+		return EnumActionResult.FAIL;
 	}
+
 }
