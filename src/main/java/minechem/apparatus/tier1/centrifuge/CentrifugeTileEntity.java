@@ -1,21 +1,11 @@
 package minechem.apparatus.tier1.centrifuge;
 
-import minechem.Compendium;
-import minechem.apparatus.prefab.tileEntity.BasicInventoryTileEntity;
+import minechem.apparatus.prefab.tileEntity.InventoryTileEntity;
 
-public class CentrifugeTileEntity extends BasicInventoryTileEntity {
+public class CentrifugeTileEntity extends InventoryTileEntity {
 
 	public CentrifugeTileEntity() {
-		super(Compendium.Naming.centrifuge, 2);
-	}
-
-	@Override
-	public String getInventoryName() {
-		return Compendium.Naming.centrifuge;
-	}
-
-	@Override
-	public void updateEntity() {
+		super(2);
 	}
 
 }

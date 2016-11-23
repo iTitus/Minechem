@@ -1,52 +1,42 @@
 package minechem.apparatus.prefab.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 
-import minechem.Compendium;
 import minechem.registry.CreativeTabRegistry;
 
 /*
  * Extendable class for simple non-container blocks
  */
-public abstract class BasicBlock extends Block {
+public class BasicBlock extends Block {
 
-	/**
-	 * Unnamed blocks are given a default name
-	 */
-	public BasicBlock() {
-		this(Compendium.Naming.name + " Basic Block");
-	}
+	protected final String name;
 
 	/**
 	 * Create a basic block with a given name
 	 *
-	 * @param blockName unlocalized name of the block
+	 * @param name unlocalized name of the block
 	 */
-	public BasicBlock(String blockName) {
-		this(blockName, Material.grass, Block.soundTypeGrass);
+	public BasicBlock(String name) {
+		this(name, Material.IRON);
 	}
 
-	public BasicBlock(String blockName, Material material) {
-		this(blockName, material, material == Material.cloth ? Block.soundTypeCloth : material == Material.wood ? Block.soundTypeWood : material == Material.glass ? Block.soundTypeGlass : material == Material.iron ? Block.soundTypeMetal : Block.soundTypeGrass);
+	public BasicBlock(String name, Material material) {
+		this(name, material, material == Material.CLOTH ? SoundType.CLOTH : material == Material.WOOD ? SoundType.WOOD : material == Material.GLASS ? SoundType.GLASS : SoundType.METAL);
 	}
 
-	public BasicBlock(String blockName, Material material, SoundType soundType) {
+	public BasicBlock(String name, Material material, SoundType soundType) {
 		super(material);
-		setBlockName(blockName);
-		setStepSound(soundType);
+		this.name = name;
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		setSoundType(soundType);
 		setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
-		textureName = Compendium.Naming.id + ":" + blockName + "Icon";
 	}
 
-	/**
-	 * Register the block icon from the texture name
-	 *
-	 * @param iconRegister
-	 */
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(textureName);
+	public String getName() {
+		return name;
 	}
+
 }

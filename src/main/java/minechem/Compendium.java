@@ -14,6 +14,7 @@ public class Compendium {
 	public static final class Gui {
 		public static final int JOURNAL_ID = 0;
 		public static final int MICROSCOPE_ID = 1;
+		public static final int CENTRIFUGE_ID = 2;
 	}
 
 

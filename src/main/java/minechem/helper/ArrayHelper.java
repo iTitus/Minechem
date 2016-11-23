@@ -1,9 +1,10 @@
 package minechem.helper;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 @SuppressWarnings("unchecked")
 public class ArrayHelper {
@@ -33,9 +34,9 @@ public class ArrayHelper {
 	 * @return an {@link java.lang.Object}[]
 	 */
 	public static Object[] convertToArray(Object array) {
-		Class ofArray = array.getClass().getComponentType();
+		Class<?> ofArray = array.getClass().getComponentType();
 		if (ofArray.isPrimitive()) {
-			List arrayList = new ArrayList();
+			List<Object> arrayList = Lists.newArrayList();
 			int length = Array.getLength(array);
 			for (int i = 0; i < length; i++) {
 				arrayList.add(Array.get(array, i));

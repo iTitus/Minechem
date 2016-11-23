@@ -27,7 +27,7 @@ public class MinecraftAchievementPage {
 			for (column = 0; column * scaled - k < 224.0F; ++column) {
 				random.setSeed(mc.getSession().getPlayerID().hashCode() + i + column + (j + row) * 16);
 				icon = random.nextInt(1 + j + row) + (j + row) / 2;
-				IIcon iicon = Blocks.bedrock.getIcon(0, 0);
+				IIcon iicon = Blocks.BEDROCK.getIcon(0, 0);
 
 				if (icon <= 37 && j + row != 35) {
 					if (icon == 22) {
@@ -37,13 +37,13 @@ public class MinecraftAchievementPage {
 							iicon = Blocks.redstone_ore.getIcon(0, 0);
 						}
 					} else if (icon == 10) {
-						iicon = Blocks.iron_ore.getIcon(0, 0);
+						iicon = Blocks.IRON_ORE.getIcon(0, 0);
 					} else if (icon == 8) {
-						iicon = Blocks.coal_ore.getIcon(0, 0);
+						iicon = Blocks.COAL_ORE.getIcon(0, 0);
 					} else if (icon > 4) {
-						iicon = Blocks.stone.getIcon(0, 0);
+						iicon = Blocks.STONE.getIcon(0, 0);
 					} else if (icon > 0) {
-						iicon = Blocks.dirt.getIcon(0, 0);
+						iicon = Blocks.DIRT.getIcon(0, 0);
 					}
 				}
 

@@ -5,14 +5,17 @@ import javax.vecmath.Vector3f;
 
 import org.apache.logging.log4j.Level;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -33,6 +36,7 @@ import minechem.client.font.SimpleModelFontRenderer;
 import minechem.helper.LogHelper;
 import minechem.item.chemical.ChemicalItem;
 import minechem.item.chemical.ChemicalItemBakedModel;
+import minechem.registry.BlockRegistry;
 import minechem.registry.ItemRegistry;
 import repackage.net.afterlifelochie.fontbox.font.FontException;
 import repackage.net.afterlifelochie.fontbox.font.GLFont;
@@ -72,6 +76,27 @@ public class ClientProxy extends CommonProxy {
 			}
 		});
 
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), 0, new ModelResourceLocation(BlockRegistry.centrifugeBlock.getRegistryName(), "inventory"));
+
+		ModelLoader.setCustomStateMapper(BlockRegistry.blockLight, new StateMapperBase() {
+
+			final ModelResourceLocation modResLoc = new ModelResourceLocation(BlockRegistry.blockLight.getRegistryName(), "normal");
+
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return modResLoc;
+			}
+		});
+		ModelLoader.setCustomStateMapper(BlockRegistry.blockRedstone, new StateMapperBase() {
+
+			final ModelResourceLocation modResLoc = new ModelResourceLocation(BlockRegistry.blockRedstone.getRegistryName(), "normal");
+
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return modResLoc;
+			}
+		});
+
 		// RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		// ISBRH_ID = RenderingRegistry.getNextAvailableRenderId();
 		//
@@ -98,15 +123,15 @@ public class ClientProxy extends CommonProxy {
 		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock),
 		// new BasicItemRenderer(electricCrucibleRenderer, new
 		// ElectricCrucibleTileEntity()));
-		//
-		// CentrifugeTileEntityRenderer centrifugeRenderer = new
-		// CentrifugeTileEntityRenderer();
-		// ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class,
-		// centrifugeRenderer);
-		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock),
-		// new BasicItemRenderer(centrifugeRenderer, new
-		// CentrifugeTileEntity()));
-		//
+
+//		 CentrifugeTileEntityRenderer centrifugeRenderer = new
+//		 CentrifugeTileEntityRenderer();
+//		 ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class,
+//		 centrifugeRenderer);
+//		 MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock),
+//		new BasicItemRenderer(centrifugeRenderer, new
+//		 CentrifugeTileEntity()));
+
 		// RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(),
 		// new LightRenderer());
 		// MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem,
@@ -122,16 +147,17 @@ public class ClientProxy extends CommonProxy {
 		m.m01 = m.m12 = -m.m20;
 		m.m33 = 1;
 		m.setTranslation(new Vector3f(1, 1, 0));
-		modelFontRenderer = new SimpleModelFontRenderer(Minecraft.getMinecraft().gameSettings, new ResourceLocation("minecraft", "textures/font/ascii.png"), Minecraft.getMinecraft().getTextureManager(), false, m, DefaultVertexFormats.ITEM) {
+		Minecraft mc = Minecraft.getMinecraft();
+		modelFontRenderer = new SimpleModelFontRenderer(mc.gameSettings, new ResourceLocation("minecraft", "textures/font/ascii.png"), mc.getTextureManager(), false, m, DefaultVertexFormats.ITEM) {
 
 			@Override
 			protected float renderUnicodeChar(char c, boolean italic) {
 				return super.renderDefaultChar(' ', italic);
 			}
 		};
-		((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(modelFontRenderer);
+		((IReloadableResourceManager) mc.getResourceManager()).registerReloadListener(modelFontRenderer);
 
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
+		mc.getItemColors().registerItemColorHandler(new IItemColor() {
 
 			@Override
 			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
@@ -158,17 +184,15 @@ public class ClientProxy extends CommonProxy {
 	@SubscribeEvent
 	public void onModelBake(ModelBakeEvent event) {
 		for (Form form : Form.values()) {
-			ResourceLocation resourceLocation = new ResourceLocation(Compendium.Naming.id, "item/" + ItemRegistry.chemicalItem.getRegistryName().toString() + "/" + form.toString() + "_element");
 			ModelResourceLocation modResLoc = new ModelResourceLocation(ItemRegistry.chemicalItem.getRegistryName().toString() + "/" + form.toString() + "_element", "inventory");
 			IBakedModel baseBakedModel = event.getModelRegistry().getObject(modResLoc);
 			event.getModelRegistry().putObject(modResLoc, new ChemicalItemBakedModel((IPerspectiveAwareModel) baseBakedModel));
-
 		}
 	}
 
 	@Override
 	public World getClientWorld() {
-		return FMLClientHandler.instance().getClient().theWorld;
+		return FMLClientHandler.instance().getClient().world;
 	}
 
 	/**
@@ -182,12 +206,12 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public World getWorld(MessageContext context) {
-		return Minecraft.getMinecraft().theWorld;
+		return Minecraft.getMinecraft().world;
 	}
 
 	@Override
 	public EntityPlayer getPlayer(MessageContext context) {
-		return Minecraft.getMinecraft().thePlayer;
+		return Minecraft.getMinecraft().player;
 	}
 
 }

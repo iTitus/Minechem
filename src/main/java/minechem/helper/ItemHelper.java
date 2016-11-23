@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemHelper {
+
 	public static void throwItemStack(World world, ItemStack itemStack, double x, double y, double z) {
 		if (itemStack != null) {
 			Random random = new Random();
@@ -24,4 +25,5 @@ public class ItemHelper {
 			world.spawnEntityInWorld(entityitem);
 		}
 	}
+
 }
