@@ -20,16 +20,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import minechem.Compendium;
+import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntity;
+import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntityRenderer;
+import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntity;
+import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntityRenderer;
+import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntity;
+import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntityRenderer;
+import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
+import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntityRenderer;
 import minechem.chemical.ChemicalBase;
 import minechem.chemical.ChemicalBase.Form;
 import minechem.client.font.SimpleModelFontRenderer;
@@ -76,8 +86,6 @@ public class ClientProxy extends CommonProxy {
 			}
 		});
 
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), 0, new ModelResourceLocation(BlockRegistry.centrifugeBlock.getRegistryName(), "inventory"));
-
 		ModelLoader.setCustomStateMapper(BlockRegistry.blockLight, new StateMapperBase() {
 
 			final ModelResourceLocation modResLoc = new ModelResourceLocation(BlockRegistry.blockLight.getRegistryName(), "normal");
@@ -97,37 +105,42 @@ public class ClientProxy extends CommonProxy {
 			}
 		});
 
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), 0, new ModelResourceLocation(BlockRegistry.centrifugeBlock.getRegistryName(), "inventory"));
+		ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class, new CentrifugeTileEntityRenderer());
+		//TODO: Remove this hack, replace with JSON
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), 0, CentrifugeTileEntity.class);
+
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock), 0, new ModelResourceLocation(BlockRegistry.electricCrucibleBlock.getRegistryName(), "inventory"));
+		ClientRegistry.bindTileEntitySpecialRenderer(ElectricCrucibleTileEntity.class, new ElectricCrucibleTileEntityRenderer());
+		//TODO: Remove this hack, replace with JSON
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock), 0, ElectricCrucibleTileEntity.class);
+
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), 0, new ModelResourceLocation(BlockRegistry.electrolysisBlock.getRegistryName(), "inventory"));
+		ClientRegistry.bindTileEntitySpecialRenderer(ElectrolysisTileEntity.class, new ElectrolysisTileEntityRenderer());
+		//TODO: Remove this hack, replace with JSON
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), 0, ElectrolysisTileEntity.class);
+
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), 0, new ModelResourceLocation(BlockRegistry.opticalMicroscope.getRegistryName(), "inventory"));
+		ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, new OpticalMicroscopeTileEntityRenderer());
+		//TODO: Remove this hack, replace with JSON
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), 0, OpticalMicroscopeTileEntity.class);
+
+
 		// RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		// ISBRH_ID = RenderingRegistry.getNextAvailableRenderId();
-		//
-		// OpticalMicroscopeTileEntityRenderer opticalMicroscopeRenderer = new
-		// OpticalMicroscopeTileEntityRenderer();
-		// ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class,
-		// opticalMicroscopeRenderer);
+
 		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.opticalMicroscope),
 		// new BasicItemRenderer(opticalMicroscopeRenderer, new
 		// OpticalMicroscopeTileEntity()));
-		//
-		// ElectrolysisTileEntityRenderer electrolysisRenderer = new
-		// ElectrolysisTileEntityRenderer();
-		// ClientRegistry.bindTileEntitySpecialRenderer(ElectrolysisTileEntity.class,
-		// electrolysisRenderer);
+
 		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock),
 		// new BasicItemRenderer(electrolysisRenderer, new
 		// ElectrolysisTileEntity()));
-		//
-		// ElectricCrucibleTileEntityRenderer electricCrucibleRenderer = new
-		// ElectricCrucibleTileEntityRenderer();
-		// ClientRegistry.bindTileEntitySpecialRenderer(ElectricCrucibleTileEntity.class,
-		// electricCrucibleRenderer);
+
 		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock),
 		// new BasicItemRenderer(electricCrucibleRenderer, new
 		// ElectricCrucibleTileEntity()));
 
-//		 CentrifugeTileEntityRenderer centrifugeRenderer = new
-//		 CentrifugeTileEntityRenderer();
-//		 ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class,
-//		 centrifugeRenderer);
 //		 MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock),
 //		new BasicItemRenderer(centrifugeRenderer, new
 //		 CentrifugeTileEntity()));

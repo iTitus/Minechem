@@ -2,9 +2,14 @@ package minechem.apparatus.tier1.opticalMicroscope;
 
 import net.minecraft.client.model.ModelRenderer;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.apparatus.prefab.model.BasicModel;
 
+@SideOnly(Side.CLIENT)
 public class OpticalMicroscopeModel extends BasicModel {
+
 	ModelRenderer a;
 	ModelRenderer b;
 	ModelRenderer base1;

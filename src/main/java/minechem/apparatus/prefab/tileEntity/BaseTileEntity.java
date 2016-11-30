@@ -13,9 +13,9 @@ public class BaseTileEntity extends TileEntity {
 	}
 
 	public void sync() {
-		if (worldObj != null) {
-			IBlockState state = worldObj.getBlockState(pos);
-			worldObj.notifyBlockUpdate(pos, state, state, 3);
+		if (world != null) {
+			IBlockState state = world.getBlockState(pos);
+			world.notifyBlockUpdate(pos, state, state, 3);
 		}
 	}
 
@@ -56,6 +56,11 @@ public class BaseTileEntity extends TileEntity {
 
 	public NBTTagCompound writeToCustomNBT(NBTTagCompound compound) {
 		return compound;
+	}
+
+	@Override
+	public boolean canRenderBreaking() {
+		return true;
 	}
 
 }

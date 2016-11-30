@@ -2,9 +2,14 @@ package minechem.apparatus.tier1.electricCrucible;
 
 import net.minecraft.client.model.ModelRenderer;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.apparatus.prefab.model.BasicModel;
 
+@SideOnly(Side.CLIENT)
 public class ElectricCrucibleModel extends BasicModel {
+
 	ModelRenderer lid1;
 	ModelRenderer lid2;
 	ModelRenderer lid6;

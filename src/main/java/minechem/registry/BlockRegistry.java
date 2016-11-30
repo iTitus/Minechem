@@ -10,8 +10,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import minechem.apparatus.tier1.centrifuge.CentrifugeBlock;
 import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntity;
 import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleBlock;
+import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntity;
 import minechem.apparatus.tier1.electrolysis.ElectrolysisBlock;
+import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntity;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeBlock;
+import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
 import minechem.blocks.BlockLight;
 import minechem.blocks.BlockRedstone;
 
@@ -25,23 +28,13 @@ public class BlockRegistry {
 	public static BlockRedstone blockRedstone;
 
 	public static void init() {
-		// opticalMicroscope = register(new OpticalMicroscopeBlock());
-		// GameRegistry.registerTileEntity(OpticalMicroscopeTileEntity.class,
-		// Compendium.Naming.opticalMicroscope + "TileEntity");
-		//
-		// electricCrucibleBlock = register(new ElectricCrucibleBlock());
-		// GameRegistry.registerTileEntity(ElectricCrucibleTileEntity.class,
-		// Compendium.Naming.electricCrucible + "TileEntity");
+		blockLight = register(new BlockLight(), false);
+		blockRedstone = register(new BlockRedstone(), false);
 
 		centrifugeBlock = register(new CentrifugeBlock(), CentrifugeTileEntity.class);
-
-		// electrolysisBlock = register(new ElectrolysisBlock());
-		// GameRegistry.registerTileEntity(ElectrolysisTileEntity.class,
-		// Compendium.Naming.electrolysis + "TileEntity");
-
-		blockLight = register(new BlockLight(), false);
-
-		blockRedstone = register(new BlockRedstone(), false);
+		electricCrucibleBlock = register(new ElectricCrucibleBlock(), ElectricCrucibleTileEntity.class);
+		electrolysisBlock = register(new ElectrolysisBlock(), ElectrolysisTileEntity.class);
+		opticalMicroscope = register(new OpticalMicroscopeBlock(), OpticalMicroscopeTileEntity.class);
 	}
 
 	private static <T extends Block> T register(T block, boolean registerItem) {

@@ -1,15 +1,17 @@
 package minechem.apparatus.tier1.electricCrucible;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.Compendium;
 import minechem.apparatus.prefab.renderer.BasicTileEntityRenderer;
 
-public class ElectricCrucibleTileEntityRenderer extends BasicTileEntityRenderer {
+@SideOnly(Side.CLIENT)
+public class ElectricCrucibleTileEntityRenderer extends BasicTileEntityRenderer<ElectricCrucibleTileEntity, ElectricCrucibleModel> {
 
 	public ElectricCrucibleTileEntityRenderer() {
-		super(0.24F, 0.0625F);
-
-		setOffset(0.5D, 0.36D, 0.5D);
-
+		super(0.25F);
+		setOffset(0.5, 0.36D, 0.5);
 		model = new ElectricCrucibleModel();
 		texture = Compendium.Resource.Model.electricCrucible;
 	}

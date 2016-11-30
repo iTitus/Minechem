@@ -1,14 +1,17 @@
 package minechem.apparatus.tier1.centrifuge;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.Compendium;
 import minechem.apparatus.prefab.renderer.BasicTileEntityRenderer;
 
-public class CentrifugeTileEntityRenderer extends BasicTileEntityRenderer {
+@SideOnly(Side.CLIENT)
+public class CentrifugeTileEntityRenderer extends BasicTileEntityRenderer<CentrifugeTileEntity, CentrifugeModel> {
+
 	public CentrifugeTileEntityRenderer() {
-		super(0.24F, 0.0625F);
-
-		setOffset(0.5D, 0.62D, 0.5D);
-
+		super(0.25F);
+		setOffset(0.5, 0.625, 0.5);
 		model = new CentrifugeModel();
 		texture = Compendium.Resource.Model.centrifuge;
 	}

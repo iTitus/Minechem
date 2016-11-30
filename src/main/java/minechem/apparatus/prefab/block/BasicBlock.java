@@ -32,6 +32,8 @@ public class BasicBlock extends Block {
 		setRegistryName(name);
 		setUnlocalizedName(name);
 		setSoundType(soundType);
+		setHardness(5);
+		setResistance(7);
 		setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
 	}
 

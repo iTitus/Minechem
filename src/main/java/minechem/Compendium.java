@@ -15,6 +15,8 @@ public class Compendium {
 		public static final int JOURNAL_ID = 0;
 		public static final int MICROSCOPE_ID = 1;
 		public static final int CENTRIFUGE_ID = 2;
+		public static final int ELECTRIC_CRUCIBLE_ID = 3;
+		public static final int ELECTROLYSIS_ID = 4;
 	}
 
 
@@ -55,9 +57,9 @@ public class Compendium {
 		public static final String id = "minechem";
 		public static final String name = "Minechem";
 		public static final String fontBox = "fontbox";
-		public static final String opticalMicroscope = "opticalMicroscope";
+		public static final String opticalMicroscope = "optical_microscope";
 		public static final String electrolysis = "electrolysis";
-		public static final String electricCrucible = "electricCrucible";
+		public static final String electricCrucible = "electric_crucible";
 		public static final String centrifuge = "centrifuge";
 		public static final String journal = "journal";
 		public static final String chemical = "chemical";
@@ -173,9 +175,9 @@ public class Compendium {
 
 		public static final class Model {
 			public static final String prefix = "textures/models/";
-			public static final String opticalMicroscope = Compendium.Texture.Model.prefix + "opticalMicroscope.png";
+			public static final String opticalMicroscope = Compendium.Texture.Model.prefix + "optical_microscope.png";
 			public static final String electrolysis = Compendium.Texture.Model.prefix + "electrolysis.png";
-			public static final String electricCrucible = Compendium.Texture.Model.prefix + "electricCrucible.png";
+			public static final String electricCrucible = Compendium.Texture.Model.prefix + "electric_crucible.png";
 			public static final String centrifuge = Compendium.Texture.Model.prefix + "centrifuge.png";
 		}
 

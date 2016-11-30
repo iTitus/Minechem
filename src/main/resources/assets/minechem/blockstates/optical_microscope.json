@@ -3,7 +3,7 @@
   "defaults": {
 	"model": "cube_all",
     "textures": {
-	  "all": "minechem:blocks/centrifuge_icon"
+	  "all": "minechem:blocks/optical_microscope_icon"
     }
   },
   "variants": {

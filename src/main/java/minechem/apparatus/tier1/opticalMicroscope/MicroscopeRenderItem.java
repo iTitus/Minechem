@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import minechem.client.render.RenderHelper;
 
 public class MicroscopeRenderItem extends RenderItem {
+
 	public OpticalMicroscopeGUI microscopeGui;
 
 	public MicroscopeRenderItem(OpticalMicroscopeGUI microscopeGui) {

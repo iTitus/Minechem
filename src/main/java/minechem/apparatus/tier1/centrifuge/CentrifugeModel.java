@@ -2,8 +2,12 @@ package minechem.apparatus.tier1.centrifuge;
 
 import net.minecraft.client.model.ModelRenderer;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.apparatus.prefab.model.BasicModel;
 
+@SideOnly(Side.CLIENT)
 public class CentrifugeModel extends BasicModel {
 	ModelRenderer center;
 	ModelRenderer screw1;

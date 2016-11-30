@@ -5,9 +5,14 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.apparatus.prefab.model.BasicModel;
 
+@SideOnly(Side.CLIENT)
 public class ElectrolysisModel extends BasicModel {
+
 	ModelRenderer plank;
 	ModelRenderer plank2;
 	ModelRenderer plank3;

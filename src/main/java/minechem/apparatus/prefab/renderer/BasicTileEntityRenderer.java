@@ -2,15 +2,22 @@ package minechem.apparatus.prefab.renderer;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-import minechem.apparatus.prefab.model.BasicModel;
-import minechem.apparatus.prefab.tileEntity.BasicInventoryTileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer {
-	protected BasicModel model;
+import minechem.apparatus.prefab.block.BasicBlockContainer;
+import minechem.apparatus.prefab.model.BasicModel;
+import minechem.apparatus.prefab.tileEntity.BaseTileEntity;
+
+@SideOnly(Side.CLIENT)
+public abstract class BasicTileEntityRenderer<T extends BaseTileEntity, M extends BasicModel> extends TileEntitySpecialRenderer<T> {
+
+	protected M model;
 	protected float rotation;
 	protected ResourceLocation texture;
 
@@ -33,24 +40,55 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer 
 	public BasicTileEntityRenderer(float scale, float rotation) {
 		setScale(scale);
 		setRotation(rotation);
-		setOffset(0.5D, 1.5D, 0.5D);
+		setOffset(0.5, 1.5, 0.5);
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale) {
-		if (tileEntity instanceof BasicInventoryTileEntity) {
-			GL11.glPushMatrix();
-			GL11.glTranslated(x + xOffset, y + yOffset, z + zOffset);
-			GL11.glRotatef(180f, 0f, 0f, 1f);
-			GL11.glRotatef((tileEntity.getBlockMetadata() * 90.0F), 0.0F, 1.0F, 0.0F);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glScaled(xScale, yScale, zScale);
+	public void renderTileEntityAt(T te, double x, double y, double z, float partialTicks, int destroyStage) {
+		GlStateManager.enableDepth();
+		GlStateManager.depthFunc(GL11.GL_LEQUAL);
+		GlStateManager.depthMask(true);
+
+		if (destroyStage >= 0) {
+			bindTexture(DESTROY_STAGES[destroyStage]);
+			GlStateManager.matrixMode(GL11.GL_TEXTURE);
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(4, 4, 1);
+			GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
+			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+		} else {
 			bindTexture(texture);
-			model.render(rotation);
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glPopMatrix();
 		}
+
+		GlStateManager.pushMatrix();
+		GlStateManager.enableRescaleNormal();
+		if (destroyStage < 0) {
+			GlStateManager.color(1, 1, 1, 1);
+		}
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.translate(x + xOffset, y + yOffset, z + zOffset);
+		GlStateManager.scale(xScale, -yScale, -zScale);
+		if (te != null && te.hasWorld()) {
+			IBlockState state = te.getWorld().getBlockState(te.getPos());
+			state = state.getActualState(te.getWorld(), te.getPos());
+			GlStateManager.rotate(state.getValue(BasicBlockContainer.FACING).getHorizontalAngle(), 0, 1, 0);
+		}
+		renderModel(te, x, y, z, partialTicks, destroyStage);
+		GlStateManager.disableBlend();
+		GlStateManager.disableRescaleNormal();
+		GlStateManager.popMatrix();
+		GlStateManager.color(1, 1, 1, 1);
+
+		if (destroyStage >= 0) {
+			GlStateManager.matrixMode(GL11.GL_TEXTURE);
+			GlStateManager.popMatrix();
+			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+		}
+	}
+
+	protected void renderModel(T te, double x, double y, double z, float partialTicks, int destroyStage) {
+		model.render(rotation);
 	}
 
 	public final void setOffset(double xOffset, double yOffset, double zOffset) {
@@ -73,7 +111,6 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer 
 		this.xScale = xScale;
 		this.yScale = yScale;
 		this.zScale = zScale;
-
 	}
 
 }

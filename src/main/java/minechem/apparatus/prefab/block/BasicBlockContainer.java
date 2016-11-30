@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
+import minechem.helper.MathHelper;
 import minechem.helper.ResearchHelper;
 
 /**
@@ -57,7 +58,7 @@ public abstract class BasicBlockContainer extends BasicBlock implements ITileEnt
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+		return getDefaultState().withProperty(FACING, MathHelper.getHorizontal(meta));
 	}
 
 	@Override

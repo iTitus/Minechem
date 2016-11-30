@@ -1,21 +1,11 @@
 package minechem.apparatus.tier1.electricCrucible;
 
-import minechem.Compendium;
-import minechem.apparatus.prefab.tileEntity.BasicInventoryTileEntity;
+import minechem.apparatus.prefab.tileEntity.InventoryTileEntity;
 
-public class ElectricCrucibleTileEntity extends BasicInventoryTileEntity {
+public class ElectricCrucibleTileEntity extends InventoryTileEntity {
 
 	public ElectricCrucibleTileEntity() {
-		super(Compendium.Naming.electricCrucible, 2);
-	}
-
-	@Override
-	public String getInventoryName() {
-		return Compendium.Naming.electricCrucible;
-	}
-
-	@Override
-	public void updateEntity() {
+		super(2);
 	}
 
 }

@@ -1,15 +1,17 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import minechem.Compendium;
 import minechem.apparatus.prefab.renderer.BasicTileEntityRenderer;
 
-public class OpticalMicroscopeTileEntityRenderer extends BasicTileEntityRenderer {
+@SideOnly(Side.CLIENT)
+public class OpticalMicroscopeTileEntityRenderer extends BasicTileEntityRenderer<OpticalMicroscopeTileEntity, OpticalMicroscopeModel> {
 
 	public OpticalMicroscopeTileEntityRenderer() {
-		super(0.4F, 0.0625F);
-
-		setOffset(0.5D, 0.6D, 0.5D);
-
+		super(0.4F);
+		setOffset(0.5, 0.625, 0.5);
 		model = new OpticalMicroscopeModel();
 		texture = Compendium.Resource.Model.microscope;
 	}
