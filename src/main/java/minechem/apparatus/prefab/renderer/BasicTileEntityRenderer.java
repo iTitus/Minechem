@@ -45,10 +45,6 @@ public abstract class BasicTileEntityRenderer<T extends BaseTileEntity, M extend
 
 	@Override
 	public void renderTileEntityAt(T te, double x, double y, double z, float partialTicks, int destroyStage) {
-		GlStateManager.enableDepth();
-		GlStateManager.depthFunc(GL11.GL_LEQUAL);
-		GlStateManager.depthMask(true);
-
 		if (destroyStage >= 0) {
 			bindTexture(DESTROY_STAGES[destroyStage]);
 			GlStateManager.matrixMode(GL11.GL_TEXTURE);
@@ -65,8 +61,10 @@ public abstract class BasicTileEntityRenderer<T extends BaseTileEntity, M extend
 		if (destroyStage < 0) {
 			GlStateManager.color(1, 1, 1, 1);
 		}
-		GlStateManager.enableBlend();
-		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		if (te != null) {
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		}
 		GlStateManager.translate(x + xOffset, y + yOffset, z + zOffset);
 		GlStateManager.scale(xScale, -yScale, -zScale);
 		if (te != null && te.hasWorld()) {
@@ -75,10 +73,12 @@ public abstract class BasicTileEntityRenderer<T extends BaseTileEntity, M extend
 			GlStateManager.rotate(state.getValue(BasicBlockContainer.FACING).getHorizontalAngle(), 0, 1, 0);
 		}
 		renderModel(te, x, y, z, partialTicks, destroyStage);
-		GlStateManager.disableBlend();
+		if (te != null) {
+			GlStateManager.disableBlend();
+		}
 		GlStateManager.disableRescaleNormal();
-		GlStateManager.popMatrix();
 		GlStateManager.color(1, 1, 1, 1);
+		GlStateManager.popMatrix();
 
 		if (destroyStage >= 0) {
 			GlStateManager.matrixMode(GL11.GL_TEXTURE);
