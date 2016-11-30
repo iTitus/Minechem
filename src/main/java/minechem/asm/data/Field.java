@@ -3,6 +3,7 @@ package minechem.asm.data;
 import minechem.asm.LoadingPlugin;
 
 public class Field {
+	
 	private final String name, obfName, desc, obfDesc;
 
 	public Field(String name, String obfName, String desc, String obfDesc) {

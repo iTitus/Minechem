@@ -1,6 +1,7 @@
 package minechem.asm.data;
 
 public enum Hook {
+	
 	RECOLOUR(Class.MINECHEM_HOOKS, "recolourAchievement", "(Lnet/minecraft/stats/Achievement;F)V"),
 	RESET(Class.MINECHEM_HOOKS, "resetGreyscale", "(F)V"),
 	ICON(Class.MINECHEM_HOOKS, "drawIconAchievement", "(Lnet/minecraft/client/renderer/entity/RenderItem;Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IILnet/minecraft/stats/Achievement;)V"),

@@ -69,6 +69,13 @@ processResources {
     }
 }
 
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': 'minechem.asm.LoadingPlugin'
+        attributes 'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+
 task devJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'

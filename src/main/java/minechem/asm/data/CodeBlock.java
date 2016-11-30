@@ -9,6 +9,7 @@ import org.objectweb.asm.tree.VarInsnNode;
 import minechem.asm.LoadingPlugin;
 
 public enum CodeBlock implements IInsnList {
+	
 	BACKGROUND(306, 0, 373, 1),
 	CLAMP_ZOOM(183, 1, 184, 0),
 	RENDER_OVERLAY(625, 1, 625, 0);

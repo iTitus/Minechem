@@ -22,6 +22,7 @@ import minechem.asm.data.InstructionNode;
 import minechem.asm.data.Method;
 
 public class MinechemTransformer implements IClassTransformer {
+	
 	private static Map<String, Class> classMap = new HashMap<String, Class>();
 
 	static {

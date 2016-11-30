@@ -9,6 +9,7 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 @IFMLLoadingPlugin.TransformerExclusions({"minechem.asm."})
 public class LoadingPlugin implements IFMLLoadingPlugin {
+	
 	public static boolean runtimeDeobfEnabled = FMLForgePlugin.RUNTIME_DEOBF;
 
 	public LoadingPlugin() {
@@ -17,7 +18,7 @@ public class LoadingPlugin implements IFMLLoadingPlugin {
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[]{getAccessTransformerClass()};
+		return null/*new String[]{getAccessTransformerClass()}*/;
 	}
 
 	@Override
@@ -36,6 +37,6 @@ public class LoadingPlugin implements IFMLLoadingPlugin {
 
 	@Override
 	public String getAccessTransformerClass() {
-		return "minechem.asm.MinechemTransformer";
+		return null/*"minechem.asm.MinechemTransformer"*/;
 	}
 }
