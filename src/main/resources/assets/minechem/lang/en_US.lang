@@ -5,10 +5,10 @@ gui.element.tank.empty=Empty
 gui.journal.writtenBy=Written By
 gui.journal.index=Index
 
-tile.electrolysis.name=Electrolysis Apparatus
-tile.optical_microscope.name=Optical Microscope
-tile.electric_crucible.name=Electric Crucible
-tile.centrifuge.name=Centrifuge
+tile.minechem:electrolysis.name=Electrolysis Apparatus
+tile.minechem:optical_microscope.name=Optical Microscope
+tile.minechem:electric_crucible.name=Electric Crucible
+tile.minechem:centrifuge.name=Centrifuge
 
 item.minechem:journal.name=Chemist's Journal
 item.minechem:item.augmented.name=Item Augment
@@ -31,14 +31,14 @@ tab.patreon.linkText=Visit Patreon
 tab.patreon.headerText=Patreon
 tab.patreon.tooltip=Supporting Minechem
 
-achievement.minechem.item.journal=Start learning
-achievement.minechem.item.journal.desc=The journal is your gate to all the Minechem knowledge
-achievement.minechem.tile.opticalMicroscope=Looking at Things
-achievement.minechem.tile.opticalMicroscope.desc=Use the Microscope for the first time
-achievement.minechem.tile.electrolysis=Electrolysing things
-achievement.minechem.tile.electrolysis.desc=Use the Electrolysis Machine for the first time
-achievement.minechem.tile.electricCrucible=Melting things
-achievement.minechem.tile.electricCrucible.desc=Use the Electric Crucible for the first time
+achievement.minechem.item.minechem:journal=Start learning
+achievement.minechem.item.minechem:journal.desc=The journal is your gate to all the Minechem knowledge
+achievement.minechem.tile.minechem:optical_microscope=Looking at Things
+achievement.minechem.tile.minechem:optical_microscope.desc=Use the Microscope for the first time
+achievement.minechem.tile.minechem:electrolysis=Electrolysing things
+achievement.minechem.tile.minechem:electrolysis.desc=Use the Electrolysis Machine for the first time
+achievement.minechem.tile.minechem:electric_crucible=Melting things
+achievement.minechem.tile.minechem:electric_crucible.desc=Use the Electric Crucible for the first time
 
 achievement.minechem.element=Discovered %s
 achievement.minechem.element.desc=Discover %s to unlock

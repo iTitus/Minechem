@@ -10,11 +10,8 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 
 import minechem.Compendium;
 
-/**
- *
- *
- */
 public class IconHandler {
+
 	private static Map<String, IIcon> icons = new TreeMap<String, IIcon>();
 
 	public static void addIcon(String iconName, String iconPath, IIconRegister iconRegistry) {

@@ -34,7 +34,7 @@ public class AugmentLight extends AugmentBase {
 				int light = event.getWorld().getLightFor(EnumSkyBlock.BLOCK, event.getPos());
 				if (level > -1 && light < 8) {
 					consumeAugment(stack, level);
-					event.getWorld().setBlockState(event.getPos(), BlockRegistry.blockLight.getDefaultState().withProperty(BlockLight.LIGHT, level));
+					event.getWorld().setBlockState(event.getPos(), BlockRegistry.light.getDefaultState().withProperty(BlockLight.LIGHT, level));
 				}
 			}
 		}
@@ -45,7 +45,7 @@ public class AugmentLight extends AugmentBase {
 		pos = pos.offset(facing);
 		if (!world.isRemote && world.isAirBlock(pos)) {
 			consumeAugment(stack, level * 2);
-			world.setBlockState(pos, BlockRegistry.blockLight.getDefaultState().withProperty(BlockLight.LIGHT, (int) (level * 1.5F)));
+			world.setBlockState(pos, BlockRegistry.light.getDefaultState().withProperty(BlockLight.LIGHT, (int) (level * 1.5F)));
 			return EnumActionResult.SUCCESS;
 		}
 

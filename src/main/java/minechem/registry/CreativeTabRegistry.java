@@ -20,7 +20,7 @@ public class CreativeTabRegistry {
 	 */
 	public static void init() {
 		TAB_PRIMARY.setStack(new ItemStack(BlockRegistry.opticalMicroscope));
-		TAB_CHEMICALS.setStack(new ItemStack(BlockRegistry.electrolysisBlock));
+		TAB_CHEMICALS.setStack(new ItemStack(BlockRegistry.electrolysis));
 	}
 
 	private static class CreativeTab extends CreativeTabs {

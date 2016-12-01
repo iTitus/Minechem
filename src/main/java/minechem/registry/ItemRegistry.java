@@ -11,16 +11,12 @@ public class ItemRegistry {
 
 	public static JournalItem journal;
 	// public static AugmentedItem augmentedItem;
-	public static ChemicalItem chemicalItem;
+	public static ChemicalItem chemical;
 
 	public static void init() {
-
-		chemicalItem = register(new ChemicalItem());
-
+		chemical = register(new ChemicalItem());
 		journal = register(new JournalItem());
-
-		// augmentedItem = new AugmentedItem();
-		// GameRegistry.registerItem(augmentedItem, augmentedItem.getUnlocalizedName());
+		//augmentedItem = register(new AugmentedItem());
 	}
 
 	private static <T extends Item> T register(T item) {

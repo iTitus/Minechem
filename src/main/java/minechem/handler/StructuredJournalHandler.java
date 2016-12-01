@@ -15,11 +15,7 @@ import com.google.gson.stream.JsonReader;
 
 import org.apache.logging.log4j.Level;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTTagCompound;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -43,6 +39,7 @@ public class StructuredJournalHandler {
 	private static final String suffix = ".png";
 
 	public static void init() {
+
 		String[] fileDestSource = new String[2];
 		fileDestSource[0] = Compendium.Config.dataJsonPrefix + "pages.json";
 		fileDestSource[1] = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + "pages.json";
@@ -163,12 +160,17 @@ public class StructuredJournalHandler {
 				return new JournalImage(unlock, imageDir, width, height, align, floatMode);
 			} else {
 				ItemStack stack = null;
-				String id;
+				String itemName = object.has("item") ? object.get("item").getAsString() : (object.has("block") ? object.get("block").getAsString() : null);
+				int meta = object.has("damage") ? object.get("damage").getAsInt() : 0;
+				int stackSize = 1;
+				String nbtString = object.has("nbt") ? object.get("nbt").getAsString() : null;
+				stack = GameRegistry.makeItemStack(itemName, meta, stackSize, nbtString);
+				/*String id;
 				String[] split;
 				int damage = object.has("damage") ? object.get("damage").getAsInt() : 0;
 				NBTTagCompound tagCompound;
 				try {
-					tagCompound = object.has("nbt") ? (NBTTagCompound) JsonToNBT.func_150315_a(object.get("nbt").getAsString()) : null;
+					tagCompound = object.has("nbt") ? JsonToNBT.getTagFromJson(object.get("nbt").getAsString()) : null;
 				} catch (Exception e) {
 					tagCompound = null;
 				}
@@ -200,13 +202,14 @@ public class StructuredJournalHandler {
 					if (block != null) {
 						stack = new ItemStack(block, 1, damage % 16);
 					}
-				} else if (object.has("chemical")) {
+				} else*/
+				if (object.has("chemical")) {
 					stack = Jenkins.getStack(object.get("chemical").getAsString());
 				}
 				if (stack != null) {
-					if (tagCompound != null) {
+					/*if (tagCompound != null) {
 						stack.setTagCompound(tagCompound);
-					}
+					}*/
 					return new JournalImage(unlock, stack, width, height, align, floatMode);
 				}
 			}

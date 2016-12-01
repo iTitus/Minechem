@@ -13,8 +13,8 @@ public class InventoryTileEntity extends BaseTileEntity {
 
 	protected final ItemStackHandler itemStackHandler;
 
-	public InventoryTileEntity(int size) {
-		super();
+	public InventoryTileEntity(String name, int size) {
+		super(name);
 		this.itemStackHandler = new ItemStackHandler(size) {
 			@Override
 			protected void onContentsChanged(int slot) {

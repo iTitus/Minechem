@@ -1,11 +1,12 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
+import minechem.Compendium;
 import minechem.apparatus.prefab.tileEntity.InventoryTileEntity;
 
 public class OpticalMicroscopeTileEntity extends InventoryTileEntity {
 
 	public OpticalMicroscopeTileEntity() {
-		super(1);
+		super(Compendium.Naming.opticalMicroscope, 1);
 	}
 
 }

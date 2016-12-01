@@ -16,7 +16,7 @@ import minechem.client.render.RenderHelper;
 import minechem.item.IOverlay;
 
 public class MinechemHooks {
-	
+
 	public static void recolourAchievement(Achievement achievement, float greyscale) {
 		if (achievement instanceof IAchievementRenderer) {
 			int colour = ((IAchievementRenderer) achievement).recolourBackground(greyscale);

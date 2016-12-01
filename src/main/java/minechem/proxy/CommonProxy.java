@@ -16,9 +16,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import minechem.Compendium;
 import minechem.Config;
 import minechem.Minechem;
+import minechem.handler.AchievementHandler;
 import minechem.handler.ElementHandler;
 import minechem.handler.EventHandler;
 import minechem.handler.GuiHandler;
+import minechem.handler.MessageHandler;
 import minechem.handler.MoleculeHandler;
 import minechem.helper.LogHelper;
 import minechem.registry.AugmentRegistry;
@@ -37,8 +39,8 @@ public class CommonProxy {
 		LogHelper.debug("Loading configuration...");
 		Config.init(new File(event.getModConfigurationDirectory(), Compendium.Naming.id + "/" + Compendium.Naming.id + ".cfg"));
 
-		// LogHelper.debug("Registering Packets...");
-		// MessageHandler.init();
+		LogHelper.debug("Registering Packets...");
+		MessageHandler.init();
 
 		// Register Elements and Molecules before constructing items
 		LogHelper.debug("Registering Elements...");
@@ -75,8 +77,8 @@ public class CommonProxy {
 		LogHelper.debug("Registering GUI and Container handlers...");
 		NetworkRegistry.INSTANCE.registerGuiHandler(Minechem.instance, new GuiHandler());
 
-		// LogHelper.debug("Registering Achievements...");
-		// AchievementHandler.init();
+		LogHelper.debug("Registering Achievements...");
+		AchievementHandler.init();
 
 	}
 

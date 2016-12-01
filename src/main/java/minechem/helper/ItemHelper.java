@@ -22,7 +22,7 @@ public class ItemHelper {
 			entityitem.motionY = (float) random.nextGaussian() * motionMultiplier + 0.2F;
 			entityitem.motionZ = (float) random.nextGaussian() * motionMultiplier;
 
-			world.spawnEntityInWorld(entityitem);
+			world.spawnEntity(entityitem);
 		}
 	}
 

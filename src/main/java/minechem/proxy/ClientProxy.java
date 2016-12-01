@@ -69,12 +69,12 @@ public class ClientProxy extends CommonProxy {
 		ModelResourceLocation[] resLocs = new ModelResourceLocation[types.length * forms.length];
 		for (int i = 0; i < types.length; i++) {
 			for (int j = 0; j < forms.length; j++) {
-				resLocs[i * forms.length + j] = new ModelResourceLocation(ItemRegistry.chemicalItem.getRegistryName().toString() + "/" + forms[j].toString() + "_" + types[i], "inventory");
+				resLocs[i * forms.length + j] = new ModelResourceLocation(ItemRegistry.chemical.getRegistryName().toString() + "/" + forms[j].toString() + "_" + types[i], "inventory");
 			}
 		}
 
-		ModelLoader.registerItemVariants(ItemRegistry.chemicalItem, resLocs);
-		ModelLoader.setCustomMeshDefinition(ItemRegistry.chemicalItem, new ItemMeshDefinition() {
+		ModelLoader.registerItemVariants(ItemRegistry.chemical, resLocs);
+		ModelLoader.setCustomMeshDefinition(ItemRegistry.chemical, new ItemMeshDefinition() {
 
 			@Override
 			public ModelResourceLocation getModelLocation(ItemStack stack) {
@@ -86,39 +86,39 @@ public class ClientProxy extends CommonProxy {
 			}
 		});
 
-		ModelLoader.setCustomStateMapper(BlockRegistry.blockLight, new StateMapperBase() {
+		ModelLoader.setCustomStateMapper(BlockRegistry.light, new StateMapperBase() {
 
-			final ModelResourceLocation modResLoc = new ModelResourceLocation(BlockRegistry.blockLight.getRegistryName(), "normal");
-
-			@Override
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				return modResLoc;
-			}
-		});
-		ModelLoader.setCustomStateMapper(BlockRegistry.blockRedstone, new StateMapperBase() {
-
-			final ModelResourceLocation modResLoc = new ModelResourceLocation(BlockRegistry.blockRedstone.getRegistryName(), "normal");
+			final ModelResourceLocation modResLoc = new ModelResourceLocation(BlockRegistry.light.getRegistryName(), "normal");
 
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 				return modResLoc;
 			}
 		});
+		ModelLoader.setCustomStateMapper(BlockRegistry.redstone, new StateMapperBase() {
 
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), 0, new ModelResourceLocation(BlockRegistry.centrifugeBlock.getRegistryName(), "inventory"));
+			final ModelResourceLocation modResLoc = new ModelResourceLocation(BlockRegistry.redstone.getRegistryName(), "normal");
+
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return modResLoc;
+			}
+		});
+
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.centrifuge), 0, new ModelResourceLocation(BlockRegistry.centrifuge.getRegistryName(), "inventory"));
 		ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class, new CentrifugeTileEntityRenderer());
 		//TODO: Remove this hack, replace with JSON
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), 0, CentrifugeTileEntity.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.centrifuge), 0, CentrifugeTileEntity.class);
 
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock), 0, new ModelResourceLocation(BlockRegistry.electricCrucibleBlock.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.electricCrucible), 0, new ModelResourceLocation(BlockRegistry.electricCrucible.getRegistryName(), "inventory"));
 		ClientRegistry.bindTileEntitySpecialRenderer(ElectricCrucibleTileEntity.class, new ElectricCrucibleTileEntityRenderer());
 		//TODO: Remove this hack, replace with JSON
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock), 0, ElectricCrucibleTileEntity.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.electricCrucible), 0, ElectricCrucibleTileEntity.class);
 
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), 0, new ModelResourceLocation(BlockRegistry.electrolysisBlock.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.electrolysis), 0, new ModelResourceLocation(BlockRegistry.electrolysis.getRegistryName(), "inventory"));
 		ClientRegistry.bindTileEntitySpecialRenderer(ElectrolysisTileEntity.class, new ElectrolysisTileEntityRenderer());
 		//TODO: Remove this hack, replace with JSON
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), 0, ElectrolysisTileEntity.class);
+		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.electrolysis), 0, ElectrolysisTileEntity.class);
 
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), 0, new ModelResourceLocation(BlockRegistry.opticalMicroscope.getRegistryName(), "inventory"));
 		ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, new OpticalMicroscopeTileEntityRenderer());
@@ -182,7 +182,7 @@ public class ClientProxy extends CommonProxy {
 				}
 				return -1;
 			}
-		}, ItemRegistry.chemicalItem);
+		}, ItemRegistry.chemical);
 
 		LogHelper.debug("Registering Fonts...");
 		try {
@@ -197,7 +197,7 @@ public class ClientProxy extends CommonProxy {
 	@SubscribeEvent
 	public void onModelBake(ModelBakeEvent event) {
 		for (Form form : Form.values()) {
-			ModelResourceLocation modResLoc = new ModelResourceLocation(ItemRegistry.chemicalItem.getRegistryName().toString() + "/" + form.toString() + "_element", "inventory");
+			ModelResourceLocation modResLoc = new ModelResourceLocation(ItemRegistry.chemical.getRegistryName().toString() + "/" + form.toString() + "_element", "inventory");
 			IBakedModel baseBakedModel = event.getModelRegistry().getObject(modResLoc);
 			event.getModelRegistry().putObject(modResLoc, new ChemicalItemBakedModel((IPerspectiveAwareModel) baseBakedModel));
 		}

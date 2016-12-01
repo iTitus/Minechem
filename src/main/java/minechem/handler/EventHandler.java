@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * Holds all event triggered methods
  */
 public class EventHandler {
+
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save event) {
 		ResearchHandler.saveResearch();

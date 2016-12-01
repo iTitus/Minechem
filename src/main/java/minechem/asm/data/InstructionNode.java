@@ -9,7 +9,7 @@ import org.objectweb.asm.tree.VarInsnNode;
 import minechem.asm.LoadingPlugin;
 
 public enum InstructionNode implements IInsnList {
-	
+
 	RECOLOUR("bindTexture", "func_110577_a ", "glEnable", "glEnable", false),
 	RESET("glDisable", "glDisable", "canUnlockAchievement", "func_77442_b", false),
 	ICON("getTextureManager", "func_110434_K", "renderItemAndEffectIntoGUI", "func_82406_b", true),

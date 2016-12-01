@@ -25,7 +25,7 @@ public class AugmentLightning extends AugmentBase {
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user, int level) {
 		if (RAND.nextInt(15) <= level) {
-			spawnLightning(user.worldObj, target.posX, target.posY, target.posZ, stack, level);
+			spawnLightning(user.world, target.posX, target.posY, target.posZ, stack, level);
 		}
 		return false;
 	}

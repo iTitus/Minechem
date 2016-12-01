@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 @IFMLLoadingPlugin.TransformerExclusions({"minechem.asm."})
 public class LoadingPlugin implements IFMLLoadingPlugin {
-	
+
 	public static boolean runtimeDeobfEnabled = FMLForgePlugin.RUNTIME_DEOBF;
 
 	public LoadingPlugin() {

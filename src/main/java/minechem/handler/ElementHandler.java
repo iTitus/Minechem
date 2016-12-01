@@ -20,6 +20,7 @@ import minechem.helper.LogHelper;
 import minechem.registry.ElementRegistry;
 
 public class ElementHandler {
+
 	public static void init() {
 
 		String[] fileDestSource = new String[2];

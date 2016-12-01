@@ -204,6 +204,7 @@ public class Compendium {
 		public static final String amount = "amount";
 		public static final String capacity = "capacity";
 		public static final String name = "name";
+		public static final String customName = "custom_name";
 		public static final String x = "xCoord";
 		public static final String y = "xCoord";
 		public static final String z = "zCoord";

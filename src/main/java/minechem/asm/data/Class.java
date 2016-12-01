@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import minechem.asm.LoadingPlugin;
 
 public enum Class {
-	
+
 	GUI_ACHIEVEMENTS("net.minecraft.client.gui.achievement.GuiAchievements", "bei"),
 	RENDER_ITEM("net.minecraft.client.renderer.entity.RenderItem", "bny"),
 	MATH_HELPER("net.minecraft.util.MathHelper", "qh"),

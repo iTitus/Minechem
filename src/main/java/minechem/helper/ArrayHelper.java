@@ -16,7 +16,6 @@ public class ArrayHelper {
 	 * @param <T>   the type of the array as state above
 	 * @return a null less array
 	 */
-	@SuppressWarnings("SuspiciousMethodCalls")
 	public static <T> T[] removeNulls(T[] array, Class<T> type) {
 		List<T> list = new LinkedList<T>();
 		for (T value : array) {

@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 
 import minechem.registry.CreativeTabRegistry;
 
-/*
+/**
  * Extendable class for simple non-container blocks
  */
 public class BasicBlock extends Block {
@@ -30,7 +30,7 @@ public class BasicBlock extends Block {
 		super(material);
 		this.name = name;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setUnlocalizedName(getRegistryName().toString());
 		setSoundType(soundType);
 		setHardness(5);
 		setResistance(7);

@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -16,7 +17,8 @@ import minechem.item.journal.JournalItem;
 /**
  * Message used to write knowledge in on an journal on the server side
  */
-public class JournalMessage extends BaseTEMessage implements IMessageHandler<JournalMessage, IMessage> {
+public class JournalMessage extends BaseMessage implements IMessageHandler<JournalMessage, IMessage> {
+
 	private String uuid;
 
 	public JournalMessage() {
@@ -47,10 +49,12 @@ public class JournalMessage extends BaseTEMessage implements IMessageHandler<Jou
 	public IMessage onMessage(JournalMessage message, MessageContext ctx) {
 		EntityPlayer player = getServerPlayer(ctx);
 		if (player.getUniqueID().equals(UUID.fromString(message.uuid))) {
-			if (player.getHeldItem().getItem() instanceof JournalItem) {
-				ItemStack journalStack = player.getHeldItem();
-				JournalItem journalItem = (JournalItem) journalStack.getItem();
-				journalItem.writeKnowledge(journalStack, player, false);
+			ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
+			if (stack == null || !(stack.getItem() instanceof JournalItem)) {
+				stack = player.getHeldItem(EnumHand.OFF_HAND);
+			}
+			if (stack != null && stack.getItem() instanceof JournalItem) {
+				((JournalItem) stack.getItem()).writeKnowledge(stack, player);
 			}
 		}
 		return null;

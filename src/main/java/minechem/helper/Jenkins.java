@@ -14,6 +14,7 @@ import minechem.registry.MoleculeRegistry;
  * Loyal servant to find your elements and molecules
  */
 public class Jenkins {
+
 	/**
 	 * Get {@link minechem.chemical.Element} by atomic number
 	 *

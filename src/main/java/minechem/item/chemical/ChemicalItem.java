@@ -31,7 +31,7 @@ public class ChemicalItem extends BasicItem {
 	}
 
 	public static ItemStack getItemStackForChemical(ChemicalBase chemicalBase) {
-		ItemStack itemStack = new ItemStack(ItemRegistry.chemicalItem);
+		ItemStack itemStack = new ItemStack(ItemRegistry.chemical);
 		NBTTagCompound tag = new NBTTagCompound();
 		chemicalBase.writeToNBT(tag);
 		itemStack.setTagCompound(tag);

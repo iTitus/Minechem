@@ -15,8 +15,8 @@ public abstract class BasicItem extends Item {
 	public BasicItem(String name) {
 		super();
 		this.name = name;
-		setUnlocalizedName(Compendium.Naming.id + ":" + name);
 		setRegistryName(Compendium.Naming.id, name);
+		setUnlocalizedName(getRegistryName().toString());
 		setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
 	}
 

@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
  * This can be applied and will be hooked into the render code of an {@link net.minecraft.stats.Achievement} during the rendering in the {@link net.minecraft.client.gui.achievement.GuiAchievement}
  */
 public interface IAchievementRenderer {
+
 	/**
 	 * Recolour the background of the {@link net.minecraft.stats.Achievement} icon in the {@link net.minecraft.client.gui.achievement.GuiAchievement}
 	 *

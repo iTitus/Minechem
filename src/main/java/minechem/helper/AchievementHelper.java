@@ -9,6 +9,7 @@ import minechem.handler.message.AchievementMessage;
 import minechem.registry.AchievementRegistry;
 
 public class AchievementHelper {
+
 	/**
 	 * Short hand for getting an {@link net.minecraft.stats.Achievement} from the {@link minechem.registry.AchievementRegistry} by name
 	 *
@@ -68,6 +69,6 @@ public class AchievementHelper {
 	 * @param achievement the {@link net.minecraft.stats.Achievement} to grant
 	 */
 	public static void giveAchievement(EntityPlayer player, Achievement achievement) {
-		player.triggerAchievement(achievement);
+		player.addStat(achievement);
 	}
 }

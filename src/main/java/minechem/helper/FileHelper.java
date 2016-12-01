@@ -17,6 +17,7 @@ import minechem.Config;
  * Various functions to help with files
  */
 public class FileHelper {
+
 	/**
 	 * Thanks to @tterrag1098 for letting me have this bit of code
 	 *
@@ -115,10 +116,9 @@ public class FileHelper {
 	 * @return
 	 */
 	public static boolean doesFileExist(String file) {
-		try {
-			new FileInputStream(FileUtils.getFile(file));
+		try (FileInputStream stream = new FileInputStream(FileUtils.getFile(file))) {
 			return true;
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}
@@ -132,7 +132,7 @@ public class FileHelper {
 	public static FileInputStream getFile(String file) {
 		try {
 			return new FileInputStream(FileUtils.getFile(file));
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}

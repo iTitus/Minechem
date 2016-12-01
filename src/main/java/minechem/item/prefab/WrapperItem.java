@@ -300,12 +300,12 @@ public abstract class WrapperItem extends BasicItem {
 	}
 
 	@Override
-	public boolean isItemTool(ItemStack stack) {
+	public boolean isEnchantable(ItemStack stack) {
 		ItemStack wrapped = getWrappedItemStack(stack);
 		if (wrapped == null) {
-			return super.isItemTool(stack);
+			return super.isEnchantable(stack);
 		}
-		return wrapped.getItem().isItemTool(wrapped);
+		return wrapped.getItem().isEnchantable(wrapped);
 	}
 
 //	@Override

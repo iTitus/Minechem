@@ -3,7 +3,7 @@ package minechem.asm.data;
 import minechem.asm.LoadingPlugin;
 
 public enum Method {
-	
+
 	GUI_DRAW("func_146552_b", "func_146552_b", "(IIF)V", CodeBlock.BACKGROUND, InstructionNode.RECOLOUR, InstructionNode.RESET, InstructionNode.ICON),
 	ACTION_PREFORMED("actionPerformed", "func_146284_a ", "(Lnet/minecraft/client/gui/GuiButton;)V", "(Lbcb;)V", InstructionNode.SET_SCALE),
 	DRAW_SCREEN("drawScreen", "func_73863_a", "(IIF)V", CodeBlock.CLAMP_ZOOM),

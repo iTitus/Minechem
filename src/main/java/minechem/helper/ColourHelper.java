@@ -7,6 +7,7 @@ package minechem.helper;
  * 1.0F getRed(Compendium.TrueColor.green) returns 0.0F
  */
 public class ColourHelper {
+
 	/**
 	 * Convert an RGB value to {@link minechem.Compendium.Color.TrueColor}
 	 *

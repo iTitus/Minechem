@@ -56,6 +56,6 @@ public abstract class BaseMessage implements IMessage {
 	 * @return the current World
 	 */
 	public World getServerWorld(MessageContext ctx) {
-		return ctx.getServerHandler().playerEntity.worldObj;
+		return ctx.getServerHandler().playerEntity.world;
 	}
 }

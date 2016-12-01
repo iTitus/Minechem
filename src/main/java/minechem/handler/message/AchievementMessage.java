@@ -13,7 +13,8 @@ import minechem.registry.ElementRegistry;
 /**
  * Used for triggering achievements from Client only code
  */
-public class AchievementMessage extends BaseTEMessage implements IMessageHandler<AchievementMessage, IMessage> {
+public class AchievementMessage extends BaseMessage implements IMessageHandler<AchievementMessage, IMessage> {
+
 	private String achievement;
 	private boolean isElement;
 

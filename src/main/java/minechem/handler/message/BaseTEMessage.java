@@ -3,6 +3,7 @@ package minechem.handler.message;
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -11,7 +12,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
  * Basic message for {@link net.minecraft.tileentity.TileEntity} T represents the {@link net.minecraft.tileentity.TileEntity}
  */
 public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage implements IMessage {
-	private int posX, posY, posZ;
+
+	private BlockPos pos;
 
 	/**
 	 * Constructor needed for reflection
@@ -22,12 +24,10 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
 	/**
 	 * Basic Constructor using the TileEntity Use super(myTE); in subClasses
 	 *
-	 * @param entity
+	 * @param tile
 	 */
-	public BaseTEMessage(T entity) {
-		this.posX = entity.xCoord;
-		this.posY = entity.yCoord;
-		this.posZ = entity.zCoord;
+	public BaseTEMessage(T tile) {
+		this.pos = tile.getPos();
 	}
 
 	/**
@@ -37,9 +37,7 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
 	 */
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		this.posX = buf.readInt();
-		this.posY = buf.readInt();
-		this.posZ = buf.readInt();
+		pos = BlockPos.fromLong(buf.readLong());
 	}
 
 	/**
@@ -49,9 +47,7 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
 	 */
 	@Override
 	public void toBytes(ByteBuf buf) {
-		buf.writeInt(this.posX);
-		buf.writeInt(this.posY);
-		buf.writeInt(this.posZ);
+		buf.writeLong(pos.toLong());
 	}
 
 	/**
@@ -61,8 +57,8 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
 	 * @param ctx
 	 * @return can be null
 	 */
-	public T getTileEntity(BaseTEMessage message, MessageContext ctx) {
-		TileEntity tileEntity = getWorld(ctx).getTileEntity(message.posX, message.posY, message.posZ);
+	public T getTileEntity(BaseTEMessage<T> message, MessageContext ctx) {
+		TileEntity tileEntity = getWorld(ctx).getTileEntity(message.pos);
 		return tileEntity == null ? null : (T) tileEntity;
 	}
 }

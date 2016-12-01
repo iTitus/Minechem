@@ -4,9 +4,9 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,6 +21,7 @@ import minechem.helper.LocalizationHelper;
  * {@link net.minecraft.stats.Achievement} wrapper for {@link minechem.chemical.Element}s
  */
 public class ElementAchievement extends Achievement implements IAchievementRenderer {
+
 	private final static String achievementPrefix = "achievement.";
 	private final static String defaultElementTitle = "achievement.minechem.element";
 	private final static String defaultElementDescription = "achievement.minechem.element.desc";
@@ -43,13 +44,13 @@ public class ElementAchievement extends Achievement implements IAchievementRende
 	/**
 	 * Returns the title
 	 *
-	 * @return an {@link net.minecraft.util.IChatComponent}
+	 * @return an {@link net.minecraft.util.ITextComponent}
 	 */
 	@Override
-	public IChatComponent func_150951_e() {
-		IChatComponent iChatComponent = new ChatComponentTranslation(defaultElementTitle, element.shortName);
-		iChatComponent.getChatStyle().setColor(this.getSpecial() ? EnumChatFormatting.DARK_PURPLE : EnumChatFormatting.GREEN);
-		return iChatComponent;
+	public ITextComponent getStatName() {
+		ITextComponent iTextComponent = new TextComponentTranslation(defaultElementTitle, element.shortName);
+		iTextComponent.getStyle().setColor(this.getSpecial() ? TextFormatting.DARK_PURPLE : TextFormatting.GREEN);
+		return iTextComponent;
 	}
 
 	/**

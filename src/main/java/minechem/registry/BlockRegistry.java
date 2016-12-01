@@ -21,19 +21,19 @@ import minechem.blocks.BlockRedstone;
 public class BlockRegistry {
 
 	public static OpticalMicroscopeBlock opticalMicroscope;
-	public static ElectrolysisBlock electrolysisBlock;
-	public static ElectricCrucibleBlock electricCrucibleBlock;
-	public static CentrifugeBlock centrifugeBlock;
-	public static BlockLight blockLight;
-	public static BlockRedstone blockRedstone;
+	public static ElectrolysisBlock electrolysis;
+	public static ElectricCrucibleBlock electricCrucible;
+	public static CentrifugeBlock centrifuge;
+	public static BlockLight light;
+	public static BlockRedstone redstone;
 
 	public static void init() {
-		blockLight = register(new BlockLight(), false);
-		blockRedstone = register(new BlockRedstone(), false);
+		light = register(new BlockLight(), false);
+		redstone = register(new BlockRedstone(), false);
 
-		centrifugeBlock = register(new CentrifugeBlock(), CentrifugeTileEntity.class);
-		electricCrucibleBlock = register(new ElectricCrucibleBlock(), ElectricCrucibleTileEntity.class);
-		electrolysisBlock = register(new ElectrolysisBlock(), ElectrolysisTileEntity.class);
+		centrifuge = register(new CentrifugeBlock(), CentrifugeTileEntity.class);
+		electricCrucible = register(new ElectricCrucibleBlock(), ElectricCrucibleTileEntity.class);
+		electrolysis = register(new ElectrolysisBlock(), ElectrolysisTileEntity.class);
 		opticalMicroscope = register(new OpticalMicroscopeBlock(), OpticalMicroscopeTileEntity.class);
 	}
 

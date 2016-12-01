@@ -5,22 +5,17 @@ import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import minechem.Compendium;
 
 public class LuaParser {
+
 	public static Object toLua(ItemStack stack) {
 		if (stack != null) {
 			Map<String, Object> result = new LinkedHashMap<String, Object>();
 			if (stack.getItem() == null) {
 				return null;
 			}
-			GameRegistry.UniqueIdentifier id = GameRegistry.findUniqueIdentifierFor(stack.getItem());
-			if (id == null) {
-				return null;
-			}
-			result.put(Compendium.NBTTags.item, id.toString());
+			result.put(Compendium.NBTTags.item, stack.getItem().getRegistryName());
 			result.put(Compendium.NBTTags.amount, stack.stackSize);
 			result.put(Compendium.NBTTags.damage, stack.getItemDamage());
 			if (stack.hasTagCompound()) {

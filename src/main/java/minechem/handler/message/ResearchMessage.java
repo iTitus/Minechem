@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import minechem.registry.ResearchRegistry;
 
 public class ResearchMessage extends BaseMessage implements IMessageHandler<ResearchMessage, IMessage> {
+
 	private String key;
 
 	public ResearchMessage() {

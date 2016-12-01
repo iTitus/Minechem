@@ -13,6 +13,7 @@ import minechem.Config;
  * @author way2muchnoise
  */
 public class LogHelper {
+
 	/**
 	 * Used for logging when debug is turned on in the config
 	 *

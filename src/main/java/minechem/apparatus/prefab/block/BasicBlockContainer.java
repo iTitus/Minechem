@@ -68,7 +68,7 @@ public abstract class BasicBlockContainer extends BasicBlock implements ITileEnt
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		acquireResearch(player, world);
+		acquireResearch(player);
 		int id = getGuiID();
 		if (id >= 0) {
 			if (!world.isRemote) {
@@ -146,8 +146,10 @@ public abstract class BasicBlockContainer extends BasicBlock implements ITileEnt
 	 * @param player
 	 * @param world
 	 */
-	public void acquireResearch(EntityPlayer player, World world) {
-		ResearchHelper.addResearch(player, getResearchKey(), world.isRemote);
+	public void acquireResearch(EntityPlayer player) {
+		if (player != null && !player.world.isRemote) {
+			ResearchHelper.addResearch(player, getResearchKey());
+		}
 	}
 
 	/**

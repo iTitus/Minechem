@@ -40,7 +40,7 @@ public class AugmentSharp extends AugmentBase {
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack, int level) {
 		Multimap<String, AttributeModifier> modifiers = super.getAttributeModifiers(slot, stack, level);
-		modifiers.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(AugmentedItem.ATTACK_DAMAGE_MOIFIER_UUID, "Weapon modifier", (double) level, 0));
+		modifiers.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(AugmentedItem.ATTACK_DAMAGE_MOIFIER_UUID, "Weapon modifier", (double) level, 0));
 		return modifiers;
 	}
 

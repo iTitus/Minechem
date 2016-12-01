@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import minechem.chemical.Element;
 
 public class PeriodicTableHelper {
+
 	// Please keep the format of the numbers
 	public static int[][] layout = new int[][]
 			{
