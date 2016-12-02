@@ -26,6 +26,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ResourceLocation;
 
 public class EnhancedFontRenderer implements IResourceManagerReloadListener {
+
 	private static final ResourceLocation[] unicodePageLocations = new ResourceLocation[256];
 	private static final float FONT_REFERENCE_HEIGHT = 9.0F;
 	/**
@@ -567,8 +568,6 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener {
 					++f;
 				}
 
-				Tessellator tessellator;
-
 				if (this.strikethroughStyle) {
 					Tessellator t = Tessellator.getInstance();
 					VertexBuffer b = t.getBuffer();
@@ -797,10 +796,10 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener {
 	 * Perform actual work of rendering a multi-line string with wordwrap and with darker drop shadow color if flag is set
 	 */
 	private void renderSplitString(String string, int x, int y, int maxWidth, boolean dropShadow) {
-		List list = this.listFormattedStringToWidth(string, maxWidth);
+		List<String> list = this.listFormattedStringToWidth(string, maxWidth);
 
-		for (Iterator iterator = list.iterator(); iterator.hasNext(); y += this.FONT_HEIGHT) {
-			String s1 = (String) iterator.next();
+		for (Iterator<String> iterator = list.iterator(); iterator.hasNext(); y += this.FONT_HEIGHT) {
+			String s1 = iterator.next();
 			this.renderStringAligned(s1, x, y, maxWidth, this.textColor, dropShadow);
 		}
 	}

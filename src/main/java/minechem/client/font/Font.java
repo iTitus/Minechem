@@ -4,9 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.IReloadableResourceManager;
 
-import minechem.Compendium;
+import minechem.common.Compendium;
 
 public class Font {
+
 	private EnhancedFontRenderer fontRenderer;
 
 	public Font(FontRenderer fontRenderer) {

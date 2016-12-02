@@ -71,7 +71,7 @@ processResources {
 
 jar {
     manifest {
-        attributes 'FMLCorePlugin': 'minechem.asm.LoadingPlugin'
+        attributes 'FMLCorePlugin': 'minechem.common.asm.LoadingPlugin'
         attributes 'FMLCorePluginContainsFMLMod': 'true'
     }
 }
