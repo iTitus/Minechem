@@ -70,7 +70,7 @@ public abstract class BasicBlockContainer extends BasicBlock implements ITileEnt
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		acquireResearch(player);
 		int id = getGuiID();
-		if (id >= 0) {
+		if (id >= 0 && !player.isSneaking()) {
 			if (!world.isRemote) {
 				player.openGui(Minechem.instance, id, world, pos.getX(), pos.getY(), pos.getZ());
 			}

@@ -22,8 +22,7 @@ public class OpticalMicroscopeBlock extends BasicBlockContainer {
 
 	@Override
 	public int getGuiID() {
-		//return Compendium.Gui.MICROSCOPE_ID
-		return -1;
+		return Compendium.Gui.MICROSCOPE_ID;
 	}
 
 	@Override

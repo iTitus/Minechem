@@ -22,8 +22,7 @@ public class ElectricCrucibleBlock extends BasicBlockContainer {
 
 	@Override
 	public int getGuiID() {
-		//return Compendium.Gui.ELECTRIC_CRUCIBLE_ID;
-		return -1;
+		return Compendium.Gui.ELECTRIC_CRUCIBLE_ID;
 	}
 
 	@Override

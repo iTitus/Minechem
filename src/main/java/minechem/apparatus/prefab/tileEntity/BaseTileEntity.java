@@ -3,6 +3,7 @@ package minechem.apparatus.prefab.tileEntity;
 import com.google.common.base.Strings;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -38,18 +39,22 @@ public class BaseTileEntity extends TileEntity implements IWorldNameable {
 		super.markDirty();
 		sync();
 	}
+	
+	public boolean canInteractWith(EntityPlayer player) {
+		return !isInvalid() && player.getDistanceSqToCenter(pos) <= 64;
+	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
 		NBTTagCompound compound = pkt.getNbtCompound();
 		if (compound != null) {
-			readFromCustomNBT(compound);
+			readFromNBT(compound);
 		}
 	}
 
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(pos, -1, writeToCustomNBT(new NBTTagCompound()));
+		return new SPacketUpdateTileEntity(pos, -1, writeToNBT(new NBTTagCompound()));
 	}
 
 	@Override
@@ -60,17 +65,6 @@ public class BaseTileEntity extends TileEntity implements IWorldNameable {
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		readFromCustomNBT(compound);
-	}
-
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		super.writeToNBT(compound);
-		writeToCustomNBT(compound);
-		return compound;
-	}
-
-	public void readFromCustomNBT(NBTTagCompound compound) {
 		if (compound.hasKey(Compendium.NBTTags.customName, Constants.NBT.TAG_STRING)) {
 			customName = compound.getString(Compendium.NBTTags.customName);
 		} else {
@@ -78,7 +72,9 @@ public class BaseTileEntity extends TileEntity implements IWorldNameable {
 		}
 	}
 
-	public NBTTagCompound writeToCustomNBT(NBTTagCompound compound) {
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
 		if (hasCustomName()) {
 			compound.setString(Compendium.NBTTags.customName, customName);
 		}

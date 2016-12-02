@@ -22,8 +22,7 @@ public class ElectrolysisBlock extends BasicBlockContainer {
 
 	@Override
 	public int getGuiID() {
-		//return Compendium.Gui.ELECTROLYSIS_ID;
-		return -1;
+		return Compendium.Gui.ELECTROLYSIS_ID;
 	}
 
 	@Override

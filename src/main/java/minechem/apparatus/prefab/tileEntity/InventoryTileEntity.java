@@ -1,46 +1,48 @@
 package minechem.apparatus.prefab.tileEntity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class InventoryTileEntity extends BaseTileEntity {
+public class InventoryTileEntity extends EnergyTileEntity {
 
 	protected final ItemStackHandler itemStackHandler;
 
-	public InventoryTileEntity(String name, int size) {
-		super(name);
-		this.itemStackHandler = new ItemStackHandler(size) {
+	public InventoryTileEntity(String name, int itemSlots) {
+		this(name, DEFAULT_ENERGY_CAPACITY, itemSlots);
+	}
+	
+	public InventoryTileEntity(String name, int energyCapacity, int itemSlots) {
+		super(name, energyCapacity);
+		this.itemStackHandler = new ItemStackHandler(itemSlots) {
+			
 			@Override
 			protected void onContentsChanged(int slot) {
 				super.onContentsChanged(slot);
 				InventoryTileEntity.this.markDirty();
 			}
+			
+			@Override
+			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+				return !InventoryTileEntity.this.canInsert(slot, stack) ? stack : super.insertItem(slot, stack, simulate);
+			}
+			
+			@Override
+			public ItemStack extractItem(int slot, int amount, boolean simulate) {
+				return !InventoryTileEntity.this.canExtract(slot, amount) ? null : super.extractItem(slot, amount, simulate);
+			}
 		};
 	}
 
-	@Override
-	public void readFromCustomNBT(NBTTagCompound compound) {
-		super.readFromCustomNBT(compound);
-		if (compound.hasKey("items", Constants.NBT.TAG_COMPOUND)) {
-			itemStackHandler.deserializeNBT(compound.getCompoundTag("items"));
-		}
+	protected boolean canInsert(int slot, ItemStack stack) {
+		return true;
 	}
 
-	@Override
-	public NBTTagCompound writeToCustomNBT(NBTTagCompound compound) {
-		super.writeToCustomNBT(compound);
-		compound.setTag("items", itemStackHandler.serializeNBT());
-		return compound;
-	}
-
-	public boolean canInteractWith(EntityPlayer player) {
-		return !isInvalid() && player.getDistanceSqToCenter(pos) <= 64;
+	protected boolean canExtract(int slot, int amount) {
+		return true;
 	}
 
 	@Override

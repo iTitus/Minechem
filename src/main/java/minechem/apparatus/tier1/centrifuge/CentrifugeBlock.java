@@ -22,8 +22,7 @@ public class CentrifugeBlock extends BasicBlockContainer {
 
 	@Override
 	public int getGuiID() {
-		//return Compendium.Gui.CENTRIFUGE_ID;
-		return -1;
+		return Compendium.Gui.CENTRIFUGE_ID;
 	}
 
 	@Override

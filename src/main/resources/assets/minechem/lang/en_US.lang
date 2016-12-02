@@ -11,6 +11,7 @@ tile.minechem:electric_crucible.name=Electric Crucible
 tile.minechem:centrifuge.name=Centrifuge
 
 item.minechem:journal.name=Chemist's Journal
+item.minechem:chemical.name=Chemical Tube
 item.minechem:item.augmented.name=Item Augment
 
 config.debugMode=Turns on extra logging printouts

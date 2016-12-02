@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -23,7 +22,12 @@ public class ChemicalItem extends BasicItem {
 
 	public ChemicalItem() {
 		super(Compendium.Naming.chemical);
-		setCreativeTab(CreativeTabRegistry.TAB_CHEMICALS);
+		setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
+	}
+	
+	@Override
+	public CreativeTabs[] getCreativeTabs() {
+		return new CreativeTabs[] { CreativeTabRegistry.TAB_CHEMICALS, getCreativeTab() };
 	}
 
 	public static ChemicalBase getChemicalBase(ItemStack itemStack) {
@@ -31,20 +35,22 @@ public class ChemicalItem extends BasicItem {
 	}
 
 	public static ItemStack getItemStackForChemical(ChemicalBase chemicalBase) {
-		ItemStack itemStack = new ItemStack(ItemRegistry.chemical);
-		NBTTagCompound tag = new NBTTagCompound();
-		chemicalBase.writeToNBT(tag);
-		itemStack.setTagCompound(tag);
-		return itemStack;
+		ItemStack stack = new ItemStack(ItemRegistry.chemical);
+		if (chemicalBase != null) { 
+			NBTTagCompound tag = new NBTTagCompound();
+			chemicalBase.writeToNBT(tag);
+			stack.setTagCompound(tag);
+		}
+		return stack;
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack itemStack) {
-		if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("fullName", Constants.NBT.TAG_STRING)) {
-			return itemStack.getTagCompound().getString("fullName");
-		} else {
-			return "Chemical";
+	public String getItemStackDisplayName(ItemStack stack) {
+		ChemicalBase chemicalBase = getChemicalBase(stack);
+		if (chemicalBase != null) {
+			return chemicalBase.fullName;
 		}
+		return super.getItemStackDisplayName(stack);
 	}
 
 	@Override
@@ -60,14 +66,16 @@ public class ChemicalItem extends BasicItem {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
-		ItemStack itemStack;
-		NBTTagCompound tagCompound;
-		for (ChemicalBase element : Jenkins.getAll()) {
-			itemStack = new ItemStack(this);
-			tagCompound = new NBTTagCompound();
-			element.writeToNBT(tagCompound);
-			itemStack.setTagCompound(tagCompound);
-			subItems.add(itemStack);
+		ItemStack stack = new ItemStack(this);
+		if (tab != CreativeTabRegistry.TAB_CHEMICALS) {
+			subItems.add(stack);
+		}
+		if (tab != CreativeTabRegistry.TAB_PRIMARY) {
+			for (ChemicalBase chemicalBase : Jenkins.getAll()) {
+				stack = new ItemStack(this);
+				stack.setTagCompound(chemicalBase.writeToNBT(new NBTTagCompound()));
+				subItems.add(stack);
+			}
 		}
 	}
 

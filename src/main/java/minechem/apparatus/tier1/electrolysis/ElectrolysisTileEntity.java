@@ -1,13 +1,11 @@
 package minechem.apparatus.tier1.electrolysis;
 
-import net.minecraftforge.fluids.FluidContainerRegistry;
-
 import minechem.Compendium;
-import minechem.apparatus.prefab.tileEntity.SimpleFluidHandlerTileEntity;
+import minechem.apparatus.prefab.tileEntity.FluidHandlerTileEntity;
 import minechem.item.chemical.ChemicalItem;
 
 //TODO: Add fluid capability
-public class ElectrolysisTileEntity extends SimpleFluidHandlerTileEntity {
+public class ElectrolysisTileEntity extends FluidHandlerTileEntity {
 
 //	private byte LEFTSIDE = 0;
 //	private byte RIGHTSIDE = 1;
@@ -15,7 +13,7 @@ public class ElectrolysisTileEntity extends SimpleFluidHandlerTileEntity {
 //	private boolean rightTube;
 
 	public ElectrolysisTileEntity() {
-		super(Compendium.Naming.electrolysis, 2, 16 * FluidContainerRegistry.BUCKET_VOLUME);
+		super(Compendium.Naming.electrolysis, 2);
 	}
 
 //	public byte addItem(ItemStack chemicalItemStack) {
@@ -93,14 +91,4 @@ public class ElectrolysisTileEntity extends SimpleFluidHandlerTileEntity {
 //		}
 		return null;
 	}
-
-//	@Override
-//	public void writeToNBT(NBTTagCompound nbttagcompound) {
-//		super.writeToNBT(nbttagcompound);
-//	}
-//
-//	@Override
-//	public void readFromNBT(NBTTagCompound nbttagcompound) {
-//		super.readFromNBT(nbttagcompound);
-//	}
 }

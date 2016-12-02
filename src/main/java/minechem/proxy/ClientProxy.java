@@ -66,10 +66,11 @@ public class ClientProxy extends CommonProxy {
 		String[] types = {"element", "molecule"};
 		Form[] forms = Form.values();
 
-		ModelResourceLocation[] resLocs = new ModelResourceLocation[types.length * forms.length];
+		ModelResourceLocation[] resLocs = new ModelResourceLocation[1 + types.length * forms.length];
+		resLocs[0] = new ModelResourceLocation(ItemRegistry.chemical.getRegistryName().toString() + "/" + "tube", "inventory");
 		for (int i = 0; i < types.length; i++) {
 			for (int j = 0; j < forms.length; j++) {
-				resLocs[i * forms.length + j] = new ModelResourceLocation(ItemRegistry.chemical.getRegistryName().toString() + "/" + forms[j].toString() + "_" + types[i], "inventory");
+				resLocs[1 + i * forms.length + j] = new ModelResourceLocation(ItemRegistry.chemical.getRegistryName().toString() + "/" + forms[j].toString() + "_" + types[i], "inventory");
 			}
 		}
 
@@ -80,7 +81,7 @@ public class ClientProxy extends CommonProxy {
 			public ModelResourceLocation getModelLocation(ItemStack stack) {
 				ChemicalBase chemicalBase = ChemicalItem.getChemicalBase(stack);
 				if (chemicalBase != null) {
-					return resLocs[(chemicalBase.isElement() ? 0 : 1) * forms.length + chemicalBase.form.ordinal()];
+					return resLocs[1 + (chemicalBase.isElement() ? 0 : 1) * forms.length + chemicalBase.form.ordinal()];
 				}
 				return resLocs[0];
 			}
@@ -124,31 +125,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, new OpticalMicroscopeTileEntityRenderer());
 		//TODO: Remove this hack, replace with JSON
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), 0, OpticalMicroscopeTileEntity.class);
-
-
-		// RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-		// ISBRH_ID = RenderingRegistry.getNextAvailableRenderId();
-
-		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.opticalMicroscope),
-		// new BasicItemRenderer(opticalMicroscopeRenderer, new
-		// OpticalMicroscopeTileEntity()));
-
-		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock),
-		// new BasicItemRenderer(electrolysisRenderer, new
-		// ElectrolysisTileEntity()));
-
-		// MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock),
-		// new BasicItemRenderer(electricCrucibleRenderer, new
-		// ElectricCrucibleTileEntity()));
-
-//		 MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock),
-//		new BasicItemRenderer(centrifugeRenderer, new
-//		 CentrifugeTileEntity()));
-
-		// RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(),
-		// new LightRenderer());
-		// MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem,
-		// new ChemicalItemRenderer());
 	}
 
 	@Override
