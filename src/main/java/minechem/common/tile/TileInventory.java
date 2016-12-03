@@ -45,6 +45,10 @@ public class TileInventory extends TileEnergy {
 		return true;
 	}
 
+	public ItemStackHandler getItemStackHandler() {
+		return itemStackHandler;
+	}
+
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {

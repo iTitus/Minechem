@@ -1,10 +1,6 @@
 itemGroup.minechem.name=Minechem
 itemGroup.minechem_chemicals.name=Chemicals
 
-gui.element.tank.empty=Empty
-gui.journal.writtenBy=Written By
-gui.journal.index=Index
-
 tile.minechem:electrolysis.name=Electrolysis Apparatus
 tile.minechem:optical_microscope.name=Optical Microscope
 tile.minechem:electric_crucible.name=Electric Crucible
@@ -13,6 +9,12 @@ tile.minechem:centrifuge.name=Centrifuge
 item.minechem:journal.name=Chemist's Journal
 item.minechem:chemical.name=Chemical Tube
 item.minechem:item.augmented.name=Item Augment
+
+gui.element.tank.empty=Empty
+gui.journal.writtenBy=Written By
+gui.journal.index=Index
+
+container.minechem:optical_microscope.name=Optical Microscope
 
 config.debugMode=Turns on extra logging printouts
 config.debugMode.tooltip=Debug Mode

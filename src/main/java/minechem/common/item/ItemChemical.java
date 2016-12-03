@@ -24,8 +24,8 @@ public class ItemChemical extends ItemBase {
 		setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
 	}
 
-	public static ChemicalBase getChemicalBase(ItemStack itemStack) {
-		return ChemicalBase.readFromNBT(itemStack.getTagCompound());
+	public static ChemicalBase getChemicalBase(ItemStack stack) {
+		return stack != null && stack.getItem() instanceof ItemChemical && stack.hasTagCompound() ? ChemicalBase.readFromNBT(stack.getTagCompound()) : null;
 	}
 
 	public static ItemStack getItemStackForChemical(ChemicalBase chemicalBase) {

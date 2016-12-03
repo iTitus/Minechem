@@ -6,6 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import minechem.client.util.RenderHelper;
 import minechem.common.Compendium;
 import minechem.common.chemical.ChemicalBase;
 import minechem.common.chemical.Element;

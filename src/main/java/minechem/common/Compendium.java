@@ -162,7 +162,7 @@ public class Compendium {
 
 			public static final String blankMachine = Compendium.Texture.GUI.prefix + "blankMachine.png";
 			public static final String journal = Compendium.Texture.GUI.prefix + "journal.png";
-			public static final String opticalMicroscope = Compendium.Texture.GUI.prefix + "opticalMicroscope.png";
+			public static final String opticalMicroscope = Compendium.Texture.GUI.prefix + "optical_microscope.png";
 			public static final String tab_left = Compendium.Texture.GUI.prefix + "tabLeft.png";
 			public static final String tab_right = Compendium.Texture.GUI.prefix + "tabRight.png";
 			public static final String achievements = Compendium.Texture.GUI.prefix + "achievementPage.png";

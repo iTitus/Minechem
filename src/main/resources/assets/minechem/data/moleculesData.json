@@ -6704,8 +6704,8 @@
 		"Height":200,
 		"Width":200
 	},
-	"Benzhydrol":{
-		"Formula":"C13H12O",
+	"Beta-Ionone":{
+		"Formula":"C13H20O",
 		"CSID":553581,
 		"MolarMass":192.0,
 		"SMILES":"CC1\u003dC(C(CCC1)(C)C)/C\u003dC/C(\u003dO)C",
