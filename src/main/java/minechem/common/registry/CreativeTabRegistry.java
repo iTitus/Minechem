@@ -1,7 +1,6 @@
 package minechem.common.registry;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,16 +30,10 @@ public class CreativeTabRegistry {
 		public CreativeTab(String label) {
 			super(label);
 		}
-
+		
 		@Override
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem() {
-			return null;
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public ItemStack getIconItemStack() {
+		public ItemStack getTabIconItem() {
 			return getStack();
 		}
 

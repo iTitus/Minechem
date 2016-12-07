@@ -263,7 +263,7 @@ public abstract class ItemWrapped extends ItemBase {
 		}
 		boolean result = wrapped.getItem().hitEntity(wrapped, target, attacker);
 		setDamage(stack, wrapped.getItemDamage());
-		if (stack.stackSize <= 0) {
+		if (stack.getCount() <= 0) {
 			if (attacker instanceof EntityPlayer) {
 				ForgeEventFactory.onPlayerDestroyItem((EntityPlayer) attacker, stack, attacker.getActiveHand());
 			}
@@ -333,7 +333,7 @@ public abstract class ItemWrapped extends ItemBase {
 			return super.itemInteractionForEntity(stack, player, target, hand);
 		}
 		boolean result = wrapped.getItem().itemInteractionForEntity(wrapped, player, target, hand);
-		if (stack.stackSize <= 0) {
+		if (stack.getCount() <= 0) {
 			ForgeEventFactory.onPlayerDestroyItem(player, stack, player.getActiveHand());
 			player.setHeldItem(player.getActiveHand(), null);
 		}
@@ -358,7 +358,7 @@ public abstract class ItemWrapped extends ItemBase {
 		}
 		boolean result = wrapped.getItem().onBlockDestroyed(wrapped, world, state, pos, entityLiving);
 		setDamage(stack, wrapped.getItemDamage());
-		if (stack.stackSize <= 0) {
+		if (stack.getCount() <= 0) {
 			if (entityLiving instanceof EntityPlayer) {
 				ForgeEventFactory.onPlayerDestroyItem((EntityPlayer) entityLiving, stack, entityLiving.getActiveHand());
 			}
@@ -375,7 +375,7 @@ public abstract class ItemWrapped extends ItemBase {
 		}
 		boolean result = wrapped.getItem().onBlockStartBreak(wrapped, pos, player);
 		setDamage(stack, wrapped.getItemDamage());
-		if (stack.stackSize <= 0) {
+		if (stack.getCount() <= 0) {
 			ForgeEventFactory.onPlayerDestroyItem(player, stack, player.getActiveHand());
 			player.setHeldItem(player.getActiveHand(), null);
 		}
@@ -420,29 +420,29 @@ public abstract class ItemWrapped extends ItemBase {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack wrapped = getWrappedItemStack(stack);
 		if (wrapped == null) {
 			return super.onItemRightClick(stack, world, player, hand);
 		}
 		ActionResult<ItemStack> result = wrapped.getItem().onItemRightClick(wrapped, world, player, hand);
 		wrapped = result.getResult();
-		if (wrapped == null || wrapped.stackSize <= 0) {
+		if (wrapped == null || wrapped.getCount() <= 0) {
 			return ActionResult.newResult(result.getType(), null);
 		}
 		setWrappedItemStack(stack, wrapped);
 		return ActionResult.newResult(result.getType(), stack);
 	}
-
+	
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack wrapped = getWrappedItemStack(stack);
 		if (wrapped == null) {
 			return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
 		}
 		EnumActionResult result = wrapped.getItem().onItemUse(wrapped, player, world, pos, hand, facing, hitX, hitY, hitZ);
 		setDamage(stack, wrapped.getItemDamage());
-		if (stack.stackSize <= 0) {
+		if (stack.getCount() <= 0) {
 			ForgeEventFactory.onPlayerDestroyItem(player, stack, player.getActiveHand());
 			player.setHeldItem(player.getActiveHand(), null);
 		}
@@ -457,7 +457,7 @@ public abstract class ItemWrapped extends ItemBase {
 		}
 		EnumActionResult result = wrapped.getItem().onItemUseFirst(wrapped, player, world, pos, side, hitX, hitY, hitZ, hand);
 		setDamage(stack, wrapped.getItemDamage());
-		if (stack.stackSize <= 0) {
+		if (stack.getCount() <= 0) {
 			ForgeEventFactory.onPlayerDestroyItem(player, stack, player.getActiveHand());
 			player.setHeldItem(player.getActiveHand(), null);
 		}
@@ -511,7 +511,7 @@ public abstract class ItemWrapped extends ItemBase {
 		} else {
 			wrapped.getItem().setDamage(wrapped, damage);
 			if (wrapped.getMaxDamage() <= damage) {
-				stack.stackSize--;
+				stack.setCount(stack.getCount() - 1);
 			}
 			setWrappedItemStack(stack, wrapped);
 		}

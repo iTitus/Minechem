@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.IFluidContainerItem;
 
 import minechem.api.augment.IAugment;
 import minechem.api.augment.IAugmentItem;
@@ -40,9 +39,9 @@ public class AugmentRegistry {
 			return null;
 		}
 		Item item = augmentItem.getItem();
-		if (item instanceof IFluidContainerItem) {
+		/*if (item instanceof IFluidContainerItem) {
 			return fluidAugmentMap.get(((IFluidContainerItem) item).getFluid(augmentItem));
-		} else if (item instanceof IAugmentItem) {
+		} else*/ if (item instanceof IAugmentItem) {
 			return getAugment(((IAugmentItem) item).getAugmentKey(augmentItem));
 		} else {
 			return itemStackAugmentMap.get(augmentItem);

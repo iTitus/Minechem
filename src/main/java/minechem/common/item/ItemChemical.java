@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -61,10 +61,10 @@ public class ItemChemical extends ItemBase {
 			tooltip.addAll(chemicalBase.getToolTip());
 		}
 	}
-
+	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> subItems) {
+	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
 		ItemStack stack = new ItemStack(this);
 		if (tab != CreativeTabRegistry.TAB_CHEMICALS) {
 			subItems.add(stack);

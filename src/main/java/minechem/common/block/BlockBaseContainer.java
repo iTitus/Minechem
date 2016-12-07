@@ -67,7 +67,7 @@ public abstract class BlockBaseContainer extends BlockBase implements ITileEntit
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		acquireResearch(player);
 		int id = getGuiID();
 		if (id >= 0 && !player.isSneaking()) {

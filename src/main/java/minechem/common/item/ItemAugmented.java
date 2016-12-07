@@ -112,7 +112,7 @@ public class ItemAugmented extends ItemWrapped implements IAugmentedItem, IOverl
 	@Override
 	public ItemStack getWrappedItemStack(ItemStack wrapper) {
 		if (wrapper.hasTagCompound()) {
-			return ItemStack.loadItemStackFromNBT(wrapper.getTagCompound().getCompoundTag(Compendium.NBTTags.item));
+			return new ItemStack(wrapper.getTagCompound().getCompoundTag(Compendium.NBTTags.item));
 		}
 		return null;
 	}
@@ -255,9 +255,9 @@ public class ItemAugmented extends ItemWrapped implements IAugmentedItem, IOverl
 		}
 		return result;
 	}
-
+	
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		EnumActionResult result = super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
 		if (result == EnumActionResult.SUCCESS) {
 			return result;
@@ -318,9 +318,9 @@ public class ItemAugmented extends ItemWrapped implements IAugmentedItem, IOverl
 		}
 		return result;
 	}
-
+	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ActionResult<ItemStack> result = super.onItemRightClick(stack, world, player, hand);
 		for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) {
 			result = entry.getKey().onItemRightClick(stack, world, player, hand, entry.getValue());

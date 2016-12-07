@@ -55,17 +55,17 @@ public class ContainerBase<T extends TileBase> extends Container {
 		ItemStack stack = slot.getStack();
 
 		if (stack != null && slot.getHasStack()) {
-			if (slotNumber < player.inventory.mainInventory.length) {
-				if (!mergeItemStack(stack, player.inventory.mainInventory.length, inventorySlots.size(), true)) {
+			if (slotNumber < player.inventory.mainInventory.size()) {
+				if (!mergeItemStack(stack, player.inventory.mainInventory.size(), inventorySlots.size(), true)) {
 					return null;
 				}
 			} else {
-				if (!mergeItemStack(stack, 0, player.inventory.mainInventory.length, true)) {
+				if (!mergeItemStack(stack, 0, player.inventory.mainInventory.size(), true)) {
 					return null;
 				}
 			}
 
-			if (stack.stackSize == 0) {
+			if (stack.getCount() == 0) {
 				slot.putStack((ItemStack) null);
 			} else {
 				slot.onSlotChanged();

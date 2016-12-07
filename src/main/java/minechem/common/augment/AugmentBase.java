@@ -49,7 +49,7 @@ public abstract class AugmentBase implements IAugment {
 	@Override
 	public int getUsableLevel(ItemStack stack, int level) {
 		NBTTagCompound augment = stack.getTagCompound().getCompoundTag(this.getKey());
-		ItemStack augmentItem = ItemStack.loadItemStackFromNBT(augment.getCompoundTag(Compendium.NBTTags.item));
+		ItemStack augmentItem = new ItemStack(augment.getCompoundTag(Compendium.NBTTags.item));
 		if (augmentItem == null || augmentItem.getItem() == null) {
 			return -1;
 		}
@@ -74,7 +74,7 @@ public abstract class AugmentBase implements IAugment {
 	@Override
 	public int consumeAugment(ItemStack stack, int level) {
 		NBTTagCompound augment = stack.getTagCompound().getCompoundTag(this.getKey());
-		ItemStack augmentItem = ItemStack.loadItemStackFromNBT(augment.getCompoundTag(Compendium.NBTTags.item));
+		ItemStack augmentItem = new ItemStack(augment.getCompoundTag(Compendium.NBTTags.item));
 		if (augmentItem == null || augmentItem.getItem() == null) {
 			return -1;
 		}

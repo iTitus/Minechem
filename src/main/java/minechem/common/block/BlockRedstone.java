@@ -75,7 +75,7 @@ public class BlockRedstone extends BlockBase {
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World world, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return NULL_AABB;
 	}
 
@@ -138,9 +138,9 @@ public class BlockRedstone extends BlockBase {
 	}
 
 	public void secondOrderNotify(World world, BlockPos pos) {
-		world.notifyNeighborsOfStateChange(pos, this);
+		world.notifyNeighborsOfStateChange(pos, this, false);
 		for (EnumFacing facing : EnumFacing.VALUES) {
-			world.notifyNeighborsOfStateChange(pos.offset(facing), this);
+			world.notifyNeighborsOfStateChange(pos.offset(facing), this, false);
 		}
 	}
 }

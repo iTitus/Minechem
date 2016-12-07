@@ -3,14 +3,14 @@ package minechem.common.tile;
 import net.minecraft.util.EnumFacing;
 
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class TileFluid extends TileInventory {
 
-	public static final int DEFAULT_FLUID_CAPACITY = 16 * FluidContainerRegistry.BUCKET_VOLUME;
+	public static final int DEFAULT_FLUID_CAPACITY = 16 * Fluid.BUCKET_VOLUME;
 
 	protected final FluidTank fluidHandler;
 

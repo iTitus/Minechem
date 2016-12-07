@@ -21,10 +21,10 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.network.Environment;
 import li.cil.oc.api.network.ManagedPeripheral;
 import minechem.common.Compendium;
-import minechem.common.compatibility.ModList;
-import minechem.common.compatibility.lua.events.checked.CheckEvent;
-import minechem.common.compatibility.lua.methods.LuaMethod;
 import minechem.common.tile.TileBase;
+import minechem.todo.common.compatibility.ModList;
+import minechem.todo.common.compatibility.lua.events.checked.CheckEvent;
+import minechem.todo.common.compatibility.lua.methods.LuaMethod;
 
 @Optional.InterfaceList(
 		{
