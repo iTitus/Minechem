@@ -2,8 +2,9 @@ package minechem.common.inventory;
 
 import minechem.common.tile.TileInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class ItemStackHandlerCustom extends net.minecraftforge.items.ItemStackHandler {
+public class ItemStackHandlerCustom extends ItemStackHandler {
 
 	protected final TileInventory tile;
 	

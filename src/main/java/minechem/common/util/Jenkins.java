@@ -48,10 +48,7 @@ public class Jenkins {
 
 	public static ItemStack getStack(String chemical) {
 		ChemicalBase chemicalBase = get(chemical);
-		if (chemicalBase != null) {
-			return ItemChemical.getItemStackForChemical(chemicalBase);
-		}
-		return null;
+		return chemicalBase != null ? ItemChemical.getItemStackForChemical(chemicalBase) : ItemStack.EMPTY;
 	}
 
 	/**

@@ -95,7 +95,7 @@ public class TileInventory extends TileEnergy implements ISidedInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return canInsertItem(index, stack, null);
+		return true;
 	}
 
 	@Override
@@ -126,12 +126,12 @@ public class TileInventory extends TileEnergy implements ISidedInventory {
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) {
-		return true;
+		return isItemValidForSlot(index, stack);
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
-		return true;
+		return canExtract(index, stack);
 	}
 
 	public int getStackLimit(int slot, ItemStack stack) {
