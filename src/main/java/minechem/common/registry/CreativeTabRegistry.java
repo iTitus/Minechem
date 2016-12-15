@@ -14,7 +14,7 @@ public class CreativeTabRegistry {
 	public static final CreativeTab TAB_CHEMICALS = new CreativeTab(Compendium.Naming.id + "_chemicals.name").setSearchable();
 
 	/**
-	 * Must be inited after the Blocks and Items If you want to used modded
+	 * Must be inited after the Blocks and Items If you want to use modded
 	 * Items or Blocks
 	 */
 	public static void init() {

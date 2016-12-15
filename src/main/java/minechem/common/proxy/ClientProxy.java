@@ -90,7 +90,7 @@ public class ClientProxy extends CommonProxy {
 		});
 
 		//TODO: Add renderer for augmented items
-		ModelLoader.setCustomModelResourceLocation(ItemRegistry.itemAugmented, 0, new ModelResourceLocation(ItemRegistry.itemAugmented.getRegistryName(), "inventory"));
+		//ModelLoader.setCustomModelResourceLocation(ItemRegistry.itemAugmented, 0, new ModelResourceLocation(ItemRegistry.itemAugmented.getRegistryName(), "inventory"));
 
 		ModelLoader.setCustomStateMapper(BlockRegistry.light, new StateMapperBase() {
 

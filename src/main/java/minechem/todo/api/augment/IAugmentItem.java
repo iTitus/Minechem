@@ -1,4 +1,4 @@
-package minechem.api.augment;
+package minechem.todo.api.augment;
 
 import net.minecraft.item.ItemStack;
 

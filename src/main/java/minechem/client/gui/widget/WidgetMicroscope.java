@@ -26,7 +26,7 @@ public class WidgetMicroscope extends WidgetBase {
 		gui.setZLevel(zLevel);
 		gui.drawTexturedModalRect(gui.getGuiLeft() + bounds.getX(), gui.getGuiTop() + bounds.getY(), u, v + bounds.getHeight(), bounds.getWidth(), bounds.getHeight());
 
-		ItemStack stack = ((TileMicroscope) gui.getTile()).getItemStackHandler().getStackInSlot(0);
+		ItemStack stack = ((TileMicroscope) gui.getTile()).getStackHandler().getStackInSlot(0);
 		ChemicalBase chemicalBase = ItemChemical.getChemicalBase(stack);
 
 		if (chemicalBase == null) {

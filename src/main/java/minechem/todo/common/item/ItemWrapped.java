@@ -1,9 +1,10 @@
-package minechem.common.item;
+package minechem.todo.common.item;
 
 import java.util.Set;
 
 import com.google.common.collect.Multimap;
 
+import minechem.common.item.ItemBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.Entity;

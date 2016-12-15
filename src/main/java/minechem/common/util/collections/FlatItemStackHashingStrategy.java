@@ -4,6 +4,8 @@ import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Objects;
+
 import gnu.trove.strategy.HashingStrategy;
 
 public class FlatItemStackHashingStrategy implements HashingStrategy<ItemStack> {
@@ -12,7 +14,7 @@ public class FlatItemStackHashingStrategy implements HashingStrategy<ItemStack> 
 
 	@Override
 	public int computeHashCode(ItemStack stack) {
-		return stack.getItem().hashCode() ^ (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE ? 0 : stack.getItemDamage()) ^ (stack.hasTagCompound() ? stack.getTagCompound().hashCode() : 0);
+		return Objects.hash(stack.getItem(), stack.getItemDamage(), stack.getTagCompound());
 	}
 
 	@Override

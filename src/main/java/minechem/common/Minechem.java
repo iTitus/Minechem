@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import minechem.common.handler.ResearchHandler;
 import minechem.common.proxy.CommonProxy;
 
-@Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, guiFactory = "minechem.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.10.2,)", dependencies = "required-after:Forge@[12.18.2.2099,)")
+@Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, guiFactory = "minechem.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.11,)", dependencies = "required-after:forge@[13.19.1.2189,)")
 public class Minechem {
 
 	@Mod.Instance

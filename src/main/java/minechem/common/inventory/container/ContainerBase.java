@@ -46,7 +46,7 @@ public class ContainerBase<T extends TileBase> extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return tile == null || tile.canInteractWith(player);
+		return tile == null || tile.isUsableByPlayer(player);
 	}
 
 	@Override

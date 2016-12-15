@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 
 import minechem.common.chemical.ChemicalBase;
 import minechem.common.chemical.Element;
+import minechem.common.item.ItemChemical;
 import minechem.common.registry.ElementRegistry;
 import minechem.common.registry.MoleculeRegistry;
 
@@ -46,7 +47,10 @@ public class Jenkins {
 	}
 
 	public static ItemStack getStack(String chemical) {
-		// @TODO: when we have, y'know.. items
+		ChemicalBase chemicalBase = get(chemical);
+		if (chemicalBase != null) {
+			return ItemChemical.getItemStackForChemical(chemicalBase);
+		}
 		return null;
 	}
 

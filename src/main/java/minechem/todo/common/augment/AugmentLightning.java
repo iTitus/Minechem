@@ -1,4 +1,4 @@
-package minechem.common.augment;
+package minechem.todo.common.augment;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

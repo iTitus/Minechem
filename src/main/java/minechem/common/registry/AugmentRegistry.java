@@ -9,14 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.fluids.Fluid;
-
-import minechem.api.augment.IAugment;
-import minechem.api.augment.IAugmentItem;
-import minechem.common.augment.AugmentFlint;
-import minechem.common.augment.AugmentLight;
-import minechem.common.augment.AugmentRedstone;
-import minechem.common.augment.AugmentTnt;
 import minechem.common.util.collections.ItemStackMap;
+import minechem.todo.api.augment.IAugment;
+import minechem.todo.api.augment.IAugmentItem;
+import minechem.todo.common.augment.AugmentFlint;
+import minechem.todo.common.augment.AugmentLight;
+import minechem.todo.common.augment.AugmentRedstone;
+import minechem.todo.common.augment.AugmentTnt;
 
 public class AugmentRegistry {
 

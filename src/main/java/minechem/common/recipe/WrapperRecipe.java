@@ -11,7 +11,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.RecipeSorter;
 
 import minechem.common.Compendium;
-import minechem.common.item.ItemWrapped;
+import minechem.todo.common.item.ItemWrapped;
 
 public class WrapperRecipe implements IRecipe {
 
@@ -22,28 +22,28 @@ public class WrapperRecipe implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting crafting, World world) {
 		ItemStack wrapper = getWrapper(crafting);
-		if (wrapper == null) {
+		if (wrapper.isEmpty()) {
 			return false;
 		}
 		ItemStack item = getItem(crafting);
-		if (item == null) {
+		if (item.isEmpty()) {
 			return false;
 		}
 		return ((ItemWrapped) wrapper.getItem()).isWrappable(item);
 	}
 
 	private ItemStack getWrapper(IInventory crafting) {
-		ItemStack wrapper = null;
+		ItemStack wrapper = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
 			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack == null) {
+			if (itemStack.isEmpty()) {
 				continue;
 			}
 			if (itemStack.getItem() instanceof ItemWrapped) {
-				if (wrapper == null) {
+				if (wrapper.isEmpty()) {
 					wrapper = itemStack;
 				} else {
-					return null;
+					return ItemStack.EMPTY;
 				}
 			}
 		}
@@ -51,17 +51,17 @@ public class WrapperRecipe implements IRecipe {
 	}
 
 	private ItemStack getItem(IInventory crafting) {
-		ItemStack item = null;
+		ItemStack item = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
 			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack == null) {
+			if (itemStack.isEmpty()) {
 				continue;
 			}
 			if (!(itemStack.getItem() instanceof ItemWrapped)) {
-				if (item == null) {
+				if (item.isEmpty()) {
 					item = itemStack;
 				} else {
-					return null;
+					return ItemStack.EMPTY;
 				}
 			}
 		}
@@ -71,12 +71,12 @@ public class WrapperRecipe implements IRecipe {
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting crafting) {
 		ItemStack wrapper = getWrapper(crafting);
-		if (wrapper == null) {
-			return null;
+		if (wrapper.isEmpty()) {
+			return ItemStack.EMPTY;
 		}
 		ItemStack item = getItem(crafting);
-		if (item == null) {
-			return null;
+		if (item.isEmpty()) {
+			return ItemStack.EMPTY;
 		}
 		ItemStack result = wrapper.copy();
 		((ItemWrapped) result.getItem()).setWrappedItemStack(result, item);
@@ -90,7 +90,7 @@ public class WrapperRecipe implements IRecipe {
 
 	@Override
 	public ItemStack getRecipeOutput() {
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override

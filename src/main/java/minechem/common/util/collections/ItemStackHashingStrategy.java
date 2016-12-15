@@ -2,6 +2,8 @@ package minechem.common.util.collections;
 
 import net.minecraft.item.ItemStack;
 
+import java.util.Objects;
+
 import gnu.trove.strategy.HashingStrategy;
 
 public class ItemStackHashingStrategy implements HashingStrategy<ItemStack> {
@@ -10,7 +12,7 @@ public class ItemStackHashingStrategy implements HashingStrategy<ItemStack> {
 
 	@Override
 	public int computeHashCode(ItemStack stack) {
-		return stack.getItem().hashCode() ^ stack.getItemDamage() ^ (stack.getCount() << 16) ^ (stack.hasTagCompound() ? stack.getTagCompound().hashCode() : 0);
+		return Objects.hash(stack.getItem(), stack.getCount(), stack.getItemDamage(), stack.getTagCompound());
 	}
 
 	@Override

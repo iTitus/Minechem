@@ -1,4 +1,4 @@
-package minechem.common.augment;
+package minechem.todo.common.augment;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,10 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import minechem.api.augment.IAugmentedItem;
 import minechem.common.block.BlockLight;
 import minechem.common.registry.BlockRegistry;
+import minechem.todo.api.augment.IAugmentedItem;
 
 public class AugmentLight extends AugmentBase {
 

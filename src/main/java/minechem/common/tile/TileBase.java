@@ -39,8 +39,8 @@ public class TileBase extends TileEntity implements IWorldNameable {
 		super.markDirty();
 		sync();
 	}
-
-	public boolean canInteractWith(EntityPlayer player) {
+	
+	public boolean isUsableByPlayer(EntityPlayer player) {
 		return !isInvalid() && player.getDistanceSqToCenter(pos) <= 64;
 	}
 

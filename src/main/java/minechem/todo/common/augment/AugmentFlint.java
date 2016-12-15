@@ -1,4 +1,4 @@
-package minechem.common.augment;
+package minechem.todo.common.augment;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

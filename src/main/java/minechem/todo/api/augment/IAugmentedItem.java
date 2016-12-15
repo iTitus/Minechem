@@ -1,4 +1,4 @@
-package minechem.api.augment;
+package minechem.todo.api.augment;
 
 import java.util.Map;
 
@@ -33,7 +33,7 @@ public interface IAugmentedItem {
 	boolean removeAugment(ItemStack item, IAugment augment);
 
 	/**
-	 * Set {@link minechem.api.augment.IAugment} on Item
+	 * Set {@link minechem.todo.api.augment.IAugment} on Item
 	 *
 	 * @param item        ItemStack to add augment to
 	 * @param augmentItem Augment to add

@@ -9,10 +9,9 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.RecipeSorter;
-
-import minechem.api.augment.IAugmentedItem;
 import minechem.common.Compendium;
 import minechem.common.registry.AugmentRegistry;
+import minechem.todo.api.augment.IAugmentedItem;
 
 public class AugmentRecipe implements IRecipe {
 
@@ -23,28 +22,28 @@ public class AugmentRecipe implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting crafting, World world) {
 		ItemStack augmented = getAugmentable(crafting);
-		if (augmented == null) {
+		if (augmented.isEmpty()) {
 			return false;
 		}
-		ItemStack augmentItem = getItem(crafting);
-		if (augmentItem == null) {
+		ItemStack augmentStack = getItem(crafting);
+		if (augmentStack.isEmpty()) {
 			return false;
 		}
-		return ((IAugmentedItem) augmented.getItem()).canHaveAugment(augmented, AugmentRegistry.getAugment(augmentItem));
+		return ((IAugmentedItem) augmented.getItem()).canHaveAugment(augmented, AugmentRegistry.getAugment(augmentStack));
 	}
 
 	private ItemStack getAugmentable(IInventory crafting) {
-		ItemStack wrapper = null;
+		ItemStack wrapper = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
 			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack == null) {
+			if (itemStack.isEmpty()) {
 				continue;
 			}
 			if (itemStack.getItem() instanceof IAugmentedItem) {
-				if (wrapper == null) {
+				if (wrapper.isEmpty()) {
 					wrapper = itemStack;
 				} else {
-					return null;
+					return ItemStack.EMPTY;
 				}
 			}
 		}
@@ -52,17 +51,17 @@ public class AugmentRecipe implements IRecipe {
 	}
 
 	private ItemStack getItem(IInventory crafting) {
-		ItemStack item = null;
+		ItemStack item = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
 			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack == null) {
+			if (itemStack.isEmpty()) {
 				continue;
 			}
 			if (AugmentRegistry.getAugment(itemStack) != null) {
-				if (item == null) {
+				if (item.isEmpty()) {
 					item = itemStack;
 				} else {
-					return null;
+					return ItemStack.EMPTY;
 				}
 			}
 		}
@@ -72,12 +71,12 @@ public class AugmentRecipe implements IRecipe {
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting crafting) {
 		ItemStack augment = getAugmentable(crafting);
-		if (augment == null) {
-			return null;
+		if (augment.isEmpty()) {
+			return ItemStack.EMPTY;
 		}
 		ItemStack item = getItem(crafting);
-		if (item == null) {
-			return null;
+		if (item.isEmpty()) {
+			return ItemStack.EMPTY;
 		}
 		ItemStack result = augment.copy();
 		((IAugmentedItem) result.getItem()).setAugment(result, item);
@@ -91,7 +90,7 @@ public class AugmentRecipe implements IRecipe {
 
 	@Override
 	public ItemStack getRecipeOutput() {
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override

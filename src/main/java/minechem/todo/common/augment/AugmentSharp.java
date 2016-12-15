@@ -1,7 +1,8 @@
-package minechem.common.augment;
+package minechem.todo.common.augment;
 
 import com.google.common.collect.Multimap;
 
+import minechem.todo.common.item.ItemAugmented;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -11,8 +12,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import minechem.common.item.ItemAugmented;
 
 public class AugmentSharp extends AugmentBase {
 

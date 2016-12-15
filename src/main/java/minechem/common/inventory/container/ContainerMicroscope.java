@@ -11,7 +11,7 @@ public class ContainerMicroscope extends ContainerBase<TileMicroscope> {
 	public ContainerMicroscope(EntityPlayer player, TileMicroscope tile) {
 		super(player, tile);
 		addPlayerInventory(8, 84);
-		addSlotToContainer(new SlotItemHandler(tile.getItemStackHandler(), 0, 122, 35));
+		addSlotToContainer(new SlotItemHandler(tile.getStackHandler(), 0, 122, 35));
 	}
 
 }

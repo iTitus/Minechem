@@ -1,4 +1,4 @@
-package minechem.common.augment;
+package minechem.todo.common.augment;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

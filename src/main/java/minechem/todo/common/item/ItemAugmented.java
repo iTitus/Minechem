@@ -1,4 +1,4 @@
-package minechem.common.item;
+package minechem.todo.common.item;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +30,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import minechem.api.augment.IAugment;
-import minechem.api.augment.IAugmentedItem;
 import minechem.common.Compendium;
+import minechem.common.item.IOverlay;
 import minechem.common.registry.AugmentRegistry;
 import minechem.common.util.LocalizationHelper;
+import minechem.todo.api.augment.IAugment;
+import minechem.todo.api.augment.IAugmentedItem;
 
 public class ItemAugmented extends ItemWrapped implements IAugmentedItem, IOverlay {
 

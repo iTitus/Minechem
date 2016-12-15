@@ -1,4 +1,4 @@
-package minechem.common.augment;
+package minechem.todo.common.augment;
 
 import java.util.Random;
 
@@ -23,11 +23,10 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-
-import minechem.api.augment.IAugment;
-import minechem.api.augment.IAugmentItem;
 import minechem.common.Compendium;
 import minechem.common.util.LocalizationHelper;
+import minechem.todo.api.augment.IAugment;
+import minechem.todo.api.augment.IAugmentItem;
 
 public abstract class AugmentBase implements IAugment {
 
@@ -73,13 +72,13 @@ public abstract class AugmentBase implements IAugment {
 
 	@Override
 	public int consumeAugment(ItemStack stack, int level) {
-		NBTTagCompound augment = stack.getTagCompound().getCompoundTag(this.getKey());
-		ItemStack augmentItem = new ItemStack(augment.getCompoundTag(Compendium.NBTTags.item));
-		if (augmentItem == null || augmentItem.getItem() == null) {
+		NBTTagCompound augmentTag = stack.getTagCompound().getCompoundTag(this.getKey());
+		ItemStack augmentStack = new ItemStack(augmentTag.getCompoundTag(Compendium.NBTTags.item));
+		if (augmentStack.isEmpty()) {
 			return -1;
 		}
-		int discharged = dischargeAugment(augmentItem, level, true);
-		augment.setTag(Compendium.NBTTags.item, augmentItem.writeToNBT(new NBTTagCompound()));
+		int discharged = dischargeAugment(augmentStack, level, true);
+		augmentTag.setTag(Compendium.NBTTags.item, augmentStack.writeToNBT(new NBTTagCompound()));
 		return discharged;
 	}
 
