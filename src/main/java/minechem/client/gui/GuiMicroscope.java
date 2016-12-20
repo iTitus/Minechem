@@ -9,6 +9,12 @@ public class GuiMicroscope extends GuiBase<TileMicroscope, ContainerMicroscope> 
 
 	public GuiMicroscope(ContainerMicroscope container) {
 		super(container, 176, 166, Compendium.Resource.GUI.opticalMicroscope);
+		
+	}
+	
+	@Override
+	public void initGui() {
+		super.initGui();
 		addWidget(new WidgetMicroscope(13, 16, this));
 	}
 

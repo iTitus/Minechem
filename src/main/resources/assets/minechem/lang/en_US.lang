@@ -15,6 +15,9 @@ gui.journal.writtenBy=Written By
 gui.journal.index=Index
 
 container.minechem:optical_microscope.name=Optical Microscope
+container.minechem:centrifuge.name=Centrifuge
+container.minechem:electric_crucible.name=Electric Crucible
+container.minechem:electrolysis.name=Electrolysis Apparatus
 
 config.debugMode=Turns on extra logging printouts
 config.debugMode.tooltip=Debug Mode

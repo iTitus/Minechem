@@ -1,11 +1,11 @@
 package minechem.common.tile;
 
-import minechem.common.Compendium;
+import minechem.common.registry.BlockRegistry;
 
 public class TileCentrifuge extends TileInventory {
 
 	public TileCentrifuge() {
-		super(Compendium.Naming.centrifuge, 2);
+		super(BlockRegistry.centrifuge.getRegistryName().toString(), 2);
 	}
 
 }

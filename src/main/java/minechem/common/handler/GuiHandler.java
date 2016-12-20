@@ -7,10 +7,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import net.minecraftforge.fml.common.network.IGuiHandler;
-
+import minechem.client.gui.GuiCentrifuge;
+import minechem.client.gui.GuiCrucible;
+import minechem.client.gui.GuiElectrolysis;
 import minechem.client.gui.GuiJournal;
 import minechem.client.gui.GuiMicroscope;
 import minechem.common.Compendium;
+import minechem.common.inventory.container.ContainerCentrifuge;
+import minechem.common.inventory.container.ContainerCrucible;
+import minechem.common.inventory.container.ContainerElectrolysis;
 import minechem.common.inventory.container.ContainerMicroscope;
 import minechem.common.item.ItemJournal;
 import minechem.common.tile.TileCentrifuge;
@@ -46,7 +51,7 @@ public class GuiHandler implements IGuiHandler {
 				tileEntity = world.getTileEntity(pos);
 				if (tileEntity != null) {
 					if (tileEntity instanceof TileCentrifuge) {
-						//return new GuiCentrifuge(new ContainerCentrifuge(player, (TileCentrifuge) tileEntity));
+						return new GuiCentrifuge(new ContainerCentrifuge(player, (TileCentrifuge) tileEntity));
 					}
 				}
 				break;
@@ -54,7 +59,7 @@ public class GuiHandler implements IGuiHandler {
 				tileEntity = world.getTileEntity(pos);
 				if (tileEntity != null) {
 					if (tileEntity instanceof TileCrucible) {
-						//return new GuiCrucible(new ContainerCrucible(player, (TileCrucible) tileEntity));
+						return new GuiCrucible(new ContainerCrucible(player, (TileCrucible) tileEntity));
 					}
 				}
 				break;
@@ -62,7 +67,7 @@ public class GuiHandler implements IGuiHandler {
 				tileEntity = world.getTileEntity(pos);
 				if (tileEntity != null) {
 					if (tileEntity instanceof TileElectrolysis) {
-						//return new GuiElectrolysis(new ContainerElectrolysis(player, (TileElectrolysis) tileEntity));
+						return new GuiElectrolysis(new ContainerElectrolysis(player, (TileElectrolysis) tileEntity));
 					}
 				}
 				break;
@@ -88,7 +93,7 @@ public class GuiHandler implements IGuiHandler {
 				tileEntity = world.getTileEntity(pos);
 				if (tileEntity != null) {
 					if (tileEntity instanceof TileCentrifuge) {
-						//return new ContainerCentrifuge(player, (TileCentrifuge) tileEntity);
+						return new ContainerCentrifuge(player, (TileCentrifuge) tileEntity);
 					}
 				}
 				break;
@@ -96,7 +101,7 @@ public class GuiHandler implements IGuiHandler {
 				tileEntity = world.getTileEntity(pos);
 				if (tileEntity != null) {
 					if (tileEntity instanceof TileCrucible) {
-						//return new ContainerCrucible(player, (TileCrucible) tileEntity);
+						return new ContainerCrucible(player, (TileCrucible) tileEntity);
 					}
 				}
 				break;
@@ -104,7 +109,7 @@ public class GuiHandler implements IGuiHandler {
 				tileEntity = world.getTileEntity(pos);
 				if (tileEntity != null) {
 					if (tileEntity instanceof TileElectrolysis) {
-						//return new ContainerElectrolysis(player, (TileElectrolysis) tileEntity);
+						return new ContainerElectrolysis(player, (TileElectrolysis) tileEntity);
 					}
 				}
 				break;

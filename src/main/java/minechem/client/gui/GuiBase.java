@@ -42,6 +42,11 @@ public class GuiBase<T extends TileBase, C extends ContainerBase<T>> extends Gui
 	public void bindTexture(ResourceLocation texture) {
 		mc.getTextureManager().bindTexture(texture);
 	}
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+	}
 
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		String s = getTile().getDisplayName().getUnformattedText();

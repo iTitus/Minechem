@@ -1,7 +1,7 @@
 package minechem.common.tile;
 
-import minechem.common.Compendium;
 import minechem.common.item.ItemChemical;
+import minechem.common.registry.BlockRegistry;
 
 //TODO: Add fluid capability
 public class TileElectrolysis extends TileFluid {
@@ -12,7 +12,7 @@ public class TileElectrolysis extends TileFluid {
 //	private boolean rightTube;
 
 	public TileElectrolysis() {
-		super(Compendium.Naming.electrolysis, 2);
+		super(BlockRegistry.electrolysis.getRegistryName().toString(), 2);
 	}
 
 //	public byte addItem(ItemStack chemicalItemStack) {

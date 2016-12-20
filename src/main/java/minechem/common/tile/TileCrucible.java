@@ -1,11 +1,11 @@
 package minechem.common.tile;
 
-import minechem.common.Compendium;
+import minechem.common.registry.BlockRegistry;
 
 public class TileCrucible extends TileInventory {
 
 	public TileCrucible() {
-		super(Compendium.Naming.electricCrucible, 2);
+		super(BlockRegistry.electricCrucible.getRegistryName().toString(), 2);
 	}
 
 }
