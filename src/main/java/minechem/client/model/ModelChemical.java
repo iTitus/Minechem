@@ -27,6 +27,7 @@ import minechem.common.chemical.ChemicalBase;
 import minechem.common.chemical.Element;
 import minechem.common.item.ItemChemical;
 
+//TODO: Make it work
 public class ModelChemical implements IPerspectiveAwareModel {
 
 	private final IPerspectiveAwareModel baseBakedModel;
@@ -61,7 +62,7 @@ public class ModelChemical implements IPerspectiveAwareModel {
 
 		builder.addAll(baseBakedModel.getQuads(state, side, rand));
 
-		// FIXME: Add element text back
+		// FIXME: Add element text
 //		if (cachedFontQuads == null) {
 //			SimpleModelFontRenderer fontRenderer = ClientProxy.modelFontRenderer;
 //			fontRenderer.drawString(element.shortName, 0, 0, -1);

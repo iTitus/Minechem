@@ -31,7 +31,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import minechem.client.font.SimpleModelFontRenderer;
 import minechem.client.handler.ClientEventHandler;
 import minechem.client.render.tile.TESRCentrifuge;
 import minechem.client.render.tile.TESRCrucible;
@@ -52,8 +51,6 @@ import repackage.net.afterlifelochie.fontbox.font.FontException;
 import repackage.net.afterlifelochie.fontbox.font.GLFont;
 
 public class ClientProxy extends CommonProxy {
-
-	public static SimpleModelFontRenderer modelFontRenderer;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
@@ -136,22 +133,7 @@ public class ClientProxy extends CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
 
-		Matrix4f m = new Matrix4f();
-		m.m20 = 1f / 128f;
-		m.m01 = m.m12 = -m.m20;
-		m.m33 = 1;
-		m.setTranslation(new Vector3f(1, 1, 0));
-		Minecraft mc = Minecraft.getMinecraft();
-		modelFontRenderer = new SimpleModelFontRenderer(mc.gameSettings, new ResourceLocation("minecraft", "textures/font/ascii.png"), mc.getTextureManager(), false, m, DefaultVertexFormats.ITEM) {
-
-			@Override
-			protected float renderUnicodeChar(char c, boolean italic) {
-				return super.renderDefaultChar(' ', italic);
-			}
-		};
-		((IReloadableResourceManager) mc.getResourceManager()).registerReloadListener(modelFontRenderer);
-
-		mc.getItemColors().registerItemColorHandler(new IItemColor() {
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 
 			@Override
 			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
@@ -177,12 +159,13 @@ public class ClientProxy extends CommonProxy {
 
 	@SubscribeEvent
 	public void onModelBake(ModelBakeEvent event) {
-		for (Form form : Form.values()) {
-			ModelResourceLocation modResLoc = new ModelResourceLocation(ItemRegistry.chemical.getRegistryName().toString() + "/" + form.toString() + "_element", "inventory");
-			IBakedModel baseBakedModel = event.getModelRegistry().getObject(modResLoc);
-			//TODO: Fix font rendering
-			//event.getModelRegistry().putObject(modResLoc, new ChemicalItemBakedModel((IPerspectiveAwareModel) baseBakedModel));
-		}
+		//TODO: Add font rendering for elements
+//		for (Form form : Form.values()) {
+//			ModelResourceLocation modResLoc = new ModelResourceLocation(ItemRegistry.chemical.getRegistryName().toString() + "/" + form.toString() + "_element", "inventory");
+//			IBakedModel baseBakedModel = event.getModelRegistry().getObject(modResLoc);
+//			
+//			//event.getModelRegistry().putObject(modResLoc, new ChemicalItemBakedModel((IPerspectiveAwareModel) baseBakedModel));
+//		}
 
 		//TODO: Add renderer for augmented items
 	}
