@@ -14,6 +14,15 @@ import minechem.common.proxy.CommonProxy;
 @Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, guiFactory = "minechem.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.11,)", dependencies = "required-after:forge@[13.19.1.2189,)")
 public class Minechem {
 
+	//TODO: 1. 1.11 ItemStack fixes (@Nullable etc.)
+	//TODO: 2. TESR->JSON models
+	//TODO: 3. Refractor Augmented Items
+	//TODO: 4. More rendering fixes: achievement background page (was ASM), element names on items
+	
+	//TODO: 5. New features and content, in cooperation with jakimfett
+	
+	//TODO: 6. Compat
+	
 	@Mod.Instance
 	public static Minechem instance;
 
