@@ -32,10 +32,10 @@ public class GuiHandler implements IGuiHandler {
 		switch (ID) {
 			case Compendium.Gui.JOURNAL_ID:
 				ItemStack stack = player.getHeldItemMainhand();
-				if (stack == null || !(stack.getItem() instanceof ItemJournal)) {
+				if (!(stack.getItem() instanceof ItemJournal)) {
 					stack = player.getHeldItemOffhand();
 				}
-				if (stack != null && stack.getItem() instanceof ItemJournal) {
+				if (stack.getItem() instanceof ItemJournal) {
 					return new GuiJournal(player, ItemJournal.getKnowledgeKeys(stack), ItemJournal.getAuthors(stack));
 				}
 				break;

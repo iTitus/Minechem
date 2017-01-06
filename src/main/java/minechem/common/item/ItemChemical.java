@@ -25,7 +25,7 @@ public class ItemChemical extends ItemBase {
 	}
 
 	public static ChemicalBase getChemicalBase(ItemStack stack) {
-		return stack != null && stack.getItem() instanceof ItemChemical && stack.hasTagCompound() ? ChemicalBase.readFromNBT(stack.getTagCompound()) : null;
+		return !stack.isEmpty() && stack.getItem() instanceof ItemChemical && stack.hasTagCompound() ? ChemicalBase.readFromNBT(stack.getTagCompound()) : null;
 	}
 
 	public static ItemStack getItemStackForChemical(ChemicalBase chemicalBase) {
@@ -65,7 +65,7 @@ public class ItemChemical extends ItemBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-		ItemStack stack = new ItemStack(this);
+		ItemStack stack = new ItemStack(item);
 		if (tab != CreativeTabRegistry.TAB_CHEMICALS) {
 			subItems.add(stack);
 		}

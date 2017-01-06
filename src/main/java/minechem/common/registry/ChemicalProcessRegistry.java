@@ -94,11 +94,11 @@ public class ChemicalProcessRegistry {
 	/**
 	 * Add a {@link minechem.common.chemical.process.ChemicalProcess} to an {@link net.minecraft.item.ItemStack}
 	 *
-	 * @param itemStack the itemStack
+	 * @param stack the itemStack
 	 * @param process   the process
 	 */
-	public void addItemProcess(ItemStack itemStack, ChemicalProcess process) {
-		Map<ChemicalProcessType, Set<ChemicalProcess>> chemicalTypes = itemProcessMap.get(itemStack);
+	public void addItemProcess(ItemStack stack, ChemicalProcess process) {
+		Map<ChemicalProcessType, Set<ChemicalProcess>> chemicalTypes = itemProcessMap.get(stack);
 		if (chemicalTypes == null) {
 			chemicalTypes = new HashMap<ChemicalProcessType, Set<ChemicalProcess>>();
 		}
@@ -108,22 +108,22 @@ public class ChemicalProcessRegistry {
 		}
 		processes.add(process);
 		chemicalTypes.put(process.getType(), processes);
-		itemProcessMap.put(itemStack, chemicalTypes);
+		itemProcessMap.put(stack, chemicalTypes);
 	}
 
 	/**
 	 * Get the output of given {@link net.minecraft.item.ItemStack} using given {@link minechem.common.chemical.process.ChemicalProcessType} and the given level
 	 *
-	 * @param itemStack   the input ItemStack
+	 * @param stack   the input ItemStack
 	 * @param processType the ChemicalProcessType
 	 * @param level       the level of the process
 	 * @return the output in an array
 	 */
-	public ChemicalBase[] getOutput(ItemStack itemStack, ChemicalProcessType processType, int level) {
-		Map<ChemicalProcessType, Set<ChemicalProcess>> chemicalTypes = itemProcessMap.get(itemStack);
-		if (itemStack == null) {
+	public ChemicalBase[] getOutput(ItemStack stack, ChemicalProcessType processType, int level) {
+		if (stack.isEmpty()) {
 			return ChemicalProcess.empty;
 		}
+		Map<ChemicalProcessType, Set<ChemicalProcess>> chemicalTypes = itemProcessMap.get(stack);
 		Set<ChemicalProcess> processes = chemicalTypes.get(processType);
 		if (processType == null) {
 			return ChemicalProcess.empty;

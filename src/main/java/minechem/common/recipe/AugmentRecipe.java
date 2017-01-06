@@ -35,13 +35,13 @@ public class AugmentRecipe implements IRecipe {
 	private ItemStack getAugmentable(IInventory crafting) {
 		ItemStack wrapper = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
-			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack.isEmpty()) {
+			ItemStack stack = crafting.getStackInSlot(i);
+			if (stack.isEmpty()) {
 				continue;
 			}
-			if (itemStack.getItem() instanceof IAugmentedItem) {
+			if (stack.getItem() instanceof IAugmentedItem) {
 				if (wrapper.isEmpty()) {
-					wrapper = itemStack;
+					wrapper = stack;
 				} else {
 					return ItemStack.EMPTY;
 				}
@@ -53,13 +53,13 @@ public class AugmentRecipe implements IRecipe {
 	private ItemStack getItem(IInventory crafting) {
 		ItemStack item = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
-			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack.isEmpty()) {
+			ItemStack stack = crafting.getStackInSlot(i);
+			if (stack.isEmpty()) {
 				continue;
 			}
-			if (AugmentRegistry.getAugment(itemStack) != null) {
+			if (AugmentRegistry.getAugment(stack) != null) {
 				if (item.isEmpty()) {
-					item = itemStack;
+					item = stack;
 				} else {
 					return ItemStack.EMPTY;
 				}

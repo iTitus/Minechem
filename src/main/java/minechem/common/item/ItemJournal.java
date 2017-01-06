@@ -37,12 +37,12 @@ public class ItemJournal extends ItemBase {
 	/**
 	 * Gets a list of authors
 	 *
-	 * @param itemStack the journal Stack
+	 * @param stack the journal Stack
 	 * @return an array of authors can be empty
 	 */
-	public static String[] getAuthors(ItemStack itemStack) {
-		if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("authors", Constants.NBT.TAG_LIST)) {
-			NBTTagList authorsTag = itemStack.getTagCompound().getTagList("authors", Constants.NBT.TAG_STRING);
+	public static String[] getAuthors(ItemStack stack) {
+		if (!stack.isEmpty() && stack.hasTagCompound() && stack.getTagCompound().hasKey("authors", Constants.NBT.TAG_LIST)) {
+			NBTTagList authorsTag = stack.getTagCompound().getTagList("authors", Constants.NBT.TAG_STRING);
 			String[] authors = new String[authorsTag.tagCount()];
 			for (int i = 0; i < authorsTag.tagCount(); i++) {
 				authors[i] = authorsTag.getStringTagAt(i);
@@ -52,35 +52,15 @@ public class ItemJournal extends ItemBase {
 		return new String[0];
 	}
 
-	// @Override
-	// @SideOnly(Side.CLIENT)
-	// public ItemStack onItemRightClick(ItemStack stack, World world,
-	// EntityPlayer player) {
-	// if (player.isSneaking()) {
-	// if (!Config.playerPrivateKnowledge) {
-	// writeKnowledge(stack, player, world.isRemote);
-	// }
-	// } else {
-	// if (world.isRemote) {
-	// Minecraft.getMinecraft()
-	// .displayGuiScreen(new JournalGUI(player, getKnowledgeKeys(stack),
-	// getAuthors(stack)));
-	// }
-	// }
-	// AchievementHelper.giveAchievement(player, this.getUnlocalizedName(),
-	// world.isRemote);
-	// return stack;
-	// }
-
 	/**
 	 * Gets a list of knowledgeKeys
 	 *
-	 * @param itemStack the journal Stack
+	 * @param stack the journal Stack
 	 * @return an array of knowledgeKeys can be empty
 	 */
-	public static String[] getKnowledgeKeys(ItemStack itemStack) {
-		if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("research", Constants.NBT.TAG_LIST)) {
-			NBTTagList authorsTag = itemStack.getTagCompound().getTagList("research", Constants.NBT.TAG_STRING);
+	public static String[] getKnowledgeKeys(ItemStack stack) {
+		if (!stack.isEmpty() && stack.hasTagCompound() && stack.getTagCompound().hasKey("research", Constants.NBT.TAG_LIST)) {
+			NBTTagList authorsTag = stack.getTagCompound().getTagList("research", Constants.NBT.TAG_STRING);
 			String[] knowledgeKeys = new String[authorsTag.tagCount()];
 			for (int i = 0; i < authorsTag.tagCount(); i++) {
 				knowledgeKeys[i] = authorsTag.getStringTagAt(i);
@@ -93,34 +73,36 @@ public class ItemJournal extends ItemBase {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (player.isSneaking()) {
-			if (!world.isRemote && !Config.playerPrivateKnowledge) {
-				writeKnowledge(stack, player);
+		if (!stack.isEmpty()) {
+			if (player.isSneaking()) {
+				if (!world.isRemote && !Config.playerPrivateKnowledge) {
+					writeKnowledge(stack, player);
+				}
+			} else {
+				BlockPos pos = player.getPosition();
+				player.openGui(Minechem.instance, Compendium.Gui.JOURNAL_ID, world, pos.getX(), pos.getY(), pos.getZ());
 			}
-		} else {
-			BlockPos pos = player.getPosition();
-			player.openGui(Minechem.instance, Compendium.Gui.JOURNAL_ID, world, pos.getX(), pos.getY(), pos.getZ());
+			player.addStat(AchievementRegistry.getInstance().getAchievement(getUnlocalizedName(stack)));
+			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 		}
-		player.addStat(AchievementRegistry.getInstance().getAchievement(getUnlocalizedName(stack)));
-
-		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+		return ActionResult.newResult(EnumActionResult.PASS, stack);
 	}
 
 	/**
 	 * Writes knowledge to the journal
 	 *
-	 * @param itemStack the journal stack
+	 * @param stack the journal stack
 	 * @param player    the player that writes the knowledge
 	 * @param isRemote  is the world remote on true it will send a
 	 *                  {@link minechem.common.network.JournalMessage} to the server
 	 */
-	public void writeKnowledge(ItemStack itemStack, EntityPlayer player) {
+	public void writeKnowledge(ItemStack stack, EntityPlayer player) {
 		// if (isRemote) {
 		// MessageHandler.INSTANCE.sendToServer(new JournalMessage(player));
 		// return;
 		// }
 
-		NBTTagCompound tagCompound = itemStack.getTagCompound();
+		NBTTagCompound tagCompound = stack.getTagCompound();
 		Set<String> playerKnowledge = ResearchRegistry.getInstance().getResearchFor(player);
 		if (playerKnowledge == null) {
 			return;
@@ -154,7 +136,7 @@ public class ItemJournal extends ItemBase {
 			authorsTag.appendTag(new NBTTagString(author));
 		}
 		tagCompound.setTag("authors", authorsTag);
-		itemStack.setTagCompound(tagCompound);
+		stack.setTagCompound(tagCompound);
 	}
 
 	@Override

@@ -19,7 +19,6 @@ import minechem.common.util.PeriodicTableHelper;
 
 public class AchievementRegistry {
 	private static AchievementRegistry instance;
-	private static Achievement nullAchievement = null;
 	public AchievementPage elementsPage, minechemPage;
 	private Map<Element, Achievement> elementsAchievementMap;
 	private Map<String, Achievement> minechemAchievementMap;
@@ -104,15 +103,15 @@ public class AchievementRegistry {
 	 * @return the added {@link net.minecraft.stats.Achievement}
 	 */
 	public Achievement addAchievement(String name, int row, int column, ItemStack displayItemStack) {
-		return addAchievement(name, row, column, displayItemStack, nullAchievement, false);
+		return addAchievement(name, row, column, displayItemStack, null, false);
 	}
 
 	public Achievement addAchievement(String name, int row, int column, Item displayItem) {
-		return addAchievement(name, row, column, new ItemStack(displayItem), nullAchievement, false);
+		return addAchievement(name, row, column, new ItemStack(displayItem), null, false);
 	}
 
 	public Achievement addAchievement(String name, int row, int column, Block displayBlock) {
-		return addAchievement(name, row, column, new ItemStack(displayBlock), nullAchievement, false);
+		return addAchievement(name, row, column, new ItemStack(displayBlock), null, false);
 	}
 
 	/**

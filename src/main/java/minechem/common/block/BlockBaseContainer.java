@@ -14,8 +14,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -85,25 +87,12 @@ public abstract class BlockBaseContainer extends BlockBase implements ITileEntit
 
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		TileEntity tileEntity = world.getTileEntity(pos);
-		if (tileEntity != null) {
-			List<ItemStack> droppedStacks = Lists.newArrayList();
-
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile != null) {
 			if (dropInventory()) {
-				if (tileEntity instanceof IInventory) {
-					IInventory inventory = (IInventory) tileEntity;
-					for (int i = 0; i < inventory.getSizeInventory(); i++) {
-						ItemStack stack = inventory.getStackInSlot(i);
-						if (stack != null) {
-							droppedStacks.add(stack);
-						}
-					}
+				if (tile instanceof IInventory) {
+					InventoryHelper.dropInventoryItems(world, pos, (IInventory) tile);
 				}
-			}
-
-			addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
-			for (ItemStack stack : droppedStacks) {
-				ItemHelper.throwItemStack(world, stack, pos.getX(), pos.getY(), pos.getZ());
 			}
 		}
 		super.breakBlock(world, pos, state);
@@ -117,18 +106,8 @@ public abstract class BlockBaseContainer extends BlockBase implements ITileEntit
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-	}
-
-	/**
-	 * Define what stacks get dropped when the block is broken, defaults to
-	 * nothing
-	 *
-	 * @param tileEntity
-	 * @param itemStacks
-	 */
-	public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, List<ItemStack> itemStacks) {
 	}
 
 	/**

@@ -99,7 +99,7 @@ public class ElementAchievement extends Achievement implements IAchievementRende
 	}
 
 	@Override
-	public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top) {
+	public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack stack, int left, int top) {
 		if (regularFont == null) {
 			regularFont = new Font(fontRenderer);
 		}

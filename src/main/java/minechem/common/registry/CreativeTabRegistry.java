@@ -38,7 +38,7 @@ public class CreativeTabRegistry {
 		}
 
 		public ItemStack getStack() {
-			return stack != null && stack.getItem() != null ? stack : null;
+			return stack;
 		}
 
 		public void setStack(ItemStack stack) {

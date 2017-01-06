@@ -54,19 +54,19 @@ public class ContainerBase<T extends TileBase> extends Container {
 		Slot slot = (Slot) inventorySlots.get(slotNumber);
 		ItemStack stack = slot.getStack();
 
-		if (stack != null && slot.getHasStack()) {
+		if (!stack.isEmpty()) {
 			if (slotNumber < player.inventory.mainInventory.size()) {
 				if (!mergeItemStack(stack, player.inventory.mainInventory.size(), inventorySlots.size(), true)) {
-					return null;
+					return ItemStack.EMPTY;
 				}
 			} else {
 				if (!mergeItemStack(stack, 0, player.inventory.mainInventory.size(), true)) {
-					return null;
+					return ItemStack.EMPTY;
 				}
 			}
 
-			if (stack.getCount() == 0) {
-				slot.putStack((ItemStack) null);
+			if (stack.getCount() <= 0) {
+				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();
 			}

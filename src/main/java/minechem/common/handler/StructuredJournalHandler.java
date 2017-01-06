@@ -159,7 +159,8 @@ public class StructuredJournalHandler {
 				}
 				return new JournalImage(unlock, imageDir, width, height, align, floatMode);
 			} else {
-				ItemStack stack = null;
+				//TODO: Check if this works
+				ItemStack stack = ItemStack.EMPTY;
 				String itemName = object.has("item") ? object.get("item").getAsString() : (object.has("block") ? object.get("block").getAsString() : null);
 				int meta = object.has("damage") ? object.get("damage").getAsInt() : 0;
 				int stackSize = 1;
@@ -206,7 +207,7 @@ public class StructuredJournalHandler {
 				if (object.has("chemical")) {
 					stack = Jenkins.getStack(object.get("chemical").getAsString());
 				}
-				if (stack != null) {
+				if (!stack.isEmpty()) {
 					/*if (tagCompound != null) {
 						stack.setTagCompound(tagCompound);
 					}*/

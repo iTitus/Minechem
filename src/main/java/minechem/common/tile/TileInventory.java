@@ -60,7 +60,7 @@ public class TileInventory extends TileEnergy implements ISidedInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		return stackHandler.getStackInSlot(index);
+		return index >= 0 && index < getSizeInventory() ? stackHandler.getStackInSlot(index) : ItemStack.EMPTY;
 	}
 
 	@Override

@@ -6,6 +6,6 @@ import net.minecraft.item.ItemStack;
 
 public interface IOverlay {
 
-	void renderOverlay(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top, float z);
+	void renderOverlay(FontRenderer fontRenderer, TextureManager textureManager, ItemStack stack, int left, int top, float z);
 
 }

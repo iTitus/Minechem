@@ -34,7 +34,7 @@ public class AugmentRegistry {
 	}
 
 	public static IAugment getAugment(ItemStack augmentItem) {
-		if (augmentItem == null) {
+		if (augmentItem.isEmpty()) {
 			return null;
 		}
 		Item item = augmentItem.getItem();

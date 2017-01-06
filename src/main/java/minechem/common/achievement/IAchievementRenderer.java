@@ -29,9 +29,9 @@ public interface IAchievementRenderer {
 	 *
 	 * @param fontRenderer
 	 * @param textureManager
-	 * @param itemStack
+	 * @param stack
 	 * @param left           left of the achievement icon
 	 * @param top            top of the achievement icon
 	 */
-	public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top);
+	public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack stack, int left, int top);
 }

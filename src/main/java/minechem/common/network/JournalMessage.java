@@ -50,10 +50,10 @@ public class JournalMessage extends BaseMessage implements IMessageHandler<Journ
 		EntityPlayer player = getServerPlayer(ctx);
 		if (player.getUniqueID().equals(UUID.fromString(message.uuid))) {
 			ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
-			if (stack == null || !(stack.getItem() instanceof ItemJournal)) {
+			if (!(stack.getItem() instanceof ItemJournal)) {
 				stack = player.getHeldItem(EnumHand.OFF_HAND);
 			}
-			if (stack != null && stack.getItem() instanceof ItemJournal) {
+			if (stack.getItem() instanceof ItemJournal) {
 				((ItemJournal) stack.getItem()).writeKnowledge(stack, player);
 			}
 		}

@@ -35,13 +35,13 @@ public class WrapperRecipe implements IRecipe {
 	private ItemStack getWrapper(IInventory crafting) {
 		ItemStack wrapper = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
-			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack.isEmpty()) {
+			ItemStack stack = crafting.getStackInSlot(i);
+			if (stack.isEmpty()) {
 				continue;
 			}
-			if (itemStack.getItem() instanceof ItemWrapped) {
+			if (stack.getItem() instanceof ItemWrapped) {
 				if (wrapper.isEmpty()) {
-					wrapper = itemStack;
+					wrapper = stack;
 				} else {
 					return ItemStack.EMPTY;
 				}
@@ -53,13 +53,13 @@ public class WrapperRecipe implements IRecipe {
 	private ItemStack getItem(IInventory crafting) {
 		ItemStack item = ItemStack.EMPTY;
 		for (int i = 0; i < crafting.getSizeInventory(); i++) {
-			ItemStack itemStack = crafting.getStackInSlot(i);
-			if (itemStack.isEmpty()) {
+			ItemStack stack = crafting.getStackInSlot(i);
+			if (stack.isEmpty()) {
 				continue;
 			}
-			if (!(itemStack.getItem() instanceof ItemWrapped)) {
+			if (!(stack.getItem() instanceof ItemWrapped)) {
 				if (item.isEmpty()) {
-					item = itemStack;
+					item = stack;
 				} else {
 					return ItemStack.EMPTY;
 				}
