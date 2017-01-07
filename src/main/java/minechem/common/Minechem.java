@@ -15,7 +15,7 @@ import minechem.common.proxy.CommonProxy;
 public class Minechem {
 
 	//TODO: 1. 1.11 ItemStack fixes (@Nullable etc.)
-	//TODO: 2. TESR->JSON models
+	//TODO: 2. TESR->JSON/OBJ models
 	//TODO: 3. Refractor Augmented Items
 	//TODO: 4. More rendering fixes: achievement background page (was ASM), element names on items
 	
