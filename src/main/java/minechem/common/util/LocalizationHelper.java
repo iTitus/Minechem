@@ -7,10 +7,6 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
-/**
- *
- *
- */
 public class LocalizationHelper {
 
 	public static String getLocalString(String key) {

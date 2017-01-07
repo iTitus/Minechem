@@ -3,8 +3,6 @@ package minechem.client.model;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -527,17 +525,6 @@ public class ModelElectrolysis extends ModelRenderable {
 		jar1m9.rotateAngleY = -3.141592F;
 		jar1m9.rotateAngleZ = 0F;
 		jar1m9.renderWithRotation(rotation);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	@Override
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
 	}
 
 	public boolean getLeftTube() {

@@ -3,7 +3,8 @@ package minechem.common.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-
+import net.minecraft.item.Item;
+import minechem.common.item.block.ItemBlockBase;
 import minechem.common.registry.CreativeTabRegistry;
 
 /**
@@ -39,6 +40,10 @@ public class BlockBase extends Block {
 
 	public String getName() {
 		return name;
+	}
+	
+	public Item getItemBlock() {
+		return new ItemBlockBase(this);
 	}
 
 }

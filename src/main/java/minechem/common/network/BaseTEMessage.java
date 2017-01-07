@@ -57,6 +57,7 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
 	 * @param ctx
 	 * @return can be null
 	 */
+	@SuppressWarnings("unchecked")
 	public T getTileEntity(BaseTEMessage<T> message, MessageContext ctx) {
 		TileEntity tileEntity = getWorld(ctx).getTileEntity(message.pos);
 		return tileEntity == null ? null : (T) tileEntity;

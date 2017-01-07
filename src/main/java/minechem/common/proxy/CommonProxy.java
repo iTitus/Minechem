@@ -23,9 +23,7 @@ import minechem.common.handler.GuiHandler;
 import minechem.common.handler.MoleculeHandler;
 import minechem.common.network.NetworkHandler;
 import minechem.common.registry.AugmentRegistry;
-import minechem.common.registry.BlockRegistry;
 import minechem.common.registry.CreativeTabRegistry;
-import minechem.common.registry.ItemRegistry;
 import minechem.common.registry.JournalRegistry;
 import minechem.common.registry.RecipeRegistry;
 import minechem.common.util.LogHelper;
@@ -42,19 +40,12 @@ public class CommonProxy {
 		LogHelper.debug("Registering Packets...");
 		NetworkHandler.init();
 
-		// Register Elements and Molecules before constructing items
+		// Register Elements and Molecules
 		LogHelper.debug("Registering Elements...");
 		ElementHandler.init();
 
 		LogHelper.debug("Registering Molecules...");
 		MoleculeHandler.init();
-
-		// Register items and blocks.
-		LogHelper.debug("Registering Items...");
-		ItemRegistry.init();
-
-		LogHelper.debug("Registering Blocks...");
-		BlockRegistry.init();
 
 		LogHelper.debug("Registering Augments...");
 		AugmentRegistry.init();

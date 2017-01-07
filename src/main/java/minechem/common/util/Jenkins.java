@@ -32,6 +32,7 @@ public class Jenkins {
 	 * @param s eg. 'H', 'H2O', 'hydrogen', 'water'
 	 * @return the element or molecule that matches given abbreviation or full name
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T extends ChemicalBase> T get(String s) {
 		ChemicalBase chemicalBase = ElementRegistry.getInstance().getElement(s);
 		if (chemicalBase == null) {

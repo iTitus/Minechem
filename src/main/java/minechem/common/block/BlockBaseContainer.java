@@ -1,9 +1,5 @@
 package minechem.common.block;
 
-import java.util.List;
-
-import com.google.common.collect.Lists;
-
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -15,16 +11,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import minechem.common.Minechem;
-import minechem.common.util.ItemHelper;
 import minechem.common.util.MathHelper;
 import minechem.common.util.ResearchHelper;
 
@@ -101,13 +96,23 @@ public abstract class BlockBaseContainer extends BlockBase implements ITileEntit
 	@Override
 	public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
 		super.eventReceived(state, world, pos, id, param);
-		TileEntity tileentity = world.getTileEntity(pos);
-		return tileentity == null ? false : tileentity.receiveClientEvent(id, param);
+		TileEntity tile = world.getTileEntity(pos);
+		return tile != null && tile.receiveClientEvent(id, param);
 	}
 
 	@Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+	
+	@Override
+	public IBlockState withRotation(IBlockState state, Rotation rotation) {
+		return state.withProperty(FACING, rotation.rotate(state.getValue(FACING)));
+	}
+	
+	@Override
+	public IBlockState withMirror(IBlockState state, Mirror mirror) {
+		return state.withRotation(mirror.toRotation(state.getValue(FACING)));
 	}
 
 	/**

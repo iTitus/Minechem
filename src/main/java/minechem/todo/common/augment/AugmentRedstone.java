@@ -33,7 +33,7 @@ public class AugmentRedstone extends AugmentBase {
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ, int level) {
 		pos = pos.offset(facing);
 		if (!world.isRemote && player.canPlayerEdit(pos, facing, stack) && world.isAirBlock(pos)) {
-			world.setBlockState(pos, BlockRegistry.redstone.getDefaultState().withProperty(BlockRedstone.POWER, levels[level]), 7);
+			world.setBlockState(pos, BlockRegistry.redstone.getDefaultState().withProperty(BlockRedstone.VALUE, levels[level]), 7);
 			return EnumActionResult.SUCCESS;
 		}
 		return EnumActionResult.FAIL;
