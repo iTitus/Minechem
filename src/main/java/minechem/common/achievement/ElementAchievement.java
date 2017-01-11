@@ -16,6 +16,7 @@ import minechem.common.Compendium;
 import minechem.common.chemical.Element;
 import minechem.common.util.ColourHelper;
 import minechem.common.util.LocalizationHelper;
+import minechem.todo.common.achievement.IAchievementRenderer;
 
 /**
  * {@link net.minecraft.stats.Achievement} wrapper for {@link minechem.common.chemical.Element}s
@@ -27,16 +28,16 @@ public class ElementAchievement extends Achievement implements IAchievementRende
 	private final static String defaultElementDescription = "achievement.minechem.element.desc";
 	private final static Achievement nullAchievement = null;
 	private static Font regularFont, smallFont;
+	
 	private final Element element;
 
 	public ElementAchievement(Element element, int row, int column) {
 		super(achievementPrefix + element.shortName, element.shortName, column, row, element.getItemStack(), nullAchievement);
 		this.element = element;
-		this.initIndependentStat();
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public String getDescription() {
 		return String.format(LocalizationHelper.getLocalString(defaultElementDescription), element.fullName);
 	}

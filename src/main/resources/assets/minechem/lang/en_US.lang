@@ -37,14 +37,16 @@ tab.patreon.linkText=Visit Patreon
 tab.patreon.headerText=Patreon
 tab.patreon.tooltip=Supporting Minechem
 
-achievement.minechem.item.minechem:journal=Start learning
-achievement.minechem.item.minechem:journal.desc=The journal is your gate to all the Minechem knowledge
-achievement.minechem.tile.minechem:optical_microscope=Looking at Things
-achievement.minechem.tile.minechem:optical_microscope.desc=Use the Microscope for the first time
-achievement.minechem.tile.minechem:electrolysis=Electrolysing things
-achievement.minechem.tile.minechem:electrolysis.desc=Use the Electrolysis Machine for the first time
-achievement.minechem.tile.minechem:electric_crucible=Melting things
-achievement.minechem.tile.minechem:electric_crucible.desc=Use the Electric Crucible for the first time
+achievement.minechem:item.minechem:journal=Start learning
+achievement.minechem:item.minechem:journal.desc=The journal is your gate to all the Minechem knowledge
+achievement.minechem:tile.minechem:optical_microscope=Looking at Things
+achievement.minechem:tile.minechem:optical_microscope.desc=Use the Microscope for the first time
+achievement.minechem:tile.minechem:electrolysis=Electrolysing things
+achievement.minechem:tile.minechem:electrolysis.desc=Use the Electrolysis Machine for the first time
+achievement.minechem:tile.minechem:electric_crucible=Melting things
+achievement.minechem:tile.minechem:electric_crucible.desc=Use the Electric Crucible for the first time
+achievement.minechem:tile.minechem:centrifuge=Rotating things
+achievement.minechem:tile.minechem:centrifuge.desc=Use the Centrifuge for the first time
 
 achievement.minechem.element=Discovered %s
 achievement.minechem.element.desc=Discover %s to unlock

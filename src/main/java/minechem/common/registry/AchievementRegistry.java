@@ -1,171 +1,71 @@
 package minechem.common.registry;
 
-import java.util.Collection;
 import java.util.Map;
-import java.util.TreeMap;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
-
-import net.minecraftforge.common.AchievementPage;
+import com.google.common.collect.Maps;
 
 import minechem.common.Compendium;
 import minechem.common.achievement.ElementAchievement;
-import minechem.common.achievement.ElementAchievementPage;
+import minechem.common.block.BlockBase;
 import minechem.common.chemical.Element;
+import minechem.common.item.ItemBase;
 import minechem.common.util.PeriodicTableHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Achievement;
+import net.minecraftforge.common.AchievementPage;
 
 public class AchievementRegistry {
-	private static AchievementRegistry instance;
-	public AchievementPage elementsPage, minechemPage;
-	private Map<Element, Achievement> elementsAchievementMap;
-	private Map<String, Achievement> minechemAchievementMap;
 
-	private AchievementRegistry() {
-		elementsAchievementMap = new TreeMap<Element, Achievement>();
-		minechemAchievementMap = new TreeMap<String, Achievement>();
-	}
+	private static Map<Object, Achievement> achievements = Maps.newHashMap();
 
-	public static AchievementRegistry getInstance() {
-		if (instance == null) {
-			instance = new AchievementRegistry();
+	public static Achievement journal, microscope, centrifuge, crucible, electrolysis;
+
+	public static void init() {
+		journal = register(0, 0, ItemRegistry.journal, null, false);
+		microscope = register(0, 3, BlockRegistry.opticalMicroscope, journal, false);
+		centrifuge = register(-2, 3, BlockRegistry.centrifuge, microscope, false);
+		crucible = register(0, 5, BlockRegistry.electricCrucible, microscope, false);
+		electrolysis = register(2, 3, BlockRegistry.electrolysis, microscope, false);
+		
+		for (Element element : ElementRegistry.getInstance().getElements()) {
+			int[] pos = PeriodicTableHelper.getPosition(element);
+			register(pos[0] - 5, pos[1] - 8, element);
 		}
-		return instance;
+		
+		AchievementPage.registerAchievementPage(new AchievementPage(Compendium.Naming.name, achievements.entrySet().stream().filter(entry -> !(entry.getKey() instanceof Element)).map(Map.Entry::getValue).toArray(Achievement[]::new)));
+		AchievementPage.registerAchievementPage(new AchievementPage("Periodic Table", achievements.entrySet().stream().filter(entry -> entry.getKey() instanceof Element).map(Map.Entry::getValue).toArray(Achievement[]::new)));
 	}
 
-	/**
-	 * Adds default achievement for an {@link minechem.common.chemical.Element}
-	 *
-	 * @param element the element to create an achievement for
-	 * @return the added {@link net.minecraft.stats.Achievement}
-	 */
-	public Achievement addAchievement(Element element) {
-		int[] position = PeriodicTableHelper.getPosition(element);
-		ElementAchievement achievement = new ElementAchievement(element, position[0] - 5, position[1] - 8);
-		elementsAchievementMap.put(element, achievement);
+	private static Achievement register(int x, int y, ItemBase item, Achievement parent, boolean isSpecial) {
+		Achievement achievement = register(Compendium.Naming.id + ":" + item.getUnlocalizedName(), x, y, new ItemStack(item), parent, isSpecial);
+		achievements.put(item, achievement);
 		return achievement;
 	}
 
-	/**
-	 * Creates and adds an {@link net.minecraft.stats.Achievement} to the {@link net.minecraftforge.common.AchievementPage} with given prerequisite {@link net.minecraft.stats.Achievement}
-	 *
-	 * @param name             the name for the achievement
-	 * @param row              the row to display
-	 * @param column           the column display
-	 * @param displayItemStack the {@link net.minecraft.item.ItemStack} to display
-	 * @param prerequisite     the prerequisite {@link net.minecraft.stats.Achievement}
-	 * @return the added {@link net.minecraft.stats.Achievement}
-	 */
-	public Achievement addAchievement(String name, int row, int column, ItemStack displayItemStack, Achievement prerequisite) {
-		return addAchievement(name, row, column, displayItemStack, prerequisite, false);
+	private static Achievement register(int x, int y, BlockBase block, Achievement parent, boolean isSpecial) {
+		Achievement achievement = register(Compendium.Naming.id + ":" + block.getUnlocalizedName(), x, y, new ItemStack(block), parent, isSpecial);
+		achievements.put(block, achievement);
+		return achievement;
 	}
 
-	public Achievement addAchievement(String name, int row, int column, Item displayItem, Achievement prerequisite) {
-		return addAchievement(name, row, column, new ItemStack(displayItem), prerequisite);
+	private static Achievement register(int x, int y, Element element) {
+		Achievement achievement = new ElementAchievement(element, x, y);
+		achievements.put(element, achievement);
+		return achievement.initIndependentStat().registerStat();
 	}
 
-	public Achievement addAchievement(String name, int row, int column, Block displayBlock, Achievement prerequisite) {
-		return addAchievement(name, row, column, new ItemStack(displayBlock), prerequisite);
-	}
-
-	/**
-	 * Creates and adds an {@link net.minecraft.stats.Achievement} to the {@link net.minecraftforge.common.AchievementPage} with given prerequisite {@link net.minecraft.stats.Achievement}
-	 *
-	 * @param name             the name for the achievement
-	 * @param row              the row to display
-	 * @param column           the column display
-	 * @param displayItemStack the {@link net.minecraft.item.ItemStack} to display
-	 * @param prerequisite     the prerequisite {@link net.minecraft.stats.Achievement}
-	 * @param isSpecial        is this a special {@link net.minecraft.stats.Achievement} ?
-	 * @return the added {@link net.minecraft.stats.Achievement}
-	 */
-	public Achievement addAchievement(String name, int row, int column, ItemStack displayItemStack, Achievement prerequisite, boolean isSpecial) {
-		String statName = Compendium.Naming.id + "." + name;
-		Achievement achievement = new Achievement("achievement." + statName, statName, column, row, displayItemStack, prerequisite);
+	private static Achievement register(String name, int x, int y, ItemStack stack, Achievement parent, boolean isSpecial) {
+		Achievement achievement = new Achievement("achievement." + name, name, x, y, stack, parent);
 		if (isSpecial) {
 			achievement.setSpecial();
 		}
-		if (prerequisite == null) {
+		if (parent == null) {
 			achievement.initIndependentStat();
 		}
-		return addAchievement(achievement);
+		return achievement.registerStat();
+	}
+	
+	public static Achievement getAchievement(Object object) {
+		return achievements.get(object);
 	}
 
-	/**
-	 * Creates and adds an {@link net.minecraft.stats.Achievement} to the {@link net.minecraftforge.common.AchievementPage}
-	 *
-	 * @param name             the name for the achievement
-	 * @param row              the row to display
-	 * @param column           the column display
-	 * @param displayItemStack the {@link net.minecraft.item.ItemStack} to display
-	 * @return the added {@link net.minecraft.stats.Achievement}
-	 */
-	public Achievement addAchievement(String name, int row, int column, ItemStack displayItemStack) {
-		return addAchievement(name, row, column, displayItemStack, null, false);
-	}
-
-	public Achievement addAchievement(String name, int row, int column, Item displayItem) {
-		return addAchievement(name, row, column, new ItemStack(displayItem), null, false);
-	}
-
-	public Achievement addAchievement(String name, int row, int column, Block displayBlock) {
-		return addAchievement(name, row, column, new ItemStack(displayBlock), null, false);
-	}
-
-	/**
-	 * Add an {@link net.minecraft.stats.Achievement} to the minechem {@link net.minecraftforge.common.AchievementPage}
-	 *
-	 * @param achievement the {@link net.minecraft.stats.Achievement} to add
-	 * @return the added {@link net.minecraft.stats.Achievement}
-	 */
-	public Achievement addAchievement(Achievement achievement) {
-		minechemAchievementMap.put(achievement.statId, achievement);
-		return achievement;
-	}
-
-	/**
-	 * Gets the achievement for a specific {@link minechem.common.chemical.Element}
-	 *
-	 * @param element the element to find an {@link net.minecraft.stats.Achievement for}
-	 * @return can be null if the {@link minechem.common.chemical.Element} has no {@link net.minecraft.stats.Achievement}
-	 */
-	public Achievement getAchievement(Element element) {
-		return elementsAchievementMap.get(element);
-	}
-
-	/**
-	 * Get a minechem {@link net.minecraft.stats.Achievement} for the given name
-	 *
-	 * @param name the name of the achievement
-	 * @return can be null if the name does not exist in the registry
-	 */
-	public Achievement getAchievement(String name) {
-		return minechemAchievementMap.get("achievement." + Compendium.Naming.id + "." + name);
-	}
-
-	/**
-	 * Registers {@link minechem.common.achievement.ElementAchievement}s to the periodic table page
-	 */
-	public void registerElementAchievements() {
-		Collection<Achievement> achievements = elementsAchievementMap.values();
-		for (Achievement achievement : achievements) {
-			achievement.registerStat();
-		}
-		elementsPage = new ElementAchievementPage("Periodic Table", achievements.toArray(new Achievement[achievements.size()]));
-		AchievementPage.registerAchievementPage(elementsPage);
-	}
-
-	/**
-	 * Registers {@link minechem.common.achievement.ElementAchievement}s to the minechem page
-	 */
-	public void registerMinechemAchievements() {
-		Collection<Achievement> achievements = minechemAchievementMap.values();
-		for (Achievement achievement : achievements) {
-			achievement.registerStat();
-		}
-		minechemPage = new AchievementPage(Compendium.Naming.name, achievements.toArray(new Achievement[achievements.size()]));
-		AchievementPage.registerAchievementPage(minechemPage);
-	}
 }

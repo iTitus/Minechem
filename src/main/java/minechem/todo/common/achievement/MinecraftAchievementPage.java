@@ -1,4 +1,4 @@
-package minechem.common.achievement;
+package minechem.todo.common.achievement;
 
 import java.util.Random;
 

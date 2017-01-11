@@ -1,4 +1,4 @@
-package minechem.common.achievement;
+package minechem.todo.common.achievement;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.stats.Achievement;
@@ -9,6 +9,7 @@ import minechem.client.util.RenderHelper;
 import minechem.common.Compendium;
 
 public class ElementAchievementPage extends AchievementPage implements IAchievementPageRenderer {
+	
 	public ElementAchievementPage(String name, Achievement... achievements) {
 		super(name, achievements);
 	}

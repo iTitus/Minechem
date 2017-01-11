@@ -1,4 +1,4 @@
-package minechem.common.network;
+package minechem.todo.common.network;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

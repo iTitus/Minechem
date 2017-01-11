@@ -82,7 +82,7 @@ public class ItemJournal extends ItemBase {
 				BlockPos pos = player.getPosition();
 				player.openGui(Minechem.instance, Compendium.Gui.JOURNAL_ID, world, pos.getX(), pos.getY(), pos.getZ());
 			}
-			player.addStat(AchievementRegistry.getInstance().getAchievement(getUnlocalizedName(stack)));
+			player.addStat(AchievementRegistry.journal);
 			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 		}
 		return ActionResult.newResult(EnumActionResult.PASS, stack);

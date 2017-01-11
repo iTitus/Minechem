@@ -7,6 +7,7 @@ import minechem.common.registry.ResearchRegistry;
 public class ResearchHelper {
 
 	public static void addResearch(EntityPlayer player, String key) {
+		//TODO: Fix
 		/*if (isRemote) {
 			MessageHandler.INSTANCE.sendToServer(new ResearchMessage(key));
 		} else {*/

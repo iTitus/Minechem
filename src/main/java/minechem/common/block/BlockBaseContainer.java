@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.stats.Achievement;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -19,7 +20,10 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import com.google.common.base.Strings;
+
 import minechem.common.Minechem;
+import minechem.common.registry.AchievementRegistry;
 import minechem.common.util.MathHelper;
 import minechem.common.util.ResearchHelper;
 
@@ -65,7 +69,7 @@ public abstract class BlockBaseContainer extends BlockBase implements ITileEntit
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		acquireResearch(player);
+		acquireResearchAndAchievement(player);
 		int id = getGuiID();
 		if (id >= 0 && !player.isSneaking()) {
 			if (!world.isRemote) {
@@ -125,15 +129,26 @@ public abstract class BlockBaseContainer extends BlockBase implements ITileEntit
 	}
 
 	/**
-	 * Acquire the research for the block
+	 * Acquire the research and the achievement for the block
 	 *
 	 * @param player
 	 * @param world
 	 */
-	public void acquireResearch(EntityPlayer player) {
+	public void acquireResearchAndAchievement(EntityPlayer player) {
 		if (player != null && !player.world.isRemote) {
-			ResearchHelper.addResearch(player, getResearchKey());
+			String researchKey = getResearchKey();
+			if (!Strings.isNullOrEmpty(researchKey)) {
+				ResearchHelper.addResearch(player, researchKey);
+			}
+			Achievement achievement = getAchievement();
+			if (achievement != null) {
+				player.addStat(achievement);
+			}
 		}
+	}
+
+	protected Achievement getAchievement() {
+		return AchievementRegistry.getAchievement(this);
 	}
 
 	/**
@@ -141,17 +156,8 @@ public abstract class BlockBaseContainer extends BlockBase implements ITileEntit
 	 *
 	 * @return
 	 */
-	public String getResearchKey() {
-		return "apparatus." + getRawUnlocalizedName();
-	}
-
-	/**
-	 * Get the unlocalized name without the "tile." prefix
-	 *
-	 * @return
-	 */
-	public String getRawUnlocalizedName() {
-		return getUnlocalizedName().substring(5);
+	protected String getResearchKey() {
+		return "apparatus." + name;
 	}
 
 }

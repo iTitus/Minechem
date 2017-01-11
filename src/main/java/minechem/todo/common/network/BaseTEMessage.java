@@ -1,4 +1,4 @@
-package minechem.common.network;
+package minechem.todo.common.network;
 
 import io.netty.buffer.ByteBuf;
 
