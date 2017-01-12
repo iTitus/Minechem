@@ -48,8 +48,8 @@ achievement.minechem:tile.minechem:electric_crucible.desc=Use the Electric Cruci
 achievement.minechem:tile.minechem:centrifuge=Rotating things
 achievement.minechem:tile.minechem:centrifuge.desc=Use the Centrifuge for the first time
 
-achievement.minechem.element=Discovered %s
-achievement.minechem.element.desc=Discover %s to unlock
+achievement.minechem:element=Discovered %s
+achievement.minechem:element.desc=Discover %s to unlock
 
 augment.augmentedItem=Augmented
 augment.light=Lighting

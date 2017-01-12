@@ -70,7 +70,7 @@ public class PeriodicTableHelper {
 			if (column != -1) {
 				int[] result = new int[]
 						{
-								row, column
+								column, row
 						};
 				layoutCache.put(element, result);
 				return result;

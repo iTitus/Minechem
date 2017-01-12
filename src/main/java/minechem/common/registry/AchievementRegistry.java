@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 
 import minechem.common.Compendium;
 import minechem.common.achievement.ElementAchievement;
+import minechem.common.achievement.ElementAchievementPage;
 import minechem.common.block.BlockBase;
 import minechem.common.chemical.Element;
 import minechem.common.item.ItemBase;
@@ -20,19 +21,19 @@ public class AchievementRegistry {
 	public static Achievement journal, microscope, centrifuge, crucible, electrolysis;
 
 	public static void init() {
-		journal = register(0, 0, ItemRegistry.journal, null, false);
-		microscope = register(0, 3, BlockRegistry.opticalMicroscope, journal, false);
-		centrifuge = register(-2, 3, BlockRegistry.centrifuge, microscope, false);
-		crucible = register(0, 5, BlockRegistry.electricCrucible, microscope, false);
-		electrolysis = register(2, 3, BlockRegistry.electrolysis, microscope, false);
+		journal = register(0, -2, ItemRegistry.journal, null, false);
+		microscope = register(0, 0, BlockRegistry.opticalMicroscope, journal, false);
+		centrifuge = register(-2, 0, BlockRegistry.centrifuge, microscope, false);
+		crucible = register(0, 2, BlockRegistry.electricCrucible, microscope, false);
+		electrolysis = register(2, 0, BlockRegistry.electrolysis, microscope, false);
 		
 		for (Element element : ElementRegistry.getInstance().getElements()) {
 			int[] pos = PeriodicTableHelper.getPosition(element);
-			register(pos[0] - 5, pos[1] - 8, element);
+			register(pos[0] - 3, pos[1] - 2, element);
 		}
 		
 		AchievementPage.registerAchievementPage(new AchievementPage(Compendium.Naming.name, achievements.entrySet().stream().filter(entry -> !(entry.getKey() instanceof Element)).map(Map.Entry::getValue).toArray(Achievement[]::new)));
-		AchievementPage.registerAchievementPage(new AchievementPage("Periodic Table", achievements.entrySet().stream().filter(entry -> entry.getKey() instanceof Element).map(Map.Entry::getValue).toArray(Achievement[]::new)));
+		AchievementPage.registerAchievementPage(new ElementAchievementPage(achievements.entrySet().stream().filter(entry -> entry.getKey() instanceof Element).map(Map.Entry::getValue).toArray(Achievement[]::new)));
 	}
 
 	private static Achievement register(int x, int y, ItemBase item, Achievement parent, boolean isSpecial) {
