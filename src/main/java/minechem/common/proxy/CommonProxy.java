@@ -79,11 +79,11 @@ public class CommonProxy {
 	}
 
 	public EntityPlayer getPlayer(MessageContext context) {
-		return context.getServerHandler().playerEntity;
+		return context.getServerHandler().player;
 	}
 
 	public World getWorld(MessageContext context) {
-		return context.getServerHandler().playerEntity.world;
+		return context.getServerHandler().player.world;
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

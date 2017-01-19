@@ -50,8 +50,8 @@ public class GuiBase<T extends TileBase, C extends ContainerBase<T>> extends Gui
 
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		String s = getTile().getDisplayName().getUnformattedText();
-		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 0x404040);
-		fontRendererObj.drawString(getPlayerInventory().getDisplayName().getUnformattedText(), 8, ySize - 96 + 2, 0x404040);
+		fontRenderer.drawString(s, xSize / 2 - fontRenderer.getStringWidth(s) / 2, 6, 0x404040);
+		fontRenderer.drawString(getPlayerInventory().getDisplayName().getUnformattedText(), 8, ySize - 96 + 2, 0x404040);
 
 		for (WidgetBase widget : widgets) {
 			GlStateManager.color(1f, 1f, 1f);
@@ -90,7 +90,7 @@ public class GuiBase<T extends TileBase, C extends ContainerBase<T>> extends Gui
 	}
 
 	public FontRenderer getFontRenderer() {
-		return fontRendererObj;
+		return fontRenderer;
 	}
 
 	public int getGuiLeft() {
