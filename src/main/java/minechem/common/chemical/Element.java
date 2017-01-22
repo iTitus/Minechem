@@ -85,11 +85,12 @@ public class Element extends ChemicalBase implements Comparable<Element> {
 	 */
 	@Override
 	public void log() {
-		LogHelper.debug("Atomic Number: " + this.atomicNumber);
-		LogHelper.debug("Element name: " + this.fullName);
-		LogHelper.debug("Element abbreviation: " + this.shortName);
-		LogHelper.debug("Form: " + this.form);
-		LogHelper.debug("Neutrons: " + this.neutrons);
+		//TODO: Fix logging
+		//LogHelper.debug("Atomic Number: " + this.atomicNumber);
+		//LogHelper.debug("Element name: " + this.fullName);
+		//LogHelper.debug("Element abbreviation: " + this.shortName);
+		//LogHelper.debug("Form: " + this.form);
+		//LogHelper.debug("Neutrons: " + this.neutrons);
 	}
 
 	@Override

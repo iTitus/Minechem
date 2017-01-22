@@ -103,9 +103,10 @@ public class Molecule extends ChemicalBase {
 
 	@Override
 	public void log() {
-		LogHelper.debug("Molecule name: " + this.fullName);
-		LogHelper.debug("Molecule structure: " + this.getFormula());
-		LogHelper.debug("Form: " + this.form);
+		//TODO: Fix logging
+		//LogHelper.debug("Molecule name: " + this.fullName);
+		//LogHelper.debug("Molecule structure: " + this.getFormula());
+		//LogHelper.debug("Form: " + this.form);
 	}
 
 	@Override

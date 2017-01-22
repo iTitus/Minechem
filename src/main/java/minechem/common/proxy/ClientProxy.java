@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -54,6 +55,8 @@ public class ClientProxy extends CommonProxy {
 
 		LogHelper.debug("Registering Renderers...");
 
+		OBJLoader.INSTANCE.addDomain(Compendium.Naming.id);
+		
 		ModelLoader.setCustomModelResourceLocation(ItemRegistry.journal, 0, new ModelResourceLocation(ItemRegistry.journal.getRegistryName(), "inventory"));
 
 		String[] types = {"element", "molecule"};
@@ -118,9 +121,9 @@ public class ClientProxy extends CommonProxy {
 		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.electrolysis), 0, TileElectrolysis.class);
 
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), 0, new ModelResourceLocation(BlockRegistry.opticalMicroscope.getRegistryName(), "inventory"));
-		ClientRegistry.bindTileEntitySpecialRenderer(TileMicroscope.class, new TESRMicroscope());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileMicroscope.class, new TESRMicroscope());
 		//TODO: Remove this hack, replace with JSON
-		ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), 0, TileMicroscope.class);
+		//ForgeHooksClient.registerTESRItemStack(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), 0, TileMicroscope.class);
 	}
 
 	@Override

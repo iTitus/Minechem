@@ -82,7 +82,8 @@ public class Compendium {
 		public static final class Tracer implements ITracer {
 			@Override
 			public void trace(Object... params) {
-				LogHelper.debug("Fontbox trace: " + StringHelper.toString(", ", params));
+				//TODO: Fix logging
+				//LogHelper.debug("Fontbox trace: " + StringHelper.toString(", ", params));
 			}
 
 			@Override
