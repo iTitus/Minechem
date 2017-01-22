@@ -5,7 +5,9 @@
 	"model": "minechem:optical_microscope.obj"
   },
   "variants": {
-    "inventory": [{}],
+    "inventory": [{
+	  "transform": "forge:default-block"
+	}],
     "facing": {
       "north": {},
       "south": {"y": 180},
